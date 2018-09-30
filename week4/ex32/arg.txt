@@ -1,0 +1,6 @@
+d_source is a reference. Hence the constructer should also use a reference.
+
+All members that do not edit d_source should be followed marked as const.
+
+Compare doesn't need a copy of the string a const & is clearer.
+

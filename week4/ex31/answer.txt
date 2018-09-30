@@ -1,0 +1,11 @@
+Encapsulation means that parts of a program only have access to relevant information. Data hiding is a way to make specific parts within a class inaccesable to to things outside of the class.
+
+This makes the program easier to understand because it limits the scope of every part, it also helps with bug fixing. If for example there is some variable 'd_foo' in class 'bar'. If the members which edit directly 'd_foo' are hidden from things outside the class, 'd_foo' is only editted by members of 'bar'. Which means if you are going through the code and something goes wrong with 'd_foo', you only have to search for problems in the members of foo. 
+
+If members that edit 'd_foo' are public you might have to go through every part of your program that uses the class in some way.
+
+
+In the example setBits is private, the only way for things outside the program to influence the data is to use the readInput() function. This limits the places where problems can occur.
+
+
+Implementation is irrelevant because data hiding and encapsulation is not determined in the source files but instead by headers. Making members private is what hides them.
