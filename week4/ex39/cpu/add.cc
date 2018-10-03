@@ -5,7 +5,7 @@ void CPU::add()
 	Operand op;
 	int lhs, rhs;
 
-	if (not twoOperands(op, lhs, rhs))
+	if (not twoOperands(op, lhs, rhs)) //exit incase of read error
 		return;
 
 	if (op.type == OperandType::MEMORY)

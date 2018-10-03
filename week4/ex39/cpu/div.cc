@@ -6,7 +6,7 @@ void CPU::div()
 	int lhs, rhs;
 
 	if (not twoOperands(op, lhs, rhs) || rhs == 0)
-		return;
+		return; 	//exit incase of read error or division by 0
 
 	if (op.type == OperandType::MEMORY)
 		d_mem.store(op.value, lhs / rhs);

@@ -2,19 +2,21 @@
 
 bool CPU::rvalue(Operand &op)
 {
-	op.type = tokenizer.token();
+	op.type = tokenizer.token(); 
 	op.value = tokenizer.value();
 
 	switch (op.type)
 	{
-		OperandType::SYNTAX:
+		case OperandType::SYNTAX:
 			return error();
-		OperandType::REGISTER:
-			if (op.value > NREGISTERS)
+		case OperandType::REGISTER:
+			if (op.value > NREGISTERS) //register out of bound
 				return error();
-		OperandType::MEMORY:
+		case OperandType::MEMORY:	//memory out of bound
 			if (op.value > RAM::SIZE)
 				return error();
+		default:	//prevents compiler warning
+			break;
 	}
 
 	return true;

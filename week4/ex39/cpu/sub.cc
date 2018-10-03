@@ -5,6 +5,7 @@ void CPU::sub()
 	Operand op;
 	int lhs, rhs;
 
+	//exit incase of read error
 	if (not twoOperands(op, lhs, rhs))
 		return;
 

@@ -2,7 +2,7 @@
 
 bool CPU::instrSwitch(Opcode code)
 {
-	switch(code)
+	switch(code) //Call relevant function based on opcode
 	{
 		case Opcode::ERR:
 			error();

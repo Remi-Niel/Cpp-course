@@ -4,12 +4,12 @@ void CPU::run()
 {
 	while(true)
 	{
-		Opcode code = token.opcode(); //Get opcode from tokenizer
+		Opcode code = tokenizer.opcode(); //Get opcode from tokenizer
 
-		//Call function needed for opcode. If code = STOP break.
+		//Call function needed for opcode. If code == STOP break.
 		if (instrSwitch(code))
 			break;
 
-		token.reset();	//Prepare tokenizer for next instr
+		tokenizer.reset();	//Prepare tokenizer for next instr
 	}
 }

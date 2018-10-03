@@ -5,7 +5,7 @@ void CPU::dsp()
 	Operand op;
 	
 	if (not rvalue(op))
-		return;
+		return; 	//exit incase of read error
 
 	if (op.type == OperandType::MEMORY)
 		cout << d_mem.load(op.value) << '\n';

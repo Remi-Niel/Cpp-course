@@ -4,6 +4,7 @@ void CPU::neg()
 {
 	Operand op;
 	
+	//exit incase of read error
 	if (not rvalue(op))
 		return;
 
