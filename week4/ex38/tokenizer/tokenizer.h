@@ -2,6 +2,7 @@
 #define INCLUDED_TOKENIZER_
 
 #include <iostream>
+#include <limits>
 #include "../enums/enums.h"
 
 class Tokenizer
@@ -32,7 +33,7 @@ inline OperandType Tokenizer::token()
 
 inline void Tokenizer::reset()
 {
-    std::cin.ignore(static_cast<size_t>(-1), '\n');
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "../enums/enums.h"
 #include "../memory/memory.h"
+#include "../tokenizer/tokenizer.h"
 
 
 enum registers
