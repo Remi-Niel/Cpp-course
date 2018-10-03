@@ -42,7 +42,8 @@ inline void Person::setMass(size_t mass)
 
 inline void Person::insert(std::ostream &output) const
 {
-	output << d_name << ", " << d_address << ", " << d_phone << ", " << d_mass << '\n';
+	output << d_name << ", " << d_address 
+		   << ", " << d_phone << ", " << d_mass << '\n';
 } 
 
 inline std::string const &Person::name() const
