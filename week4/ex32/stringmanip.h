@@ -10,16 +10,16 @@ class StringManip
     public:
         StringManip(std::string &source);
 
-        std::string lc() const;               // return a copy of d_source in 
-                                        // lower-case chars 
-        std::string uc() const;               // return a copy in upper-case 
-                                        // chars
-
-        int compare(std::string const &rhs) const;   // -1: d_source first, 0: equal
+        std::string lc() const;     // return a copy of d_source in 
+                                    // lower-case chars 
+        std::string uc() const;     // return a copy in upper-case chars
+                                    
+        int compare(std::string const &rhs) const;   
+                                        // -1: d_source first, 0: equal
                                         // 1: rhs first, case insensitive
                                         // comparison. 
 
-        std::string copy() const;             // return a copy of d_source
+        std::string copy() const;       // return a copy of d_source
 };
         
 #endif

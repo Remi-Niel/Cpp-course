@@ -4,7 +4,7 @@ int main()
 {
     User user;
 
-    cout << "User loaded " << (user.valid() ? "successfully.\n" : "unsuccesfully.\n");
+    cout << "Loading user..  " << (user.valid() ? "success!\n" : "failed!.\n");
     if(!user.valid())
         return -1;
 
