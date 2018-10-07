@@ -1,0 +1,64 @@
+----------------------------------------------------------------------------
+  definition:         rewrite: 
+----------------------------------------------------------------------------
+  int x[8];           x[4]            
+
+pointer notation:  *(x + 4)
+       semantics:  x + 4 points to the location of the 4th int beyond x.
+                   That element is reached using the dereference operator (*)
+
+----------------------------------------------------------------------------
+  int x[8];           x[3] = x[2];
+
+pointer notation:     *(x + 3) = *(x + 2);
+       semantics:     The value at x[2] is accessed by dereferencing the 
+                      pointer with an offset of two, and it is then stored
+                      at x[3] through the same method.
+
+----------------------------------------------------------------------------
+  char *argv[8];      cout << argv[2];
+
+pointer notation:     cout << *(argv + 2);
+       semantics:     Dereferences argv with an offset of 2, which obtains
+                      a char* pointing to the third argument supplied when
+                      calling the program.
+
+----------------------------------------------------------------------------
+  int x[8];           &x[10] - &x[3];
+ 
+pointer notation:     (x + 10) - (x + 3);
+       semantics:     Subtracts the address of x + 3 from the address of 
+                      x + 10. This naturally resolves as 3.
+
+----------------------------------------------------------------------------
+  char *argv[8];      argv[0]++;
+
+pointer notation:     (*argv)++;
+       semantics:     Increments the first 'element' (char*) in argv, which
+                      essentially makes that element's first char* point to
+                      the second element in its NTBS.
+
+----------------------------------------------------------------------------
+  char *argv[8];      argv++[0];
+
+pointer notation:     *argv++;
+       semantics:     Dereferences argv to obtain the first item it points
+                      at, then increments argv, making the char** point 
+                      to the next char*'s address.
+
+----------------------------------------------------------------------------
+  char *argv[8];      ++argv[0];
+
+pointer notation:     *++argv
+       semantics:     Increments argv, then dereferences it, obtaining the
+                      char value that used to be at argv[1].
+
+----------------------------------------------------------------------------
+  char **argv;        ++argv[0][2];
+
+pointer notation:     ++*(*argv + 2);
+       semantics:     Dereferences argv, then dereferences the pointer its
+                      first pointer points at plus two then increments the 
+                      char value stored there.
+----------------------------------------------------------------------------
+        
