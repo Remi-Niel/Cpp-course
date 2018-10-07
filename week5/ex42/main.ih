@@ -1,0 +1,16 @@
+#include <cctype>
+#include <iostream>
+#include <string>
+
+#include "charcount/charcount.h"
+
+namespace Icmbuild
+{
+    extern char version[];
+    extern char years[];
+    extern char author[];
+};
+
+void showChar(Char const &toshow);
+
+using namespace std;
