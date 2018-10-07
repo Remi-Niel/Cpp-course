@@ -1,6 +1,7 @@
 1. What differences exist between pointer variables and arrays
-	Pointer variables can have the size of the memory block they point to changed (realloc).
-	In case of arrays of pointers en 2d arrays. 2d arrays guarentee that all data is in 1 block i.e. in case of a 4x4 array [4][0] is the same object as [0][5]. In case of pointer arrays this is not guarenteed. 
+	Pointer variables can have the size of the memory block they point to changed (realloc), while in arrays the content has to be copied to new arrays of different size.
+
+	In case of arrays of pointers and 2d arrays. 2d arrays guarentee that all data is in 1 block i.e. in case of a 4x4 array [4][0] is the same object as [0][5]. In case of pointer arrays this is not guarenteed.  
 
 2. What differences exist between pointer variables and reference variables
 	A reference variable cannot change its target. 
