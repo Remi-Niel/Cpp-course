@@ -8,6 +8,7 @@ class Strings
 	std::size_t d_size;
 	std::string *d_str;
     public:
+    	Strings();
         Strings(int argc, char **argv);
         Strings(char **environ);
         Strings(std::istream &in);
