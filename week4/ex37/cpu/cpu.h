@@ -10,12 +10,6 @@ enum registers
 	NREGISTERS = 5
 };
 
-struct Operand
-{
-	OperandType type;
-	int value;
-};
-
 class CPU
 {
 	Memory d_mem;
@@ -36,5 +30,10 @@ class CPU
     	void neg();
     	void dsp();
 };
+
+inline CPU::CPU(Memory &mem)
+{
+	d_mem = mem;
+}
         
 #endif

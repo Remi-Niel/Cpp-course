@@ -6,11 +6,6 @@
 #include "../tokenizer/tokenizer.h"
 
 
-enum registers
-{
-	NREGISTERS = 5
-};
-
 struct Operand
 {
 	OperandType type;
@@ -19,8 +14,13 @@ struct Operand
 
 class CPU
 {
+	enum registers
+	{
+		NREGISTERS = 5
+	};
+
 	Memory d_mem;
-	Tokenizer tokenizer;
+	Tokenizer d_tokenizer;
 	int d_registers[NREGISTERS];
 
     public:
@@ -33,6 +33,7 @@ class CPU
     	bool operands(Operand &lhs, Operand &rhs);
     	bool lvalue(Operand &op);
     	bool rvalue(Operand &op);
+		void store(Operand op, int val);
     	int dereference(Operand op);
     	void mov();
     	void add();

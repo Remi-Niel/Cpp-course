@@ -9,8 +9,5 @@ void CPU::mov()
 	if (not twoOperands(op, lhs, rhs))
 		return;
 
-	if (op.type == OperandType::MEMORY)
-		d_mem.store(op.value, rhs);
-	else
-		d_registers[op.value] = rhs;
+	store(op, rhs);
 }

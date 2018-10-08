@@ -7,7 +7,7 @@ void CPU::neg()
 	//exit incase of read error
 	if (not rvalue(op))
 		return;
-
+	
 	if (op.type == OperandType::MEMORY)
 		d_mem.store(op.value, -d_mem.load(op.value));
 	else if(op.type == OperandType::REGISTER)

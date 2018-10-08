@@ -11,8 +11,5 @@ bool CPU::twoOperands(Operand &leftOp, int &lhs, int &rhs)
 	lhs = dereference(leftOp);
 	rhs = dereference(rightOp);
 
-
-
 	return true;
-
 }

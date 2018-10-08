@@ -2,32 +2,32 @@
 
 bool CPU::instrSwitch(Opcode code)
 {
-	switch(code)
+	switch (code)
 	{
 		case Opcode::ERR:
 			error();
-			break;
+		break;
 		case Opcode::MOV:
 			mov();
-			break;
+		break;
 		case Opcode::ADD:
 			add();
-			break;
+		break;
 		case Opcode::SUB:
 			sub();
-			break;
+		break;
 		case Opcode::MUL:
 			mul();
-			break;
+		break;
 		case Opcode::DIV:
 			div();
-			break;
+		break;
 		case Opcode::NEG:
 			neg();
-			break;
+		break;
 		case Opcode::DSP:
 			dsp();
-			break;
+		break;
 		case Opcode::STOP:
 			return true;
 	}

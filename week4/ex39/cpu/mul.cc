@@ -9,8 +9,5 @@ void CPU::mul()
 	if (not twoOperands(op, lhs, rhs))
 		return;
 
-	if (op.type == OperandType::MEMORY)
-		d_mem.store(op.value, lhs * rhs);
-	else
-		d_registers[op.value] = lhs * rhs;
+	store(op, lhs * rhs);
 }
