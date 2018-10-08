@@ -1,0 +1,6 @@
+#include "dataimp.h"
+#include <iostream>
+//#define CERR std::cerr << __FILE__": "
+
+using namespace std;
+
