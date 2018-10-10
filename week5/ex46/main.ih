@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "strings/strings.h"
+#include "filter/filter.h"
 
 namespace Icmbuild
 {
