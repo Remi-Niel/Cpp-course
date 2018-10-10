@@ -19,6 +19,10 @@ class Tokenizer
 
     private:
         OperandType parse_operand();
+
+        bool is_register(std::string const &str);
+        bool is_memory(std::string const &str);
+        bool is_syntax(std::string const &str);
 };
 
 inline int Tokenizer::value()
