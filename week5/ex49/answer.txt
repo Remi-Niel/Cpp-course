@@ -1,0 +1,5 @@
+- Data now contains a new data-member. However since the code using it is not recompiled, it still assignes memory blocks assuming the previous definition. Therefor when using the data class to little mory is assigned, which can either flat-out crash or give weird behaviour.
+
+- Pointers have fixed size in memory, therefore memory is reserved correctly. What has to be done is resolved by the library itself en other programs using it do not concern themselves with that.
+
+- What you could do is add the necessary data-members. However functions which use/adjust the new data-members also receive the size of an object created using the default constructer. If the size of the object is smaller than it should be to contain all data-members, the function does nothing to/with the newly added data-members. Hence the new data members are only used when the program that uses the library expects the new version and allocates memory for them. Programs which expect the old version should not need the new functionality.
