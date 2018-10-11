@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "strings/strings.h"
+#include "charcount/charcount.h"
 
 namespace Icmbuild
 {
@@ -10,6 +10,6 @@ namespace Icmbuild
     extern char author[];
 };
 
-void swapStrings(Strings &left, Strings &right);
+void showChar(Char const &toshow);
 
 using namespace std;

@@ -24,8 +24,6 @@ class Strings
         void at(char const *&str, std::size_t idx) const;
         stringsData release();
 
-        void swapStrings(Strings &left, Strings &right);
-
     private:
     	void add(std::string str);
     	void add(char *str);

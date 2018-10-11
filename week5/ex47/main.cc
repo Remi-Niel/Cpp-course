@@ -1,10 +1,14 @@
 #include "main.ih"
 
-int main(int argc, char **argv)
-try
+static int swap(Strings &str1, Strings &str2)
 {
+    Strings str3 = str1;
+    str1 = str2;
+    str2 = str3;
 }
-catch (...)
+
+int main(int argc, char **argv)
 {
-    return 1;
+    
+
 }

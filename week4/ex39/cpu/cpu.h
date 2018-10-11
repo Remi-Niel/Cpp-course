@@ -3,14 +3,8 @@
 
 #include "../enums/enums.h"
 #include "../memory/memory.h"
+#include "../operand.h"
 #include "../tokenizer/tokenizer.h"
-
-
-struct Operand
-{
-	OperandType type;
-	int value;
-};
 
 class CPU
 {
