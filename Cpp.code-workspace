@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.ih": "cpp",
+			"istream": "cpp",
+			"*.cc": "cpp"
+		}
+	}
+}
