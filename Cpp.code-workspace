@@ -8,7 +8,8 @@
 		"files.associations": {
 			"*.ih": "cpp",
 			"istream": "cpp",
-			"*.cc": "cpp"
+			"*.cc": "cpp",
+			"*.tcc": "cpp"
 		}
 	}
 }
