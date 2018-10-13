@@ -8,9 +8,10 @@ void Strings::reserve(std::size_t n){
         for (string **old = d_str, **newArr = newStr; old != d_str + d_size; ++old, ++newArr)
             *newArr = *old;
 
-        delete[] d_str;
-        d_str = newStr;
+        if (d_capacity > 0)
+            delete[] d_str;
         
+        d_str = newStr;
         d_capacity = n;
     }
 }
