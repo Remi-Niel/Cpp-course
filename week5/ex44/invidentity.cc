@@ -1,9 +1,9 @@
 #include "main.ih"
 
-void inv_identity(int *square[10])
+void inv_identity(int (*square)[10])
 {
 	//Iterate through all 10 rows
-	for (int **row = square; row != (square + 10); ++row)
+	for (int (*row)[10] = square; row != (square + 10); ++row)
 	{
 		//Iterate through all 10 columns
 		for (int *val = *row, *max = *(row) + 10; val != max; ++val)
