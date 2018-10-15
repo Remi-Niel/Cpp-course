@@ -12,6 +12,8 @@ struct Char
 
 struct CharInfo
 {
+    CharInfo();
+
     Char* ptr;
     size_t nChar;
 };
@@ -32,7 +34,19 @@ class CharCount
         void insert(char newchar);
         void update(char update);
         int locate(char chin) const;
+
+        Char *enlarge() const;
+        size_t copy_until(Char* dest, char until) const;
 };
+
+inline Char *CharCount::enlarge() const
+{
+    return new Char[d_charinfo.nChar + 1];
+}
+
+inline CharInfo::CharInfo()
+    : ptr(nullptr), nChar(0)
+{ }
 
 inline CharInfo const &CharCount::info() const
 {
