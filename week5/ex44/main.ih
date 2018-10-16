@@ -1,13 +1,6 @@
 #include <iostream>
 #include <string>
 
-namespace Icmbuild
-{
-    extern char version[];
-    extern char years[];
-    extern char author[];
-};
-
 void inv_identity(int (*row)[10]);
 
 using namespace std;
