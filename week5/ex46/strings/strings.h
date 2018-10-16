@@ -5,28 +5,34 @@
 
 struct stringsData
 {
-	std::size_t size;
+	size_t size;
 	std::string *strings;
 };
 
 class Strings
 {
-	std::size_t d_size;
+	size_t d_size;
 	std::string *d_str;
+
     public:
     	Strings();
         Strings(int argc, char **argv);
         Strings(char **environ);
         Strings(std::istream &in);
-        std::size_t size() const;
-        std::string *data() const;
-      	void at(std::string &str, std::size_t idx) const;
-        void at(char const *&str, std::size_t idx) const;
+        ~Strings();
+    
+        size_t size() const;
+        std::string const *data() const;
+    
+        std::string &at(size_t idx);
+      	std::string const &at(size_t idx) const;
+    
         stringsData release();
 
     private:
-    	void add(std::string str);
-    	void add(char *str);
+    	void add(std::string const &str);
+        size_t length(char **data) const;
+        std::string &at_index(size_t idx) const;
 };
 
 inline size_t Strings::size() const
@@ -34,7 +40,7 @@ inline size_t Strings::size() const
     return d_size;
 }
 
-inline std::string *Strings::data() const
+inline std::string const *Strings::data() const
 {
     return d_str;
 } 

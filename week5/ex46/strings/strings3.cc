@@ -1,11 +1,9 @@
 #include "strings.ih"
 
 Strings::Strings(istream &in)
-//:
+	: Strings()
 {
-	d_size = 0;
 	string inputStr;
-	d_str = {};
 
 	while (getline(in, inputStr))
 		add(inputStr);

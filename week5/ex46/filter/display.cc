@@ -2,10 +2,11 @@
 
 void Filter::display()
 {
-	string *start = str.data();
+	string const *start = str.data();
+
 	size_t size = str.size();
 
-	string *end = start + size -1;
+	string const *end = start + size -1;
 
 	while (end->find_first_not_of(" \t") == string::npos)
 		--end;
