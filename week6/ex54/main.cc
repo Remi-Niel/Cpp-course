@@ -3,12 +3,13 @@
 
 int main()
 {
-    string* arr1 = new string[20];
+    string* arr1 = new string[10];
     arr1[0] = "hi there!";
-    arr1[1] = "ello guvnor";
-    arr1[2] = "buenos dias hijos de puta";
+    arr1[1] = "ello";
+    arr1[2] = "buenos dias";
+    arr1[3] = "allo";
 
-    for (int i = 0; i != 20; ++i)
+    for (size_t i = 0; i != 10; ++i)
     {
         cout << arr1[i] << '\n';
     }
@@ -16,7 +17,7 @@ int main()
     Sort* sorter = new Sort(Sort::increasing);
     sorter->sort(&arr1, 1);
     
-    for (int i = 0; i != 20; ++i)
+    for (size_t i = 0; i != 10; ++i)
     {
         cout << arr1[i] << '\n';
     }
