@@ -6,12 +6,16 @@
 
 class Filter
 {
-	Strings str;
+	Strings d_str;
+	string const* d_first_line;
+	string const* d_last_line;
+
     public:
     	Filter();
     	void display();
 
-    private:
+	private:
+		void set_bounds();
 };
         
 #endif
