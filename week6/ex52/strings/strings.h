@@ -21,13 +21,14 @@ class Strings
         ~Strings();
         std::size_t size() const;
         std::string *data() const;
-      	void at(std::string &str, std::size_t idx) const;
-        void at(char const *&str, std::size_t idx) const;
+        std::string &at(size_t idx);
+      	std::string const &at(size_t idx) const;
         stringsData release();
+    	void add(std::string const &str);
 
     private:
-    	void add(std::string str);
-    	void add(char *str);
+        size_t length(char **data) const;
+        std::string &at_index(size_t idx) const;
 };
 
 inline size_t Strings::size() const

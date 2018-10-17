@@ -1,6 +1,6 @@
 #include "strings.ih"
 
-void Strings::add(char *str)
+void Strings::add(string const &str)
 {
 	string *newArr = new string[d_size + 1];
 
@@ -11,6 +11,6 @@ void Strings::add(char *str)
 
 	delete[] d_str;
 	d_str = newArr;
-	
+
 	++d_size;
 }

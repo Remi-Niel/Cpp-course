@@ -1,6 +1,6 @@
-#include "sort.ih"
+#include "sorter.ih"
 
-int Sort::nocasedec(string **str1, string **str2)
+int Sorter::nocasedec(string **str1, string **str2)
 {
         // get length of shortest string
     size_t minLen = 

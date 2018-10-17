@@ -1,6 +1,6 @@
 #include "strings.ih"
 
-void Strings::add(char *str)
+void Strings::add(string const &str)
 {
 	if (d_size == d_capacity)
 		reserve(d_capacity * 2);

@@ -1,21 +1,17 @@
 #include "main.ih"
 
-int main(int argc, char **argv, char **env)
+extern char **environ;
+
+int main()
 {
-	Strings set(env);
-	Strings set1(argc, argv);
-	Strings set2(cin);
+	for (size_t iter = 0; iter != 1000; ++iter)
+	{
+		Strings env(environ);
 
-	string *data = set.data();
-	string *data1 = set1.data();
-	string *data2 = set2.data();
-
-	for (string *tmp = data; tmp != data + set.size(); ++tmp)
-		cout << *tmp <<'\n';
-	cout << '\n';
-	for (string *tmp = data1; tmp != data1 + set1.size(); ++tmp)
-		cout << *tmp <<'\n';
-	cout << '\n';
-	for (string *tmp = data2; tmp != data2 + set2.size(); ++tmp)
-		cout << *tmp <<'\n';
+		for (size_t rept = 0; rept != 100; ++rept)
+		{
+			for (char **ptr = environ; *ptr; ++ptr)
+				env.add(*ptr);
+		}
+	}
 }

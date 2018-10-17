@@ -1,24 +1,30 @@
-#include <iostream>
-#include "sort/sort.h"
+#include "main.ih"
 
 int main()
 {
-    string* arr1 = new string[10];
-    arr1[0] = "hi there!";
-    arr1[1] = "ello";
-    arr1[2] = "buenos dias";
-    arr1[3] = "allo";
 
-    for (size_t i = 0; i != 10; ++i)
+    string str1("b");
+    string str2("d");
+    string str3("a");
+    string str4("c");
+    string** arr1 = new string *[4];
+    arr1[0] = &str1;
+    arr1[1] = &str2;
+    arr1[2] = &str3;
+    arr1[3] = &str4;
+
+    for (size_t i = 0; i != 4; ++i)
     {
-        cout << arr1[i] << '\n';
+        cout << *arr1[i] << '\n';
     }
 
-    Sort* sorter = new Sort(Sort::increasing);
-    sorter->sort(&arr1, 1);
+    Sorter sorter = Sorter(Sorter::increasing);
+    sorter.sort(arr1, 4);
     
-    for (size_t i = 0; i != 10; ++i)
+    for (size_t i = 0; i != 4; ++i)
     {
-        cout << arr1[i] << '\n';
+        cout << *arr1[i] << '\n';
     }
+
+    delete[] arr1;
 }

@@ -1,11 +1,17 @@
 #include "main.ih"
 
-int main(int argc, char **argv, char **env)
+extern char **environ;
+
+int main()
 {
-	Strings set(env);
+	for (size_t iter = 0; iter != 1000; ++iter)
+	{
+		Strings env(environ);
 
-	string **data = set.data();
-
-	for (size_t idx = 0; idx != set.size(); ++idx)
-		cout << *data[idx] <<'\n';
+		for (size_t rept = 0; rept != 100; ++rept)
+		{
+			for (char **ptr = environ; *ptr; ++ptr)
+				env.add(*ptr);
+		}
+	}
 }
