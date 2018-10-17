@@ -1,0 +1,17 @@
+
+52:
+real	43m27,494s
+user	42m57,616s
+sys	0m28,349s
+
+53:
+real	0m1,878s
+user	0m1,477s
+sys	0m0,291s
+
+55:
+real	0m1,997s
+user	0m1,701s
+sys	0m0,296s
+
+I prefer 53 timewise because it is the fastest. 
