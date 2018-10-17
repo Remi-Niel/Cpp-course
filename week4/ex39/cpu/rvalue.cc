@@ -2,8 +2,8 @@
 
 bool CPU::rvalue(Operand &op)
 {
-	op.type = tokenizer.token(); 
-	op.value = tokenizer.value();
+	op.type = d_tokenizer.token(); 
+	op.value = d_tokenizer.value();
 
 	switch (op.type)
 	{

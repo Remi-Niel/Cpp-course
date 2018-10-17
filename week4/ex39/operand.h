@@ -1,4 +1,4 @@
-#include "../enums/enums.h"
+#include "enums/enums.h"
 
 struct Operand
 {
