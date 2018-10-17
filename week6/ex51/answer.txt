@@ -1,0 +1,83 @@
+Exercise 51: Types of new and delete
+
+1. Simple new on primitives or objects:
+
+int *p_int = new int;						// not necessarily initialized
+int *p_int = new int();						// initialized to 0
+int *p_int = new int(8);					// initialized to 8
+
+string *p_string = new string();			// initialized using relevant constructor
+											// here default constructor (no arguments)
+
+
+2. Simple delete on primitives or objects:
+
+delete p_int;								// returns allocated memory for primitive
+delete p_string;							// calls class destructor, then returns allocated memory
+
+
+3. new[] for arrays of primitives or objects:
+
+int *p_int = new int[50];					// allocates an array of 50 integers
+int *p_int = new int[50]();					// allocates an array of 50 integers, all 0
+
+string *p_string = new string[50];			// allocates an array of 50 strings
+											// uses default constructor
+
+
+4. delete[] for arrays of primitives and objects:
+
+Frees memory allocated for primitives, calls destructor and then frees allocated memory for objects.
+
+int *p_int = new int[50];					// allocated an array of 50 integers
+delete[] p_int;								// frees the allocated memory
+
+string *p_string = new string[50];			// allocates an array of 50 strings
+delete[] p_string;							// calls destructors of all allocated strings,
+											// which free memory allocated by each string,
+											// then frees the memory allocated by new[]
+
+
+5. operator new and operator new[] for 'raw' memory:
+
+											// allocates enough 'raw' memory to hold 10 ints
+int *p_int = static_cast<int *>(operator new(10 * sizeof(int)));
+
+											// allocates enough 'raw' memory for 20 chars
+char *p_chr = static_cast<char *>(operator new(20 * sizeof(char)));
+
+											// allocates enough 'raw' memory for 30 string objects
+string *p_str = static_cast<string *>(operator new(30 * sizeof(string)));
+
+operator new[] is equivalent to operator new in that it simply allocates a block of memory of the
+indicated size.
+
+
+6. operator delete and operator delete[] for raw memory:
+
+Both versions of operator delete are identical in that they simply free the memory that
+the pointer handed to them points to, without calling any destructors.
+
+int *p_int = static_cast<int *>(operator new(10* sizeof(int)));
+operator delete(p_int);						// frees the memory allocated for p_int
+
+string *p_str = static_cast<int *>(operator new(10 * sizeof(string)));
+operator delete(p_str);						// frees memory allocated for p_str, leaking any
+											// memory that the string objects may have allocated
+
+
+7. placement new
+
+Initializes an object or value in an existing block of memory that it is passed. This is useful when
+objects 'grow' and have to move their existing data into a larger memory pool where more data can be added. (Offering similar functionality to realloc in C)
+
+This is where the memory created through operator new comes in handy.
+
+											// allocate memory
+MyClass *largerMemory = static_cast<MyClass *>(operator new(sizeof(MyClass) * desiredSize));
+											
+											// place object into memory
+MyClass *memory = new (largerMemory) MyClass {object};
+
+When different types of object are stored in one memory pool through placement new, you need to
+explicitly call their destructors (e.g. ~MyClass) in order to ensure no memory leaks occur.
