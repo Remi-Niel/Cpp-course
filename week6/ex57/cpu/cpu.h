@@ -22,6 +22,18 @@ class CPU
         int value;
     };
 
+    void (CPU::*exec[8])() =
+    {
+        reinterpret_cast<void (CPU::*)()>(&CPU::error),
+        &CPU::mov,
+        &CPU::add,
+        &CPU::sub,
+        &CPU::mul,
+        &CPU::div,
+        &CPU::neg,
+        &CPU::dsp,
+    };
+
     Memory &d_memory;
     Tokenizer d_tokenizer;
 
