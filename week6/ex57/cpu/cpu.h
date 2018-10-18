@@ -31,7 +31,20 @@ class CPU
         &CPU::mul,
         &CPU::div,
         &CPU::neg,
-        &CPU::dsp,
+        &CPU::dsp
+    };
+
+    int (CPU::*deref[3])(int value) =
+    {
+        &CPU::derefVal,
+        &CPU::derefReg,
+        &CPU::derefMem
+    };
+
+    void (CPU::*sto[2])(int lhsVal, int val) =
+    {
+        &CPU::storeReg,
+        &CPU::storeMem
     };
 
     Memory &d_memory;
@@ -71,6 +84,13 @@ class CPU
                                 // div a b computes a /= b, last reg: %
         void neg();             // negate a value
         void dsp();             // display a value
+
+        int derefVal(int);      // helper function for dereference
+        int derefReg(int);      // helper function for dereference
+        int derefMem(int);      // helper function for dereference
+
+        void storeReg(int lhsVal, int val);     // helper function for store
+        void storeMem(int lhsVal, int val);     // helper function for store
 };
         
 #endif
