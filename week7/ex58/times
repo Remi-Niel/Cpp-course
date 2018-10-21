@@ -1,0 +1,10 @@
+When printing: 
+
+real	0m23,717s
+user	0m23,166s
+sys	0m0,548s
+
+When not printing:
+real	0m11,100s
+user	0m11,090s
+sys	0m0,009s
