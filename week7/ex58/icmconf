@@ -53,7 +53,7 @@
 #define USE_ECHO            ON
 
     //  Use the VERSION file
-#define USE_VERSION
+//#define USE_VERSION
 
     // When DEFCOM "program" is specified './icmbuild' is shorthand for 
     // './icmbuild program'

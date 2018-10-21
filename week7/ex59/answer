@@ -1,0 +1,5 @@
+When using constructor with a filename for fstream. The failbit is set if the file cannot be opened. 
+This is because you have to provide the correct flags to tell fstream what you want it to do. Since no such flags are provided
+it does not create the file and therefore fails to open it setting the failbit and prints nothing.
+
+Ofstream by default is for output and generates the file or empties it if it alread exists. Hence its output is shown.
