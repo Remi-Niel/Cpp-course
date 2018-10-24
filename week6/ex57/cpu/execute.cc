@@ -6,6 +6,6 @@ bool CPU::execute(Opcode opcode)
         return false;
 
         // call appropriate function through pointer in exec[]
-    (this->*exec[static_cast<int>(opcode)])();
+    (this->*d_exec[static_cast<int>(opcode)])();
     return true;
 }

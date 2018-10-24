@@ -22,7 +22,7 @@ class CPU
         int value;
     };
 
-    void (CPU::*exec[8])() =
+    void (CPU::* const d_exec[8])() =
     {
         reinterpret_cast<void (CPU::*)()>(&CPU::error),
         &CPU::mov,
@@ -34,14 +34,14 @@ class CPU
         &CPU::dsp
     };
 
-    int (CPU::*deref[3])(int value) =
+    int (CPU::* const d_deref[3])(int value) =
     {
         &CPU::derefVal,
         &CPU::derefReg,
         &CPU::derefMem
     };
 
-    void (CPU::*sto[2])(int lhsVal, int val) =
+    void (CPU::* const d_sto[2])(int lhsVal, int val) =
     {
         &CPU::storeReg,
         &CPU::storeMem
