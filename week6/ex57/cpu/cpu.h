@@ -22,31 +22,6 @@ class CPU
         int value;
     };
 
-    void (CPU::* const d_exec[8])() =
-    {
-        reinterpret_cast<void (CPU::*)()>(&CPU::error),
-        &CPU::mov,
-        &CPU::add,
-        &CPU::sub,
-        &CPU::mul,
-        &CPU::div,
-        &CPU::neg,
-        &CPU::dsp
-    };
-
-    int (CPU::* const d_deref[3])(int value) =
-    {
-        &CPU::derefVal,
-        &CPU::derefReg,
-        &CPU::derefMem
-    };
-
-    void (CPU::* const d_sto[2])(int lhsVal, int val) =
-    {
-        &CPU::storeReg,
-        &CPU::storeMem
-    };
-
     Memory &d_memory;
     Tokenizer d_tokenizer;
 
