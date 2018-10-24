@@ -9,7 +9,7 @@ class Sorter
     d_Comparer d_cmpFunc;
 
     public:
-        Sorter(d_CompareFunction cmpFunc);
+        Sorter(d_Comparer cmpFunc);
         void sort(std::string **strArrays, size_t size);
         static int increasing(std::string **pp_str1, std::string **pp_str2);
         static int nocasedec(std::string **pp_str1, std::string **pp_str2);
