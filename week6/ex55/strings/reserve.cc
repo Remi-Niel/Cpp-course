@@ -5,7 +5,7 @@ void Strings::reserve(std::size_t n){
     {
         string *newStr = rawStrings(n);
 
-        for (size_t idx = d_size; idx--; )
+        for (size_t idx = d_size - 1; idx--; )
             new(newStr + idx) string{d_str[idx]};
 
         destroy();

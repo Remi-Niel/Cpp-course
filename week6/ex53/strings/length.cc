@@ -1,6 +1,6 @@
 #include "strings.ih"
 
-size_t Strings::length(char **data) const
+size_t Strings::length(char **data)
 {   
     size_t idx = 0;
     
