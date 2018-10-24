@@ -8,6 +8,6 @@ void Sorter::sort(string **strArrays, size_t arrSize)
         strArrays,
         arrSize,
         sizeof(string *),
-        reinterpret_cast<int (*)(const void *, const void *)>(cmpFunc)
+        reinterpret_cast<int (*)(const void *, const void *)>(d_cmpFunc)
     );
 }

@@ -2,15 +2,20 @@
 #define INCLUDED_SORT_
 #include <string>
 
+typedef int (*d_Comparer)(std::string **pp_str1, std::string **pp_str2);
+
 class Sorter
 {
-    int (*cmpFunc)(std::string **pp_str1, std::string **pp_str2);
+    d_Comparer d_cmpFunc;
 
     public:
-        Sorter(int (*compar)(std::string **pp_str1, std::string **pp_str2));
+        Sorter(d_CompareFunction cmpFunc);
         void sort(std::string **strArrays, size_t size);
         static int increasing(std::string **pp_str1, std::string **pp_str2);
         static int nocasedec(std::string **pp_str1, std::string **pp_str2);
         
+    private:
+        static int char_compare(char c1, char c2);
 };
+
 #endif
