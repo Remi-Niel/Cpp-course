@@ -2,7 +2,7 @@
 
 
 // Locate the index, of not found return insert / append.
-int CharCount::locate(char chin) const
+Action CharCount::locate(char chin) const
 {
     for (size_t idx = 0; idx < d_charinfo.nChar; ++idx)
     {
@@ -10,7 +10,7 @@ int CharCount::locate(char chin) const
             return INSERT;
         
         if (d_charinfo.ptr[idx].ch == chin)
-            return static_cast<int>(idx);
+            return UPDATE;
     }
 
     return APPEND;

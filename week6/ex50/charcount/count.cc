@@ -11,14 +11,8 @@ size_t CharCount::count(std::istream& in)
             break;
         
         ++count;
-        int idx = locate(chin);
         
-        if(idx == APPEND)
-            append(chin);
-        else if(idx == INSERT)
-            insert(chin);
-        else
-            ++d_charinfo.ptr[idx].count;
+        (this->*s_updater[locate(chin)])(chin);
     }
 
     return count;

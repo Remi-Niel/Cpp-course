@@ -7,8 +7,3 @@
 using namespace std;
 
 // Any positive number is a valid index.
-enum Action
-{
-    APPEND = -1,
-    INSERT = -2
-};

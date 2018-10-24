@@ -4,6 +4,13 @@
 #include <istream>
 #include <cstddef>
 
+enum Action
+{
+    APPEND,
+    INSERT,
+    UPDATE,
+};
+
 struct Char
 {
     char ch;
@@ -20,6 +27,7 @@ struct CharInfo
 class CharCount
 {
     CharInfo d_charinfo;
+    static void (CharCount::*s_updater[])(char newchar);
 
     public:
         CharCount();
@@ -36,7 +44,7 @@ class CharCount
         void append(char newchar);
         void insert(char newchar);
         void update(char update);
-        int locate(char chin) const;
+        Action locate(char chin) const;
 };
 
 inline CharInfo const &CharCount::info() const
