@@ -1,0 +1,11 @@
+The problem that causes the second output to be 0 is the fact that the eofbit of the stream is still set after assigning it a new string. 
+
+The istringstream::str function does not clear the condition flags previously set. When the istream::operator>> is used it first constructs a sentry object that,
+among other functions, checks whether any of the condition flags have been set, and which in this case sets the failbit because it encounters the eofbit.
+
+Because the failbit is set, the istream::operator>> does not perform the extraction, and no2 remains 0.
+
+The fix is to clear the condition flags with istr.clear() anywhere between the first and second extraction.
+
+Example snippet:
+
