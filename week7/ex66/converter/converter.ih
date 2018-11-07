@@ -1,0 +1,9 @@
+#include <iostream>
+#include "converter.h"
+
+enum inputType {
+    BINARY = '0'
+};
+
+using namespace std;
+
