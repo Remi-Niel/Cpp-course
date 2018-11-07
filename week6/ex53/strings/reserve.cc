@@ -5,8 +5,12 @@ void Strings::reserve(std::size_t n){
     {
         string **newStr = new string *[n];
 
-        for (string **old = d_str, **newArr = newStr; old != d_str + d_size; ++old, ++newArr)
+        for (string **old = d_str, **newArr = newStr;
+             old != d_str + d_size;
+             ++old, ++newArr)
+        {
             *newArr = *old;
+        }
 
         if (d_capacity > 0)
             delete[] d_str;
