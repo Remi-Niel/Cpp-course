@@ -1,0 +1,9 @@
+#include <fstream>
+#include <iostream>
+#include <string>
+
+#include "lock/lock.h"
+
+using namespace std;
+
+void prompt(string const &file);
