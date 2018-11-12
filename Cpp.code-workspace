@@ -10,7 +10,8 @@
 			"istream": "cpp",
 			"*.cc": "cpp",
 			"*.tcc": "cpp",
-			"iosfwd": "cpp"
+			"iosfwd": "cpp",
+			"iostream": "cpp"
 		}
 	}
 }
