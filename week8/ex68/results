@@ -1,0 +1,16 @@
+Copy:
+
+voldelord@voldelord-Aspire-A114-32:~/Cpp/week8/ex68$ time tmp/bin/binary 100000
+CLUTTER_IM_MODULE=xim _=tmp/bin/binary
+
+real	0m19,048s
+user	0m19,041s
+sys	0m0,005s
+
+Move:
+voldelord@voldelord-Aspire-A114-32:~/Cpp/week8/ex68$ time tmp/bin/binary 100000 m
+CLUTTER_IM_MODULE=xim _=tmp/bin/binary
+
+real	0m3,481s
+user	0m3,480s
+sys	0m0,000s
