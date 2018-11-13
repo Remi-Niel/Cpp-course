@@ -2,6 +2,7 @@
 
 Data &Data::copy(Type current, Data const &other, Type next)
 {
-    destroy(current);
-    (this->*s_copy[next])(other);
+    Data copy(other, next);
+    swap(current, copy, next);
+    return *this;
 }

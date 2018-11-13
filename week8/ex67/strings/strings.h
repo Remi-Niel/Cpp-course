@@ -27,7 +27,7 @@ class Strings
         Strings &operator=(Strings &&tmp);
         std::size_t size() const;
         std::size_t capacity() const;
-        std::string const **data() const;
+        std::string const * const *data() const;
         std::string &at(size_t idx);
       	std::string const &at(size_t idx) const;
         void resize(std::size_t count);
@@ -51,9 +51,9 @@ inline size_t Strings::capacity() const
     return d_capacity;
 }
 
-inline std::string const **Strings::data() const
+inline std::string const * const *Strings::data() const
 {
-    return d_str;
+    return (d_str);
 } 
         
 #endif

@@ -22,14 +22,13 @@ union Data
         std::string u_word;
         double u_value;
 
-        static void (Data::*s_copy[])(Data const &data);
-
     public:
         Data(int argc, char **argv);
         Data(char **environ);
         Data(std::istream &in);
         Data(char const *ntbs);
         Data(double value);
+        ~Data();
 
         Data(Data const &data, Type type);
         Data(Data &&data, Type type);
