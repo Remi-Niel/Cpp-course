@@ -64,4 +64,39 @@ class Arg
         void evalGetOpt(int opt);    //Determine whether getopt encountered problems
 };
 
+inline char const *Arg::arg(unsigned idx) const
+{
+    return d_args[idx];
+}
+
+inline std::string const &Arg::basename() const
+{
+    return d_basename;
+}
+
+inline size_t Arg::nArgs() const
+{
+    return d_nArgs;
+}     
+
+inline size_t Arg::nOptions() const
+{
+    return d_nOptions;
+}
+
+inline size_t Arg::option(int opt) const
+{
+    return shortOptions.size(opt);
+}
+
+inline size_t Arg::option(std::string *value, int opt) const
+{
+    return shortOptions.size(value, opt);
+}
+
+inline size_t Arg::option(std::string *value, char const *longOption) const
+{
+    return longOptions.size(value, longOption);
+}
+
 #endif
