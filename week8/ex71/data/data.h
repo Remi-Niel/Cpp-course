@@ -33,6 +33,10 @@ union Data
         Data(Data const &data, Type type);
         Data(Data &&data, Type type);
 
+        Strings &words();
+        std::string &word();
+        double &value();
+
         Data &copy(Type current, Data const &other, Type next);
         Data &move(Type current, Data &&other, Type next);
         void swap(Type current, Data &other, Type next);
@@ -74,5 +78,20 @@ inline Data::Data(char const *ntbs)
 inline Data::Data(double value)
 :   u_value(value)
 { }
+
+inline Strings &Data::words()
+{
+    return u_words;
+}
+
+inline std::string &Data::word()
+{
+    return u_word;
+}
+
+inline double &Data::value()
+{
+    return u_value;
+}
         
 #endif

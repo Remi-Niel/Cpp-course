@@ -7,6 +7,7 @@ int main()
 	for (size_t iter = 0; iter != 1000; ++iter)
 	{
 		Strings env(environ);
+		// cout << "<<< --- BOOPTIEBOOP --- >>>" << endl;
 
 		for (size_t rept = 0; rept != 100; ++rept)
 		{
