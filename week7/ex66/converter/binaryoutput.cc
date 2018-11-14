@@ -1,27 +1,22 @@
 #include "converter.ih"
 
-void Converter::binaryOutput(string outputFile)
+void Converter::binaryOutput(string const &outputFile)
 {
-    ofstream output{outputFile};
-
-    char type, offset;
+    char type;
 
     //Determine input type, binary starts with a '0'. Human readable cannot start with a '0'
     type = input.peek(); 
 
     if (type == BINARY) //Binary to binary simply copies the file byte by byte
     {
-        input.get(type);
-        input.get(offset); //Get the amount of bases in the final byte
-        output.put(BINARY);
-        output.put(offset);
+        cerr << "Your are trying to convert binary to binary\n";
+        exit(1);
+    }
 
-        binaryToBinary(output);
-    }
-    else   
-    {
-        output.put(BINARY);
-        output.put('E');    //Placeholder for the amount of bases in the final byte
-        humanToBinary(output);
-    }
+    ofstream output{outputFile};
+    
+    output.put(BINARY);
+    output.put('E');    //Placeholder for the amount of bases in the final byte
+    humanToBinary(output);
+    
 }

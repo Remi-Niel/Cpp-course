@@ -17,15 +17,15 @@ class Converter
     std::ifstream input;
 
     public:
-        Converter(std::string inputFile);
-        void binaryOutput(std::string output);
-        void humanReadableOutput(std::string output);
+        Converter(std::string const &inputFile);
+        void binaryOutput(std::string const &output);
+        void humanReadableOutput(std::string const &output);
 
     private:
-        void binaryToBinary(std::ofstream &output);
         void binaryToHuman(std::ofstream &output, size_t offset); 
         void humanToBinary(std::ofstream &output);
-        void humanToHuman(std::ofstream &output);
+        void processByte(size_t &idx, uint8_t &byte, char &base);
+        void finishBinary(size_t amount, std::ofstream &output);
         void setBits(uint8_t &bits, size_t idx, nucleobases base);
         char valueOf(uint8_t bits, size_t idx);
         nucleobases enumVal(char base);

@@ -1,6 +1,6 @@
 #include "converter.ih"
 
-Converter::Converter(string inputFile)
+Converter::Converter(string const &inputFile)
 {
     input = ifstream(inputFile);
 }

@@ -1,19 +1,23 @@
 #include "converter.ih"
 
-void Converter::humanReadableOutput(string outputFile)
+void Converter::humanReadableOutput(string const &outputFile)
 {
-    ofstream output{outputFile};
-
     char type, offset;
 
     type = input.peek();
 
-    if (type == BINARY)
+    if (type != BINARY)
     {
-        input.get(type);
-        input.get(offset);
-        binaryToHuman(output, offset);
+        cerr << "You are trying to convert human readable to human readable\n";
+        exit(1);
     }
-    else
-        humanToHuman(output);
+
+    ofstream output{outputFile};
+
+    input.get(type);
+    input.get(offset);
+    binaryToHuman(output, offset);
+    
+    
+    
 }
