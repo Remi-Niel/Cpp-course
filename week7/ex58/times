@@ -1,10 +1,20 @@
-When printing: 
+Without if statement: 
 
-real	0m23,717s
-user	0m23,166s
-sys	0m0,548s
+real	0m1,018s
+user	0m1,018s
+sys	0m0,000s
 
-When not printing:
-real	0m11,100s
-user	0m11,090s
-sys	0m0,009s
+With if statement:
+
+real	0m0,670s
+user	0m0,657s
+sys	0m0,012s
+
+The version that simply checks the goodbit is faster than the one that attempts
+to print, but is stopped when it encounters the failbit.
+
+A possible reason for this is the extra function call to ostream::operator<<,
+which includes the string literal argument's reference.
+
+A good rule of thumb would be to prefer checking the state of a stream over
+attempting an operation when the operation is repeated and expected to fail often.
