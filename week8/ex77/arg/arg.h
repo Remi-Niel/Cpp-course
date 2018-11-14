@@ -47,6 +47,7 @@ class Arg
         static Arg &initialize(char const *opstring, int argc, char **argv);
         static Arg &initialize(char const *opstring, LongOption const *const begin, LongOption const *const end, int argc, char **argv);
         static Arg &instance();
+        ~Arg();
         char const *arg(unsigned idx) const;
         std::string const &basename() const;
         size_t nArgs() const;

@@ -29,4 +29,6 @@ int main(int argc, char **argv)
 
     count = arg.option(&value, "debug");
     cout << "debug: " << count << ' ' << value << '\n';
+    
+    delete &arg;
 }
