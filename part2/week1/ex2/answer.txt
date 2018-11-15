@@ -1,0 +1,4 @@
+The operator bool() is defined explicit in the ostream class, therefore the compiler cannot 
+implcitly convert it to a bool, (which is not a problem when using it in while() or if).
+
+This can be fixxed by static casting the result of the getline function to a bool.
