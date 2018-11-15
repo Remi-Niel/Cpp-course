@@ -1,0 +1,16 @@
+-----------------------------------------------------------
+                        constructors        assignment ops.
+                     ------------------     ---------------  
+define:              default copy move        copy    move   
+-----------------------------------------------------------
+no constructor:                                            
+default cons:           a
+copy cons (CC):   	 	a	   a   MC					M=	        
+move cons (MC):         a	   a   a			a		a
+other cons:             a
+                        
+no assignment:          	
+copy assignmnt (C=):    		   MC			a		M=
+move assignmnt (M=):    	   a   a			a 		a
+other assignmnt:                                             
+-------------------------------------------------------------
