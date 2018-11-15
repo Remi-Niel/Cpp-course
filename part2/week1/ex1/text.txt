@@ -1,0 +1,16 @@
+1.
+
+First::fun() is called because Koenig lookup finds it via the specific namespace member First::Enum,
+if we wanted to call Second::fun() we would have to specify it explicitly: Second::fun(x);
+
+2.
+
+If Koenig lookup did not exist and we had to declare namespaces specifically, then using overloaded
+operators would be much more bothersome. Currently, Koenig lookup helps us select the right overloaded
+<< operator for streams, as one of its arguments is the stream object from the std namespace. Without 
+Koenig lookup we would have to specify the overloaded operator by its full name std::operator<<(cout, arg2);
+
+3.
+
+Because of the declaration outside of the namespaces, both definitions are now readily available to
+main, and an ambiguity arises and stops the program from compiling.
