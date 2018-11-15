@@ -6,5 +6,5 @@ void Converter::finishBinary(size_t amount, ofstream &output)
     // contains 4 bases
     amount = (amount == 0) ? 4 : amount;
     output.seekp(1);
-    output.put(amount); //Write amount of bases in last block to the second byte
+    output.put(amount); //Write amount of bases in last block 
 }

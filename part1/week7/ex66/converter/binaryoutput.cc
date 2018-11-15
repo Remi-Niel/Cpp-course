@@ -4,7 +4,8 @@ void Converter::binaryOutput(string const &outputFile)
 {
     char type;
 
-    //Determine input type, binary starts with a '0'. Human readable cannot start with a '0'
+    //Determine input type, binary starts with a '0'. 
+    //Human readable cannot start with a '0'
     type = input.peek(); 
 
     if (type == BINARY) //Binary to binary simply copies the file byte by byte
