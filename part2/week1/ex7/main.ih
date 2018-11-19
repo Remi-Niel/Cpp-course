@@ -1,0 +1,14 @@
+#include <iostream>
+#include <string>
+
+#include "strings/strings.h"
+#include "in/in.h"
+
+namespace Icmbuild
+{
+    extern char version[];
+    extern char years[];
+    extern char author[];
+};
+
+using namespace std;
