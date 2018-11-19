@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     
     Strings const &str = w3.words();
 
-    for (size_t idx = 0, end = str.size(); idx != end; ++idx)
+    for (size_t idx = 0, end = str->size(); idx != end; ++idx)
         cout << str.at(idx) << ' ';
     cout << '\n';
 
