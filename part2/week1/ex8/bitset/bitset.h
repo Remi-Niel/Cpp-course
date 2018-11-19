@@ -6,12 +6,15 @@
 
 #include "../bitmemory/bitmemory.h"
 
+// Literal operator
+std::string operator "" _bits(char const *literal);
+
 class BitSet
 {
     BitMemory d_bits;
 
     public:
-        BitSet(size_t n_bits = 0);
+        BitSet(size_t n_bits = 8);
         BitSet(std::string const &bits);
 
         size_t size();
@@ -23,7 +26,6 @@ class BitSet
         friend BitSet operator|(BitSet const &lvalue, BitSet const &rvalue);
 
         BitSet &operator&=(BitSet const &rvalue);
-        friend BitSet operator|(BitSet const &lvalue, BitSet const &rvalue);
 
         BitMemory::Proxy operator[](size_t idx);
         BitMemory::Proxy operator[](size_t idx) const;
