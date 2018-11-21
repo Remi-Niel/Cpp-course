@@ -5,9 +5,12 @@ BitMemory &BitMemory::operator|=(BitMemory const &mem)
     if (mem.d_nbits > d_nbits)
         enlarge(mem.d_nbits);
 
+    size_t diff = max_bit_nr() - mem.max_bit_nr();
+    cout << "diff: " << diff << "\n";
+
     for (size_t idx = 0; idx < mem.d_nbits; ++idx)
     {
-        (*this)[max_bit_nr() - 1 - idx] |= mem[mem.max_bit_nr() - 1 - idx];
+        (*this)[diff + idx] |= mem[idx];
     }
 
     return *this;
