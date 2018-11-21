@@ -28,6 +28,9 @@ class BitMemory
         void swap(BitMemory &swap);
         BitMemory &operator=(BitMemory const &copy);
         BitMemory &operator=(BitMemory &&move);
+
+        BitMemory &operator|=(BitMemory const &mem);
+        BitMemory &operator&=(BitMemory const &mem);
     
         BitMemory &operator<<=(size_t shift);
         BitMemory::Proxy operator[](size_t idx);
@@ -36,6 +39,7 @@ class BitMemory
     private:
         static void copy(memory_t *dest, memory_t *src, size_t bits);
 
+        // void set_bit(size_t idx, size_t val);
         BitMemory::Proxy proxy(size_t idx) const;
         void enlarge(size_t newsize); //newsize in bits.
 
@@ -54,21 +58,6 @@ inline BitMemory::BitMemory(size_t bits)
 inline size_t BitMemory::max_bit_nr() const
 {
     return d_nbits;
-}
-
-inline BitMemory::Proxy BitMemory::operator[](size_t idx)
-{
-    return proxy(idx);
-}
-
-inline BitMemory::Proxy BitMemory::operator[](size_t idx) const
-{
-    return proxy(idx);
-}
-
-inline BitMemory::Proxy BitMemory::proxy(size_t idx) const
-{
-    return BitMemory::Proxy(d_bits[idx / 8], idx % 8);
 }
 
 #endif

@@ -10,20 +10,19 @@ int main()
     ss >> gross;                            // Extraction
 
     cout << "gross = " << gross << "\n"     // Insertions
-        "dozen = " << dozen << '\n';
-
+         "dozen = " << dozen << '\n';
 
     cout << "bits:\n"               // manipulating/outputting bits;
-        << (gross[143] = dozen[0]) << '\n'; 
+         << (gross[143] = dozen[0]) << '\n'; 
 
     cout << "shifting:\n"
-        << gross << '\n'
-        << (gross << 5) << '\n'; // Shift operator
+         << gross << '\n'
+         << (gross << 5) << '\n'; // Shift operator
 
     cout << "bitwise OR:\n"
-        << dozen << '\n'
-        << (dozen | gross ) << '\n' // bitwise OR
-        << dozen << '\n';
+         << dozen << '\n'
+         << (dozen | gross ) << '\n' // bitwise OR
+         << dozen << '\n';
 
     BitSet const no_change;
     // no_change[2] = false;        // WC!

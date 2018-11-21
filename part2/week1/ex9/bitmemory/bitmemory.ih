@@ -1,5 +1,6 @@
 #include "bitmemory.h"
 
+#include <iostream>
 #include "../proxy/proxy.h"
 
 using namespace std;
