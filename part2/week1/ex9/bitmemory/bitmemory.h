@@ -36,12 +36,12 @@ class BitMemory
         BitMemory::Proxy operator[](size_t idx);
         BitMemory::Proxy operator[](size_t idx) const;
 
+        void enlarge(size_t newsize); //newsize in bits.
     private:
         static void copy(memory_t *dest, memory_t *src, size_t bits);
 
         // void set_bit(size_t idx, size_t val);
         BitMemory::Proxy proxy(size_t idx) const;
-        void enlarge(size_t newsize); //newsize in bits.
 
 };
 
