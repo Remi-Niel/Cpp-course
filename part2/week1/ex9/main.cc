@@ -19,14 +19,14 @@ int main()
          << gross << '\n'
          << (gross << 5) << '\n'; // Shift operator
 
-    // cout << "bitwise OR:\n"
-    //      << dozen << '\n'
-    //      << (dozen | gross ) << '\n' // bitwise OR
-    //      << dozen << '\n';
+    cout << "bitwise OR:\n"
+         << dozen << '\n'
+         << (dozen | gross ) << '\n' // bitwise OR
+         << dozen << '\n';
 
-    // BitSet const no_change;
-    // // no_change[2] = false;        // WC!
+    BitSet const no_change;
+    // no_change[2] = false;        // WC!
 
-    // dozen = gross;                  // copy assignment
-    // dozen = BitSet{4};              // move assignment
+    dozen = gross;                  // copy assignment
+    dozen = BitSet{4};              // move assignment
 }

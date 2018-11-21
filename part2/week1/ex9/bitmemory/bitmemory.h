@@ -10,7 +10,8 @@ typedef uint8_t memory_t;
 
 class BitMemory
 {
-    size_t d_nbits;
+    size_t d_nbits; // bits in use.
+    size_t d_blocks; // total capacity.
     memory_t *d_bits;
 
     public:
@@ -46,7 +47,7 @@ class BitMemory
 };
 
 inline BitMemory::BitMemory()
-:   d_nbits(0), d_bits(nullptr)
+:   d_nbits(0), d_blocks(0), d_bits(nullptr)
 { }
 
 inline BitMemory::BitMemory(size_t bits)
