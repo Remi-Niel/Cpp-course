@@ -44,9 +44,22 @@ class Strings
         In in(char const *sep);
         In in(char const *sep, size_t start);
         In in(char const *sep, size_t start, size_t end);
-        In in(void (*funPtr)(std::ostream &out, Strings const &str, size_t idx));
-        In in(void (*funPtr)(std::ostream &out, Strings const &str, size_t idx), size_t start);
-        In in(void (*funPtr)(std::ostream &out, Strings const &str, size_t idx), size_t start, size_t end);
+        In in(void (*funPtr)(std::ostream &out, 
+                                Strings const &str, 
+                                size_t idx));
+        In in(
+            void (*funPtr)(std::ostream &out, 
+                            Strings const &str, 
+                            size_t idx), 
+            size_t start
+            );
+        In in(
+            void (*funPtr)(std::ostream &out,
+                            Strings const &str, 
+                            size_t idx), 
+            size_t start, 
+            size_t end
+            );
 
 
     private:

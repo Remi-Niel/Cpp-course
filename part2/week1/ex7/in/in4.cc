@@ -1,6 +1,10 @@
 #include "in.ih"
 
-Strings::In::In(Strings *str, void (*funPtr)(std::ostream &out, Strings const &str, size_t idx))
+Strings::In::In(Strings *str, 
+                void (*funPtr)(std::ostream &out, 
+                                Strings const &str, 
+                                size_t idx)
+                )
 {
     d_str = str;
     d_begin = 0;

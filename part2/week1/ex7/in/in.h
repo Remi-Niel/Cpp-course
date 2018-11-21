@@ -17,9 +17,24 @@ class Strings::In
         In(Strings *str, char const *delim);
         In(Strings *str, char const *delim, size_t start);
         In(Strings *str, char const *delim, size_t start, size_t end);
-        In(Strings *str, void (*funPtr)(std::ostream &out, Strings const &str, size_t idx));
-        In(Strings *str, void (*funPtr)(std::ostream &out, Strings const &str, size_t idx), size_t start);
-        In(Strings *str, void (*funPtr)(std::ostream &out, Strings const &str, size_t idx), size_t start, size_t end);
+        In(Strings *str, 
+            void (*funPtr)(std::ostream &out, 
+                            Strings const &str, 
+                            size_t idx)
+            );
+        In(Strings *str, 
+            void (*funPtr)(std::ostream &out, 
+                        Strings const &str, 
+                        size_t idx), 
+            size_t start
+            );
+        In(Strings *str, 
+            void (*funPtr)(std::ostream &out, 
+                            Strings const &str, 
+                            size_t idx), 
+            size_t start, 
+            size_t end
+            );
     private:
         void insertDelim(std::ostream &out, Strings const &str, size_t idx);
         std::ostream &insertInto(std::ostream &out);
