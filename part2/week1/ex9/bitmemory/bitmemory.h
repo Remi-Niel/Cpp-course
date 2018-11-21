@@ -16,10 +16,12 @@ class BitMemory
         class Proxy;
 
         BitMemory();
+        BitMemory(size_t n_bits);
+        BitMemory(std::string const &bits);
         BitMemory(BitMemory const &copy);
         BitMemory(BitMemory &&move);
 
-        size_t max_bit_nr();
+        size_t max_bit_nr() const;
 
         void swap(BitMemory &swap);
         BitMemory &operator=(BitMemory const &copy);
