@@ -15,13 +15,9 @@ int main()
     cout << "bits:\n"               // manipulating/outputting bits;
          << (gross[143] = dozen[0]) << '\n'; 
 
-    cout << "preshift shift\n";
-    BitSet g2 = gross << 5;
-    cout << g2 << "\n";
-
-    // cout << "shifting:\n"
-    //      << gross << '\n'
-    //      << (gross << 5) << '\n'; // Shift operator
+    cout << "shifting:\n"
+         << gross << '\n'
+         << (gross << 5) << '\n'; // Shift operator
 
     // cout << "bitwise OR:\n"
     //      << dozen << '\n'
