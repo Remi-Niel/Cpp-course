@@ -17,6 +17,7 @@ class BitSet
     public:
         BitSet(size_t n_bits = 8);
         BitSet(std::string const &bits);
+        BitSet(BitSet const &copy);
 
         size_t size() const;
 
@@ -46,6 +47,10 @@ inline BitSet::BitSet(size_t n_bits)
 
 inline BitSet::BitSet(std::string const &bits)
 :   d_bits(bits)
+{ }
+
+inline BitSet::BitSet(BitSet const &copy)
+:   d_bits(copy.d_bits)
 { }
 
 inline size_t BitSet::size() const

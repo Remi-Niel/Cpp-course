@@ -8,7 +8,7 @@ BitMemory &BitMemory::operator|=(BitMemory const &mem)
     size_t difference = d_nbits - mem.d_nbits;
 
     for (size_t idx = difference; idx < (d_nbits / 8); ++idx)
-        d_bits[idx] |= mem.d_bits[idx - difference];
+        d_bits[idx + difference] |= mem.d_bits[idx];
 
     return *this;
 }

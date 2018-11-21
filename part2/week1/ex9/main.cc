@@ -15,18 +15,22 @@ int main()
     cout << "bits:\n"               // manipulating/outputting bits;
          << (gross[143] = dozen[0]) << '\n'; 
 
-    cout << "shifting:\n"
-         << gross << '\n'
-         << (gross << 5) << '\n'; // Shift operator
+    // cout << "preshift shift\n";
+    // BitSet g2 = gross << 5;
+    // cout << g2 << "\n";
 
-    cout << "bitwise OR:\n"
-         << dozen << '\n'
-         << (dozen | gross ) << '\n' // bitwise OR
-         << dozen << '\n';
+    // cout << "shifting:\n"
+    //      << gross << '\n'
+    //      << (gross << 5) << '\n'; // Shift operator
 
-    BitSet const no_change;
-    // no_change[2] = false;        // WC!
+    // cout << "bitwise OR:\n"
+    //      << dozen << '\n'
+    //      << (dozen | gross ) << '\n' // bitwise OR
+    //      << dozen << '\n';
 
-    dozen = gross;                  // copy assignment
-    dozen = BitSet{4};              // move assignment
+    // BitSet const no_change;
+    // // no_change[2] = false;        // WC!
+
+    // dozen = gross;                  // copy assignment
+    // dozen = BitSet{4};              // move assignment
 }
