@@ -4,7 +4,8 @@
 
 void BitSet::insert_into(ostream &out) const
 {
-    for (size_t idx = 0; idx < d_bits.max_bit_nr(); ++idx)
+    size_t idx = (d_bits.capacity() - d_bits.max_bit_nr());
+    for (idx; idx < d_bits.capacity(); ++idx)
     {
         if (static_cast<size_t>(d_bits[idx]))
             cout << '1';

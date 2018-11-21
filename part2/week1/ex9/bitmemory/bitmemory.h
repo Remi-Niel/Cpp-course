@@ -25,6 +25,7 @@ class BitMemory
         ~BitMemory();
 
         size_t max_bit_nr() const;
+        size_t capacity() const;
 
         void swap(BitMemory &swap);
         BitMemory &operator=(BitMemory const &copy);
@@ -61,6 +62,11 @@ inline BitMemory::BitMemory(size_t bits)
 inline size_t BitMemory::max_bit_nr() const
 {
     return d_nbits;
+}
+
+inline size_t BitMemory::capacity() const
+{
+    return d_capacity;
 }
 
 inline size_t BitMemory::blocksize()
