@@ -7,8 +7,8 @@ BitMemory::BitMemory(string const &bits)
     for (size_t idx = 0; idx < bits.size(); ++idx)
     {
         if (bits[idx] == '1')
-            d_bits[idx / 8] |= (1 << (idx % 8));
+            (*this)[idx] = 1;
         else
-            d_bits[idx / 8] &= ~(1 << (idx % 8));
+            (*this)[idx] = 0;
     }
 }

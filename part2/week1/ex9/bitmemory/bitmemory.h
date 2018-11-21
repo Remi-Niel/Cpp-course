@@ -11,7 +11,7 @@ typedef uint8_t memory_t;
 class BitMemory
 {
     size_t d_nbits; // bits in use.
-    size_t d_blocks; // total capacity.
+    size_t d_capacity; // total blocks of capacity.
     memory_t *d_bits;
 
     public:
@@ -39,6 +39,8 @@ class BitMemory
 
         void enlarge(size_t newsize); //newsize in bits.
     private:
+        static size_t blocksize();
+        static size_t nblocks(size_t nbits);
         static void copy(memory_t *dest, memory_t *src, size_t bits);
 
         // void set_bit(size_t idx, size_t val);
@@ -47,7 +49,7 @@ class BitMemory
 };
 
 inline BitMemory::BitMemory()
-:   d_nbits(0), d_blocks(0), d_bits(nullptr)
+:   d_nbits(0), d_capacity(0), d_bits(nullptr)
 { }
 
 inline BitMemory::BitMemory(size_t bits)
@@ -59,6 +61,16 @@ inline BitMemory::BitMemory(size_t bits)
 inline size_t BitMemory::max_bit_nr() const
 {
     return d_nbits;
+}
+
+inline size_t BitMemory::blocksize()
+{
+    return sizeof(memory_t) * 8;
+}
+
+inline size_t BitMemory::nblocks(size_t nbits)
+{
+    return (nbits + (blocksize() - 1)) / blocksize();
 }
 
 #endif

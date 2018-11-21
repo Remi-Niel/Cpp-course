@@ -3,7 +3,7 @@
 BitMemory &BitMemory::operator&=(BitMemory const &mem)
 {
     if (mem.d_nbits > d_nbits)
-        enlarge(mem.d_nbits);
+        enlarge(d_nbits + mem.d_nbits);
 
     size_t difference = d_nbits - mem.d_nbits;
 
