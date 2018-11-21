@@ -4,7 +4,7 @@ BitMemory::BitMemory(string const &bits)
 :   BitMemory()
 {
     enlarge(bits.size());
-    size_t pad = capacity() - max_bit_nr();
+    size_t pad = 0;
 
     for (size_t idx = 0; idx < bits.size(); ++idx)
     {
