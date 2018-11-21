@@ -18,7 +18,7 @@ class BitSet
         BitSet(size_t n_bits = 8);
         BitSet(std::string const &bits);
 
-        size_t size();
+        size_t size() const;
 
         BitSet &operator<<=(size_t shift);
         friend BitSet operator<<(BitSet const &set, size_t shift);
@@ -38,5 +38,26 @@ class BitSet
         void insert_into(std::ostream &out) const;
         void extract_from(std::istream &in) const;
 };
+
+inline BitSet::BitSet(size_t n_bits)
+:   d_bits(n_bits)
+{ }
+
+inline BitSet::BitSet(std::string const &bits)
+:   d_bits(bits)
+{ }
+
+inline size_t BitSet::size() const
+{
+    return d_bits.max_bit_nr();
+}
+
+BitSet &BitSet::operator<<=(size_t shift)
+{
+    d_bits <<= shift;
+    return *this;
+}
+
+
         
 #endif
