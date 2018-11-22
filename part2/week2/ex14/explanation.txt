@@ -1,6 +1,6 @@
 The constructor is embedded in a function try block, and when the max number is reached an exception is thrown.
 This exception is immediately caught by the catch block under the constructor try block, which deletes any memory
-that may have been assigned (since the object is incomplete, the end of the constructor was not reached naturally).
+that may have been assigned (the object is incomplete, as the end of the constructor was not reached naturally).
 It then re-throws the caught exception, which is caught again in main.
 
 Because the previous objects were initialized inside the corresponding try block, delete[] is called for the array
