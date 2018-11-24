@@ -1,0 +1,3 @@
+Exit(3) immediately quits the program and does not call the destructors of locally defined objects, which can result in memory leaks and other nasty side effects. Using exceptions instead ensures that all the locally defined objects created in the try block in which the exception was thrown have their destructors called to provide the necessary cleanup.
+
+If you run the example program with valgrind you can see that it leaks when the function using exit() is called, but that it calls the destructor and does not leak when exceptions are used.
