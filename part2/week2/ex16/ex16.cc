@@ -39,6 +39,14 @@ void ExitLeaks::fun()
     cout << "...\n";
 }
 
+// this function throws an exception, and the local object is destroyed
+void wellBehavedFunc()
+{
+    ExitLeaks well_behaved{};
+    well_behaved.fun();
+    throw string("something terrible happened! (but it's handled well)\n");
+}
+
 // this function exits, and the object is not destroyed
 void leakyFunc()
 {
@@ -49,5 +57,25 @@ void leakyFunc()
 
 int main()
 {
-    leakyFunc();
+    cout << "[1] Well-behaved Function\n[2] Leaky Function\n> ";
+    int choice;
+    cin >> choice;
+
+    // well behaved function is called from within a try block, after the
+    // exception is thrown the destructor of the local object is called
+    if (choice == 1)
+    {
+        try
+        {
+            wellBehavedFunc();
+        }
+        catch (string str)
+        {
+            cout << str;
+            return 1;
+        }
+    }
+    
+    if (choice == 2)
+        leakyFunc();
 }
