@@ -1,0 +1,7 @@
+Exhibit 1:
+Caught int: 5
+Exhibit 2:
+Caught bad exception!
+Exhibit 3:
+terminate called after throwing an instance of 'char const*'
+[1]    14747 abort (core dumped)  ./tmp/bin/binary
