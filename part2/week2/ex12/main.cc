@@ -13,8 +13,9 @@ namespace
 }
 
 int main(int argc, char **argv)
+try
 {
-    Arg &arg=Arg::initialize(":df:hv", longOptions, longEnd, argc, argv);
+    Arg &arg = Arg::initialize(":df:hv", longOptions, longEnd, argc, argv);
 
     cout << "n_options: " << arg.nOptions() << ", n_args:" << arg.nArgs() << '\n';
 
@@ -31,4 +32,9 @@ int main(int argc, char **argv)
     cout << "debug: " << count << ' ' << value << '\n';
     
     delete &arg;
+}
+catch (char const *exception)
+{
+    cerr << "Exception caught: '" << exception << "'\n";
+    return 1;
 }
