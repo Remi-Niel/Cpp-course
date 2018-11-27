@@ -6,7 +6,6 @@ BitMemory &BitMemory::operator|=(BitMemory const &mem)
         enlarge(mem.d_nbits);
 
     size_t diff = max_bit_nr() - mem.max_bit_nr();
-    cout << "diff: " << diff << "\n";
 
     for (size_t idx = 0; idx < mem.d_nbits; ++idx)
     {
