@@ -47,17 +47,6 @@ inline size_t Strings::capacity() const     // potentially dangerous practice:
 {                                           // inline accessors
     return d_capacity;
 }
-
-inline std::string const &Strings::at(size_t idx) const
-{
-    return safeAt(idx);
-}
-
-inline std::string &Strings::at(size_t idx)
-{
-    return safeAt(idx);
-}
-
         
 #endif
 
