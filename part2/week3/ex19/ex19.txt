@@ -1,0 +1,8 @@
+If the class Derived publicly inherits all 'privacy' rules remain the same for the users of the derived objects: private and protected members of both Base and Derived cannot be directly accessed. As for derived's designer, she can only access protected and public members of Base through her derived class.
+
+If Derived uses protected inheritance, the members of Base that were public or protected will all be protected members of Derived, meaning that classes that inherit from Derived will be able to access these (now protected) members, but anything outside Derived and its derived classes cannot. For Derived's users, this means that they cannot access any of the Base class's members directly; they will have to go through Derived's methods.
+
+Finally, private derivation turns all the base class's members into private members of the derived class, meaning that they can only be accessed by the class itself, and the designer of Derived will have to create new public methods (or promote access rights within the derived class) if she wants users to be able to use any of the base class's members directly.
+
+
+
