@@ -10,8 +10,8 @@ class Demo
     public:
         Demo(string demo_name);
         Demo(Demo const &other);
-        void throwCopy();
-        inline string const name() const;
+        void thrower();
+        void tellName() const;
 };
 
 Demo::Demo(string demo_name)
@@ -24,15 +24,15 @@ Demo::Demo(Demo const &other)
     d_name("copy of " + other.d_name)
 {}
 
-void Demo::throwCopy()
+void Demo::thrower()
 {
     Demo new_demo("new demo");
     throw new_demo;
 }
 
-inline string const Demo::name() const
+void Demo::tellName() const
 {
-    return d_name;
+    cout << "object name: " << d_name << '\n';
 }
 
 int main()
@@ -43,11 +43,11 @@ int main()
     // by an object catcher
     try
     {
-        first_demo.throwCopy();
+        first_demo.thrower();       // 'copy of copy of new demo'
     }
     catch(Demo caught_object)
     {
-        cout << "Caught object: " << caught_object.name() << '\n';
+        caught_object.tellName();
 
         // here we re-throw the caught object, and observe that it is in fact
         // the same object being thrown, not a new copy of that object
@@ -57,7 +57,7 @@ int main()
         }
         catch(Demo recaught_object)
         {
-            cout << "Re-caught object: " << caught_object.name() << '\n';
+            recaught_object.tellName(); // 'copy of copy of new demo'
         }
     }
 
@@ -65,10 +65,10 @@ int main()
     // catcher, without the need for a second copy to be constructed
     try
     {
-        first_demo.throwCopy();
+        first_demo.thrower();
     }
     catch(Demo &caught_reference)
     {
-        cout << "Caught reference: " << caught_reference.name() << '\n';
+        caught_reference.tellName();    // 'copy of new demo'
     }
 }

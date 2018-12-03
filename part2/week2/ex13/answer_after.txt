@@ -1,0 +1,14 @@
+The output of the program above is as follows:
+
+object name: copy of copy of new demo
+object name: copy of copy of new demo
+object name: copy of new demo
+
+This shows that:
+
+1. The first time an exception catcher catches the demo object shows that the object caught is a copy of a copy of the original object, as a first copy is created when the object is passed to throw, and a copy of that copy is created when
+the former is caught by the exception catcher.
+
+2. When we throw the current object right after (line 56), it is the same object - and not a copy - that is thrown and caught, as evidenced by the output generated in the second catch block.
+
+3. When we catch an object reference rather than the object, a second copy does not have to be created, resulting in the third line of output showing that it is indeed the initial copy (created at the first throw) that is caught.
