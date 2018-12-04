@@ -2,7 +2,7 @@
 
 //Basic guarantee: enlarged returns pointer to allocated data,
 //hence caller is responsible for data: no leaks.
-//Strong guarantee: sing enlarged() provides the strong guarantee,
+//Strong guarantee: since enlarged() provides the strong guarantee,
 // and storageArea() does not directly make any changes 
 
 string **Strings::storageArea()
@@ -12,13 +12,7 @@ string **Strings::storageArea()
 
     d_capacity <<= 1;                   // double the capacity
     
-    try
-    {
-        return enlarged();                  // return ptr to the enlarged space 
-    }
-    catch(...)
-    {
-        throw;
-    }
+    return enlarged();                  // return ptr to the enlarged space 
+
 }
 

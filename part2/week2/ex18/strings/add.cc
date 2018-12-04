@@ -1,12 +1,18 @@
 #include "strings.ih"
 
-// Basic guarentee: memory is destroyed if no longer in use, hence no leaks
-// Strong guarentee: The old data is only removed after all operations which can
-// throw exceptions are done, hence commit or rollback.
+// Basic guarentee: tmp is deleted if an exception occurs while reserving new memory
+// the previous data is removed if it has been copied into a new location.
+
+// Strong guarentee: there are 2 cases, either there still is enough memory,
+// in this case the string is added and old data does not have to be removed.
+// Or there is not enough memory and new memory has to be reserved, in this
+// case the data is only removed when everything has been copied correctly.
+// Hence commit or rollback.
+
 // Exception neutral: exceptions are propagated to the caller.
 void Strings::add(string const &next)
 {
-    string **tmp;
+    string **tmp = nullptr;
 
     try
     {
@@ -15,6 +21,7 @@ void Strings::add(string const &next)
     }
     catch(...)
     {
+        delete[] tmp;
         throw;
     }
 

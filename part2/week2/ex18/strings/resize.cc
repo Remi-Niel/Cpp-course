@@ -5,23 +5,17 @@
 //Exception neutral: exceptions are propagated to the caller.
 void Strings::resize(size_t newSize)
 {
-    try
-    {
-        reserve(newSize);           // make sure there's enough memory
+    reserve(newSize);           // make sure there's enough memory
 
-        if (newSize > d_size)       // enlarging? initialize new strings
-        {
-            for (; d_size != newSize; ++d_size)
-                d_str[d_size] = new string;
-        }
-        else if (newSize < d_size)  // shrinking? remove excess strings
-        {
-            for (; d_size-- != newSize; )
-                delete d_str[d_size];
-        }
-    }
-    catch(...)
+    if (newSize > d_size)       // enlarging? initialize new strings
     {
-        throw;
+        for (; d_size != newSize; ++d_size)
+            d_str[d_size] = new string;
     }
+    else if (newSize < d_size)  // shrinking? remove excess strings
+    {
+        for (; d_size-- != newSize; )
+            delete d_str[d_size];
+    }
+    
 }

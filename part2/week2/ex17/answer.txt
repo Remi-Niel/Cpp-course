@@ -1,6 +1,6 @@
 No it is not exception safe, rawPointers() can throw an exception namely bad_alloc. Since it is not handeled anywhere the constructor doesn't give the Nothrow guarantee and therefor is not exception safe.
 
-This could be resolved by adding function try blocks and setting d_str in the body.
+This could be resolved by setting d_str in de function body surrounded by a try/catch. Where the catch is used to set d_str to 0. An is_valid() member can then be added such that the user can check if it went correctly. 
 
 The default constructor can only encounter an exception thrown by <new>, in which case <new> automitcally makes sure all memory it already allocated is destroyed. Hence you end up without an object but there also isn't any leaked memory. 
 

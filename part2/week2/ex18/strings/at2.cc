@@ -5,10 +5,6 @@
 //Exception neutral: exceptions are forwarded to the caller
 
 std::string &Strings::at(size_t idx)
-try
 {
     return safeAt(idx);
-}catch(...)
-{
-    throw;
 }

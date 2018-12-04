@@ -1,6 +1,7 @@
 #include "strings.ih"
 
-// Basic guarantee: memory allocated to d_str is destroyed by the destructor when needed.
+// Basic guarantee: memory allocated to d_str is destroyed by the destructor 
+// when needed.
 // Strong guarentee: d_capacity is corrected incase of exceptions.
 // Exception neutral: exceptions are propagated to the caller.
 
@@ -17,9 +18,11 @@ void Strings::reserve(size_t nextCapacity)
             
             d_str = enlarged();
         }   
-    }catch(...)
+    }
+    catch(...)
     {
-        d_capacity = capacity; //Set d_capacity to the amount actually reserved.
+        //Set d_capacity to the amount actually reserved.
+        d_capacity = capacity; 
         throw;
     }
 }

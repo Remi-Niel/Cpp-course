@@ -5,12 +5,8 @@
 //Strong guarantee: nothing existed beforehand so nothing to rollback to.
 //Exception neutral: exceptions are propagated to the caller.
 Strings::Strings(int argc, char *argv[])
-try:
-    Strings()
+    : Strings()
 {
     for (size_t begin = 0, end = argc; begin != end; ++begin)
         add(argv[begin]);
-}
-catch(...)
-{
 }

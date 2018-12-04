@@ -6,11 +6,8 @@
 //Exception neutral: exceptions are propagated to the caller.
 
 Strings::Strings(char **environLike)
-try:
-    Strings()
+    : Strings()
 {
     while (*environLike)
         add(*environLike++);
 }
-catch(...)
-{}
