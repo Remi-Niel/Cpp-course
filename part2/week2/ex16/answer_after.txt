@@ -1,0 +1,13 @@
+The program above prints the following output when leakyFunc(), which uses exit(3) is called from main:
+
+constructor called!
+
+The fact that the program ends without the destructor being called shows that exit(3) immediately quits the program and does not call the destructors of locally defined objects. This can result in memory leaks if those objects were managing allocated memory. 
+
+When exceptionFunc() is called from (within a try block in) main, it gives the following output:
+
+constructor called!
+destructor called!
+exception message goes here
+
+This shows that using exceptions does ensure that all the locally defined objects created in the try block in which the exception was thrown do have their destructors called to provide the necessary cleanup. This is the reason why exit(3) should not be used and exceptions should be preferred.
