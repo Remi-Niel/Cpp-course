@@ -5,31 +5,27 @@ using namespace std;
 
 class MaxFour
 {
+    static size_t s_obj_count;
+
     public:
-        static char s_obj_count;
         MaxFour();
         ~MaxFour();
 };
 
-char MaxFour::s_obj_count;
+size_t MaxFour::s_obj_count;
 
 MaxFour::MaxFour()
-try
 {
-    s_obj_count++;
+    cout << "constructor called...\n";
+    ++s_obj_count;
 
     if (s_obj_count == 4)
         throw string("max. number of objects reached.");
 }
-catch(...)
-{
-    // any necessary deletion of memory in incomplete object
-    throw;
-}
 
 MaxFour::~MaxFour()
 {
-    // any necessary deletion of memory for completed objects
+    cout << "destructor called.\n";
 }
 
 int main()
