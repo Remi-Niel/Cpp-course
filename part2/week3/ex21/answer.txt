@@ -2,4 +2,4 @@ Derived classes usually rely on their superclass to offer functionality they can
 
 In the example shown in main.cc a class called KiloByte allocates 1000 bytes, and allowes subclasses to access these. Now if the derived class NullTerminatedKiloByte starts copying a string into this memory it will crash when the base class has not been constructed yet.
 
-When a destructor gets called then the compiler automatically also calls the deconstructor of all non-virtual base classes in the reverse order in which they were constructed.
+When a destructor gets called (either implicit or explicit) then the compiler automatically also calls the deconstructor of all non-virtual base classes in the reverse order in which they were constructed.
