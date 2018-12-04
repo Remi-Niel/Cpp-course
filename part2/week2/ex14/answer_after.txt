@@ -4,13 +4,16 @@ constructor called...
 constructor called...
 constructor called...
 constructor called...
+constructor called...
+destructor called.
 destructor called.
 destructor called.
 destructor called.
 max. number of objects reached.
 
-The calls to the constructor (while filling the mf_array with MaxFour objects) are embedded in a try block. When the constructor is called for the fourth time it throws an exception, which causes the memory allocated for the fourth (never-completed) object to be freed. 
 
-Because an exception was thrown inside the try block, delete[] is called on the array of MaxFour objects, which calls the destructors for the three (completed) objects initialized within that try block.
+The calls to the constructor (while filling the mf_array with MaxFour objects) are embedded in a try block. When the constructor is called for the fifth time it throws an exception, which causes the memory allocated for the fifth (never-completed) object to be freed. 
 
-The solution is this simple because of these guarantees that C++ offers where space allocated for objects whose constructors throw an exception is automatically freed and where objects initialized in a try block that fails have their destructors called.
+The new function is exception safe, and guarantees that if any exception is thrown from a constructor the complete allocation operation is undone. So when the fifth constructor throws the new function automatically calls delete on the objects that were already succesfully constructed, and then releases the allocated memory.
+
+So because the new function guarantees that it either completes without errors, or has no effect we do not need to do any manual clean up if the operation fails.
