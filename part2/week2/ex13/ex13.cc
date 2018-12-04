@@ -26,8 +26,7 @@ Demo::Demo(Demo const &other)
 
 void Demo::thrower()
 {
-    Demo new_demo("new demo");
-    throw new_demo;
+    throw *this;
 }
 
 void Demo::tellName() const

@@ -19,7 +19,7 @@ MaxFour::MaxFour()
     cout << "constructor called...\n";
     ++s_obj_count;
 
-    if (s_obj_count == 4)
+    if (s_obj_count > 4)
         throw string("max. number of objects reached.");
 }
 
