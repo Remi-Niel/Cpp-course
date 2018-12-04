@@ -1,0 +1,13 @@
+When Derived's empty constructors are called the objects are not properly initialized, as Base's constructors are never called. This means that data members of Base and Derived are not initialized to 0, as shown in the following output:
+
+data: 22022
+data: -79913200
+data: 32767
+
+When changing Derived's constructors to call Base's corresponding constructors, it initializes the data member properly and the same main() gives the following output:
+
+data: 0
+data: 0
+data: 0
+
+To call Base's copy constructor from Derived's move constructor, simply omit the std::move() in the initializer list call. To call Base's move constructor from Derived's copy constructor, const_cast() other and call Base's constructor with std::move() in the initializer list call.
