@@ -1,0 +1,10 @@
+- OpusMagnum expects a specific version of WIP which needs a specific amount of memory (depending on its data members). If the data-members change the amount of memory needed might also change making ti so to little are much memory is allocated.
+
+-If the total size of the data-members of WIP changes, your class will allocate the wrong amount if it is not recompiled.
+
+Use a pointer, those are fixed size hence changes in size of WIP aren't a problem.
+class OpusMagnum
+{
+    WIP *d_wip;
+    ...
+};
