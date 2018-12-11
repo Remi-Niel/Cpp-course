@@ -12,10 +12,4 @@ class Base
     private:
         virtual void v_hello(std::ostream &out);
 };
-
-void Base::hello(std::ostream &out)
-{
-    v_hello(out);
-}
-
 #endif

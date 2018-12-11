@@ -16,9 +16,4 @@ class Derived: public Base
     private:
         void v_hello(std::ostream &out) override;
 };
-
-Derived::Derived(std::string str)
-:
-    d_line(str)
-{}
 #endif
