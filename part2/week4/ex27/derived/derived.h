@@ -9,7 +9,9 @@ class Derived: public Base
     std::string const d_line;
 
     public:
+        Derived();
         Derived(std::string str);
+        ~Derived() override;
 
     private:
         void v_hello(std::ostream &out) override;
@@ -19,10 +21,4 @@ Derived::Derived(std::string str)
 :
     d_line(str)
 {}
-
-void Derived::v_hello(std::ostream &out)
-{
-    out << d_line;
-}
-
 #endif
