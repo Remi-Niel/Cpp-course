@@ -15,12 +15,12 @@ class Derived: public Base
         void v_hello(std::ostream &out) override;
 };
 
-Derived::Derived(std::string str)
+inline Derived::Derived(std::string str)
 :
     d_line(str)
 {}
 
-void Derived::v_hello(std::ostream &out)
+inline void Derived::v_hello(std::ostream &out)
 {
     out << d_line;
 }

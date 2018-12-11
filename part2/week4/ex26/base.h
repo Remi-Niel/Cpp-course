@@ -12,12 +12,12 @@ class Base
         virtual void v_hello(std::ostream &out);
 };
 
-void Base::hello(std::ostream &out)
+inline void Base::hello(std::ostream &out)
 {
     v_hello(out);
 }
 
-void Base::v_hello(std::ostream &out)
+inline void Base::v_hello(std::ostream &out)
 {
     out << "hello from Base\n";
 }

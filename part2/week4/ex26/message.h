@@ -10,12 +10,12 @@ class Message
         void show(std::ostream &out);
 };
 
-Message::Message(Base &base)
+inline Message::Message(Base &base)
 :
     d_base(&base)
 {}
 
-void Message::show(std::ostream &out)
+inline void Message::show(std::ostream &out)
 {
     d_base->hello(out);
 }
