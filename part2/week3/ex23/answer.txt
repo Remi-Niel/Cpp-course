@@ -1,1 +1,1 @@
-The caller function works for this specific situation but should fail when an object is passed to the function that is not of the Derived type. (It might work in this trivial example, but when memory access gets involved it becomes undefined behavior).
+The caller function works for this specific situation but fails when an object is passed to the function that is not of the Derived type. When an object is passed that is not of the Derived type the dynamic_cast throws a bad_cast exception.
