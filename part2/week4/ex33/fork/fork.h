@@ -5,11 +5,11 @@
 
 class Fork
 {
-    pid_t d_pid = 0;
+    pid_t d_pid = -1; //-1 is invalid pid, so we know nothing is running.
 
     public:
         void fork();
-        
+
         virtual void childProcess() = 0;
         virtual void parentProcess() = 0;
     
@@ -23,5 +23,10 @@ class Fork
         pid_t pid() const;
         int waitForChild() const;
 };
-        
+
+inline pid_t Fork::pid() const
+{
+    return d_pid;
+}
+
 #endif
