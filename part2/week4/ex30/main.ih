@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Basic
+{
+    public:
+        Basic();
+        Basic(int integer);
+};
+
+class Deriv1 : public virtual Basic
+{ };
+
+class Deriv2 : public virtual Basic
+{ };
+
+class Multi : public Deriv1, public Deriv2
+{
+    public:
+        Multi();
+};
+
+Basic::Basic()
+{
+    cout << __PRETTY_FUNCTION__ << "\n";
+}
+
+Basic::Basic(int integer)
+{
+    cout << __PRETTY_FUNCTION__ << "\n";
+}
+
+Multi::Multi()
+:
+    Basic(12)
+{
+    cout << static_cast<Basic *>(static_cast<Deriv1 *>(this)) << "\n";
+    cout << static_cast<Basic *>(static_cast<Deriv2 *>(this)) << "\n";
+}

@@ -1,0 +1,10 @@
+\textbf{what's the required expression statement?}
+\begin{verbatim}
+d_forkPtr[d_nFork++] = fork; //am, I missing something?
+\end{verbatim}
+
+\textbf{What must change in Fork?}
+Fork must be made copy-able, else there can be no copy stored in \texttt{d_forkPtr}, it should also be final and implement some PImpl way of storing what now is the derived class, because else the objects will be sliced in the array.
+
+\textbf{if main looks like this: \texttt{ret.}}
+The run function should store the exit code of the child process in the Compile object, then at a later moment the ForkHandler can use a getter to retrieve that exit code to report it back to the user. It should also implement a function which can be checked to see if the child process is still running.

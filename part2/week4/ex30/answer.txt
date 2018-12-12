@@ -1,0 +1,36 @@
+\textbf{Explain the compiler's error message:}
+The compile error:
+\begin{verbatim}
+In file included from main.cc:1:
+main.ih: In constructor ‘Multi::Multi()’:
+main.ih:31:38: error: ‘Basic’ is an ambiguous base of ‘Multi’
+     cout << static_cast<Basic *>(this) << "\n";
+\end{verbatim}
+
+The compiler gives this error message because it can cast ot the baseclass of \texttt{Deriv1}, or the baseclass of \texttt{Deriv2}. Since there is more then one option the cast is ambiguous.
+
+\textbf{Change the statement so that there is no compilation error (there are two almost identical but fundamentally different ways of doing so. Show both ways):}
+The two different way to do this cast is:
+\begin{lstlisting}
+cout << static_cast<Basic *>(static_cast<Deriv1 *>(this)) << "\n";
+cout << static_cast<Basic *>(static_cast<Deriv2 *>(this)) << "\n";
+\end{lstlisting}
+
+\textbf{Keep the statement as-is, and show the required modifications to allow the compiler to compile the statement without errors.}
+The statement as-is can be used when \texttt{Deriv1} and \texttt{Deriv2} both use virtual inheritence.
+\begin{lstlisting}
+class Deriv1 : public virtual Basic
+{ };
+
+class Deriv2 : public virtual Basic
+{ };
+\end{listlisting}
+
+\textbf{Add a 2nd constructor to Basic, expecting an int argument. After solving the previous item, how do you realize that this 2nd constructor is the only Basic constructor that's called?}
+By calling that constructor at initialisation of \texttt{Multi}, as follows:
+\begin{lstlisting}
+Multi::Multi()
+:
+    Basic(12)
+{ }
+\end{lstlisting}
