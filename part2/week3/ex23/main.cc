@@ -7,6 +7,7 @@ class Base
 {
     public:
         void hello();
+        virtual ~Base(); //required or dynamic cast wont work.
 };
 
 class Derived : public Base
@@ -20,6 +21,11 @@ void Base::hello()
     cout << __PRETTY_FUNCTION__ << ": Hello!\n";
 }
 
+Base::~Base()
+{
+    
+}
+
 void Derived::hello()
 {
     cout << __PRETTY_FUNCTION__ << ": Hello!\n";
@@ -27,7 +33,7 @@ void Derived::hello()
 
 void caller(Base &obj)
 {
-    reinterpret_cast<Derived*>(&obj)->hello();
+    dynamic_cast<Derived&>(obj).hello();
 }
 
 int main()
