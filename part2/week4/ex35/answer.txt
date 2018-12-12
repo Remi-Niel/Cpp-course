@@ -1,0 +1,14 @@
+The core function can be declared virtual, then every derived class can create its own implementation of the "core functionality". Then when at runtime the core function is called it will automatically resolve to the right function call thanks to the vtables.
+
+ForkHandler::execute would look like
+\begin{lstlisting}
+#include "forkhandler.ih"
+
+void ForkHandler::execute()
+{
+    for (size_t idx = 0; idx != d_nFork; ++idx)
+    {
+        d_forkPtr[idx].core();
+    }
+}
+\end{lstlisting}
