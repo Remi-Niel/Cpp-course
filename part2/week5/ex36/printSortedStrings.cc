@@ -1,4 +1,4 @@
-#include <list>
+#include <queue>
 #include <iostream>
 #include <string>
 
@@ -6,19 +6,15 @@ using namespace std;
 
 int main()
 {
-	list<string> strings;
+	priority_queue<string> string_queue;
 	string input;
 
 	while (cin >> input)
-	{
-		strings.push_back(input);
-	}
+		string_queue.push(input);
 
-	strings.sort();
-	
-	for (list<string>::iterator iter = strings.begin(); 
-								iter != strings.end(); ++iter)
+	while (string_queue.size())
 	{
-		cout << *iter << '\n';
+		cout << string_queue.top() << '\n';
+		string_queue.pop();
 	}
 }
