@@ -7,12 +7,11 @@ using namespace std;
 int main()
 {
 	list<string> strings;
-	string input = "";
+	string input;
 
-	while (getline(cin, input, ' '))
+	while (cin >> input)
 	{
-		if (input != "\n")
-			strings.push_back(input);
+		strings.push_back(input);
 	}
 
 	strings.sort();
