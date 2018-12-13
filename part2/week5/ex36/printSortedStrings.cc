@@ -17,7 +17,7 @@ int main()
 		vector<string>::const_iterator idx = strings.begin();
 		for (; idx < strings.end(); ++idx)
 		{
-			if (input.compare(*idx) <= 0)
+			if (input < *idx)
 			{
 				strings.insert(idx, input);
 				break;
