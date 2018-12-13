@@ -1,4 +1,4 @@
-#include <vector>
+#include <list>
 #include <iostream>
 #include <string>
 
@@ -6,28 +6,20 @@ using namespace std;
 
 int main()
 {
-	vector<string> strings;
+	list<string> strings;
 	string input = "";
 
 	while (getline(cin, input, ' '))
 	{
-		if (input == "\n")
-			continue;
-
-		vector<string>::const_iterator idx = strings.begin();
-		for (; idx < strings.end(); ++idx)
-		{
-			if (input < *idx)
-			{
-				strings.insert(idx, input);
-				break;
-			}
-		}
-
-		if (idx == strings.end())
-			strings.insert(idx, input);
+		if (input != "\n")
+			strings.push_back(input);
 	}
 
-	for (size_t idx = 0; idx < strings.size(); ++idx)
-		cout << strings.at(idx) << '\n';
+	strings.sort();
+	
+	for (list<string>::iterator iter = strings.begin(); 
+								iter != strings.end(); ++iter)
+	{
+		cout << *iter << '\n';
+	}
 }
