@@ -7,7 +7,7 @@ class Signal
 {
     class Handler;
 
-    std::multimap<size_t, Handler> d_signal_map;
+    std::multimap<size_t, Handler &> d_signal_map;
 
     public:
         static Signal *accessSignal();
