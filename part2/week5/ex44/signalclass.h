@@ -12,6 +12,7 @@ class Signal
     public:
         static Signal *accessSignal();
         void signal(int signum, sighandler_t handler);
+        static void sigmapHandler(int signum);
 
         // functions that handle Handler objects
         void add(size_t signum, Handler &object);
@@ -32,7 +33,7 @@ class Signal
 };
 
 // construct singleton in static variable on first call, after that
-// simply return reference existing singleton
+// simply return pointer to existing singleton
 inline Signal *Signal::accessSignal()
 {
     static Signal signalInstance;
