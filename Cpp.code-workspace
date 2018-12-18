@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.ih": "cpp",
+			"istream": "cpp",
+			"*.cc": "cpp",
+			"variant": "cpp",
+			"iosfwd": "cpp"
+		}
+	}
+}
