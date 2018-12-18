@@ -10,12 +10,6 @@ class Strings
     std::vector<std::string> d_strings;
 
     public:
-        Strings() = default;
-        Strings(const Strings &) = default;
-        Strings(Strings &&) = default;
-
-        Strings &operator=(const Strings &) = default;
-        
         size_t size() const;
         size_t capacity() const;
 
