@@ -1,8 +1,5 @@
 #include "strings.ih"
 
-//Basic guarantee: no dynamically allocated data
-//Strong guarantee: no data is adjusted (const member)
-//Exception neutral: exceptions are propagated to the caller
 std::string &Strings::safeAt(size_t idx) const
 {
     if (idx >= d_size)
