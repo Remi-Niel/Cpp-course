@@ -1,11 +1,13 @@
 #ifndef SIGNALCLASS_H
 #define SIGNALCLASS_H
 
-#include "signal.ih"
+#include <csignal>
+#include <map>
 
 class Signal
 {
-    class Handler;
+    public:
+        class Handler;
 
     std::multimap<size_t, Handler &> d_sigmap;
 
@@ -25,11 +27,7 @@ class Signal
         Signal(Signal &&tmp) = delete;
 
     private:
-        Signal() = default;
-
-        // prevent assignment by hiding the functions (Singleton)
-        Signal &operator=(Signal const &other);
-        Signal &operator=(Signal &&tmp);
+        Signal();
 };
 
 // construct singleton in static variable on first call, after that
@@ -39,5 +37,17 @@ inline Signal *Signal::accessSignal()
     static Signal signalInstance;
     return &signalInstance;
 }
+
+// nested class that can be inherited from to handle signals in objects
+class Signal::Handler
+{
+    friend class Signal;
+
+    public:
+        virtual ~Handler();
+
+    private:
+        virtual void handle(size_t signum) = 0;
+};
 
 #endif

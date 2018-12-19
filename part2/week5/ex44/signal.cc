@@ -1,6 +1,7 @@
 #include "signal.ih"
-#include "signalclass.h"
-#include "handler.h"
+
+Signal::Signal()
+{}
 
 void Signal::signal(int signum, sighandler_t handler)
 {
@@ -33,9 +34,7 @@ void Signal::sigmapHandler(int signum)
 void Signal::add(size_t signum, Handler &object)
 {
     d_sigmap.insert(std::pair<size_t, Handler &>(signum, object));
-    
-    if (!d_sigmap.count(signum))
-        signal(signum, sigmapHandler);
+    signal(signum, sigmapHandler);
 }
 
 void Signal::remove(size_t signum, Handler &object)
