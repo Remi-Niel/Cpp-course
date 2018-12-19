@@ -31,4 +31,12 @@ class Signal
         Signal &operator=(Signal &&tmp);
 };
 
+// construct singleton in static variable on first call, after that
+// simply return reference existing singleton
+inline Signal *Signal::accessSignal()
+{
+    static Signal signalInstance;
+    return &signalInstance;
+}
+
 #endif
