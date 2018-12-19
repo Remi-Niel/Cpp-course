@@ -1,3 +1,2 @@
-#include <signal.h>
+#include "signalclass.h"
 #include <iostream>
-#include <map>
