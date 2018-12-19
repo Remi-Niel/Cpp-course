@@ -7,14 +7,10 @@ try
 {
     Compile compile;
 
-    string files[] = 
-    {
-        "./main.cc"
-    };
-
-    compile.run(files, 1);
+    compile.run("./main.cc");
 }
-catch (int exitcode)
+catch (char const *message)
 {
-    return exitcode;
+    cout << "Exception caught: '" << message << "'\n";
+    return -1;
 }
