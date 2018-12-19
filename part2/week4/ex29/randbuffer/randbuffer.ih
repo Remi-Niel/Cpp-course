@@ -1,6 +1,8 @@
 #include "randbuffer.h"
-#include <stdlib.h>
+
+#include <cstdlib>
 #include <stdexcept>
+#include <string>
 
 using namespace std;
 

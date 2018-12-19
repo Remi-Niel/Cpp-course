@@ -1,7 +1,4 @@
-#include "base.h"
-#include "derived.h"
-#include "message.h"
-#include <iostream>
+#include "main.ih"
 
 int main()
 {

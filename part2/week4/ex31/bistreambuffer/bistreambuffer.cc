@@ -1,6 +1,6 @@
 #include "bistreambuffer.ih"
 
-BiStreamBuffer::BiStreamBuffer(streambuf *one, streambuf *two)
+BiStreamBuffer::BiStreamBuffer(ostream &one, ostream &two)
 :
     streambuf(),
     d_one(one),

@@ -6,6 +6,7 @@
 class Base
 {
     public:
+        virtual ~Base();
         void hello(std::ostream &out);
 
     private:
@@ -15,11 +16,6 @@ class Base
 inline void Base::hello(std::ostream &out)
 {
     v_hello(out);
-}
-
-inline void Base::v_hello(std::ostream &out)
-{
-    out << "hello from Base\n";
 }
 
 #endif

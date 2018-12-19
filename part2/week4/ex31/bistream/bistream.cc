@@ -1,8 +1,9 @@
 #include "bistream.ih"
 
-BiStream::BiStream(ofstream &one, ofstream &two)
+BiStream::BiStream(ostream &one, ostream &two)
 :
-    BiStreamBuffer(one.rdbuf(), two.rdbuf()),
+    BiStreamBuffer(one, two),
     ostream(this)
 {
+    setp(0, 0);
 }

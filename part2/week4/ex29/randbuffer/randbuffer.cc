@@ -1,10 +1,10 @@
-#include "randbuffer.h"
+#include "randbuffer.ih"
 
 RandBuffer::RandBuffer(int min, int max, size_t seed)
 :
     d_min(min),
     d_range(max - min + 1),
-    d_end(RAND_MAX - RAND_MAX % d_range), // d_end is multiple of d_range
+    d_end(RAND_MAX - RAND_MAX % d_range),
     d_buffer(0)
 {
     if (max <= min)

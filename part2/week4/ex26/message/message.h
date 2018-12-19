@@ -1,9 +1,11 @@
 #ifndef INCLUDED_MESSAGE_H_
 #define INCLUDED_MESSAGE_H_
 
+#include "../base/base.h"
+
 class Message
 {
-    Base *d_base;
+    Base &d_base; //reference to prevent slicing.
 
     public:
         Message(Base &base);
@@ -12,12 +14,12 @@ class Message
 
 inline Message::Message(Base &base)
 :
-    d_base(&base)
+    d_base(base)
 {}
 
 inline void Message::show(std::ostream &out)
 {
-    d_base->hello(out);
+    d_base.hello(out);
 }
 
 #endif

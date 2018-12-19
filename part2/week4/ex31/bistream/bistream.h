@@ -8,7 +8,7 @@
 class BiStream: private BiStreamBuffer, public std::ostream
 {
     public:
-        BiStream(std::ofstream &one, std::ofstream &two);
-};
+        BiStream(std::ostream &one, std::ostream &two);
+}; 
         
 #endif
