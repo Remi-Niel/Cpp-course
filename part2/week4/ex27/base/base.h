@@ -1,7 +1,7 @@
 #ifndef INCLUDED_BASE_H_
 #define INCLUDED_BASE_H_
 
-#include <iostream>
+#include <iosfwd>
 
 class Base
 {

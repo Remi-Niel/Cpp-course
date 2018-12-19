@@ -1,0 +1,7 @@
+#include <iostream>
+
+using namespace std;
+
+#include "base/base.h"
+#include "derived/derived.h"
+#include "message/message.h"

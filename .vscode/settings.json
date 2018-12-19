@@ -5,6 +5,7 @@
         "istream": "cpp",
         "*.cc": "cpp",
         "variant": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "string": "cpp"
     }
 }

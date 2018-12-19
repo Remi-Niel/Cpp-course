@@ -6,12 +6,14 @@
 class RandBuffer: public std::streambuf
 {
     int d_min;
-    int d_range;
+    size_t d_range;
     int d_end;
-    int d_buffer;
+    char *d_buffer;
 
     public:
         RandBuffer(int min, int max, size_t seed);
+        ~RandBuffer();
+
         int underflow() override;
 };
         

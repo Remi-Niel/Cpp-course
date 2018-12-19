@@ -5,9 +5,8 @@
 void Compile::childProcess()
 {
 
-    size_t numdefaults = 7;
-    string program{ "/usr/bin/g++" };
-    string default_arguments[] =
+    size_t const numdefaults = 7;
+    string const default_arguments[] =
     {
         "/usr/bin/g++",
         "--std=c++2a",
@@ -18,22 +17,21 @@ void Compile::childProcess()
         "-O2"
     };
 
-    char const *args[numdefaults + d_nfiles + 2];
+    char const *args[numdefaults + 2];
     
-    args[numdefaults + d_nfiles + 1] = nullptr;
+    args[numdefaults + 1] = nullptr;
     
     //appoint main arguments
     for (size_t idx = 0; idx != 7; ++idx)
         args[idx] = default_arguments[idx].c_str();
 
-    //appoint files
-    for (size_t idx = 0; idx != d_nfiles; ++idx)
-        args[idx + numdefaults] = d_files[idx].c_str();
+    args[numdefaults] = d_files.c_str();
     
-    int rval = execv(program.c_str(), const_cast<char * const *>(args));
+    int rval = execv(default_arguments[0].c_str(), const_cast<char * const *>(args));
 
     if (rval == -1)
     {
         cout << "error: " << errno << "\n";
+        throw "Compilation failed!\n";
     }
 }

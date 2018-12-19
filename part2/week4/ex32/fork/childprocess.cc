@@ -1,6 +1,6 @@
 #include "fork.ih"
 
-Fork::~Fork()
+void Fork::childProcess()
 {
     
 }

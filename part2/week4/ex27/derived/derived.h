@@ -6,11 +6,11 @@
 
 class Derived: public Base
 {
-    std::string const d_line;
+    std::string d_line;
 
     public:
         Derived();
-        Derived(std::string str);
+        Derived(std::string const &str);
         ~Derived() override;
 
     private:
