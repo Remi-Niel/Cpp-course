@@ -1,10 +1,19 @@
 \textbf{what's the required expression statement?}
 \begin{verbatim}
-d_forkPtr[d_nFork++] = fork; //am, I missing something?
+d_forkPtr[d_nFork++] = fork.clone();
 \end{verbatim}
 
 \textbf{What must change in Fork?}
-Fork must be made copy-able, else there can be no copy stored in \texttt{d_forkPtr}, it should also be final and implement some PImpl way of storing what now is the derived class, because else the objects will be sliced in the array.
+Fork must be made to be an Abstract Base class. With a pure virtual private member:
+\begin{verbatim}
+virtual Fork *copy() = 0;
+\end{verbatim}
+
+It also needs a public method which calls the virtual copy method and passes the result back.
+
+\begin{verbatim}
+Fork *clone() const; //calls copy
+\end{verbatim}
 
 \textbf{if main looks like this: \texttt{ret.}}
-The run function should store the exit code of the child process in the Compile object, then at a later moment the ForkHandler can use a getter to retrieve that exit code to report it back to the user. It should also implement a function which can be checked to see if the child process is still running.
+Compile needs to override the copy method of Fork.
