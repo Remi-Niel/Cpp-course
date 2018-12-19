@@ -34,7 +34,11 @@ void Signal::sigmapHandler(int signum)
 void Signal::add(size_t signum, Handler &object)
 {
     d_sigmap.insert(std::pair<size_t, Handler &>(signum, object));
-    signal(signum, sigmapHandler);
+
+    if (d_sigmap.count(signum) == 1)
+    {
+        signal(signum, sigmapHandler);
+    }
 }
 
 void Signal::remove(size_t signum, Handler &object)
