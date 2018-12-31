@@ -1,5 +1,13 @@
 #include "main.ih"
 
+/*
+    Copiled with the following command:
+        g++ -std=c++17 -Wall -Wpedantic -fconcepts main.cc
+
+    With gcc version 8.2.1
+
+*/
+
 void gSort(auto begin, auto end, auto less)
 {
     if (begin >= end)
