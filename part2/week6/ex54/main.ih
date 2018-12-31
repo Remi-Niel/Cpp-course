@@ -1,0 +1,30 @@
+#include <algorithm>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+/*
+    functions that generate things.
+
+    its not very good but its a proof of concept anyway.
+*/
+
+inline vector<string> get_random_strings()
+{
+    return {"q", "a", "b", "t", "s", "x", "d", "y", "p"};
+}
+
+inline vector<int> get_random_ints()
+{
+    vector<int> rval;
+
+    for (int idx = 0; idx < 10; ++idx)
+    {
+        rval.push_back(rand());
+    }
+
+    return rval;
+}
