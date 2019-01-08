@@ -1,28 +1,27 @@
 #include <vector>
 #include <iostream>
+#include <set>
 #include <string>
 #include <algorithm>
 #include "vectorwrapper/vectorwrapper.h"
 
 using namespace std;
 
+vector<string> read_input()
+{
+    string input;
+    set<string> buffer;
+
+    while(cin >> input)
+        buffer.insert(input);
+
+    return vector<string>(buffer.begin(), buffer.end());
+}
+
 int main()
 {
-	vector<string> strings;
+	vector<string> strings = read_input();
     VectorWrapper wrapper;
-	string input;
-
-	// grab all strings fropm input and add them to the vector if it is not
-    // already in the vector
-	while (cin >> input)
-    {
-        cout << input << "\n";
-        if (find(strings.begin(), strings.end(), input) == strings.end())
-        {    
-            strings.push_back(input);
-            wrapper += input;
-        }
-    }
 
     cout << "Size: " << strings.size() << " , capacity: " << strings.capacity() << '\n';
 
