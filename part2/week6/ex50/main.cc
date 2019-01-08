@@ -1,11 +1,15 @@
 #include <algorithm>
 #include <iostream>
+#include <iterator>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-istream &operator>>(istream &in, string &line)
+class Line : public string
+{ };
+
+istream &operator>>(istream &in, Line &line)
 {
     getline(in, line);
     return in;
@@ -13,5 +17,12 @@ istream &operator>>(istream &in, string &line)
 
 int main()
 {
-    vector<string> vs;
+    vector<string> vs
+    {
+        istream_iterator<Line>(cin),
+        istream_iterator<Line>()
+    };
+
+    for (string const &str : vs)
+        cout << str << "\n";
 }
