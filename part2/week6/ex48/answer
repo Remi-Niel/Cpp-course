@@ -1,0 +1,20 @@
+Copy simply copies elements from one container to another. For_each performs an operation on every element in the container.
+
+Copy can't be used when the beginning of the destination range is inside the source range. 
+When using for-each no such limitations exist, it is however unable to make copies of of the elements in the sequence. It can however modify them.
+
+An example would be if you want to copy the values from a map to a vector. Copy cannot do this because it woould attempt to copy the pairs. 
+See the provided code for an example how you could achieve the correct effect with for_each.
+
+
+std::map<char, int> wordMap = { { 'a', 6 }, { 'b', 5 },
+		{ 'c', 9 }, { 'd', 6 }, { 'e', 2 }, { 'f', 1 } };
+
+ std::vector<int> values;   // Vector of int to store values
+
+// Copy all value fields from map to a vector using Lambda function
+std::for_each(wordMap.begin(), wordMap.end(),  
+                [&](std::pair<char, int>  & element){
+					values.push_back(element.second);
+					}
+            );

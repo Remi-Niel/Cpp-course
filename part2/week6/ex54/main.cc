@@ -8,22 +8,22 @@
 
 */
 
-void gSort(auto begin, auto end, auto less)
+void gSort(auto begin, auto end, auto binaryPred)
 {
     if (begin >= end)
         return;
     
-    /* Wraps begin, and the less function into the UnaryPredicate */
+    /* Wraps begin, and the binary predicate function into the UnaryPredicate */
     auto mid = partition(begin, end, 
         [&](auto const &val)
         {
-            return less(val, *begin);
+            return binaryPred(val, *begin);
         }
     );
     
     // recursive qsort.
-    gSort(begin, mid, less);
-    gSort(mid + (begin == mid), end, less);
+    gSort(begin, mid, binaryPred);
+    gSort(mid + (begin == mid), end, binaryPred);
 }
 
 /*
@@ -31,12 +31,8 @@ void gSort(auto begin, auto end, auto less)
 */
 void gSort(auto begin, auto end)
 {
-    gSort(begin, end, 
-        [](auto const &v1, auto const &v2)
-        {
-            return v1 < v2;
-        }
-    );
+    //less<void> deduces parameter and return types.
+    gSort(begin, end,less<>{});
 }
 
 // typedef string Type;
