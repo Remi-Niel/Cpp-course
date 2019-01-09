@@ -1,0 +1,2 @@
+#include "vstring.h"
+#include <iterator>
