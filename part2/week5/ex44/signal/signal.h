@@ -12,7 +12,7 @@ class Signal
     std::multimap<size_t, Handler &> d_sigmap;
 
     public:
-        static Signal *accessSignal();
+        static Signal &accessSignal();
         void signal(int signum, sighandler_t handler);
         static void sigmapHandler(int signum);
 
@@ -27,15 +27,15 @@ class Signal
         Signal(Signal &&tmp) = delete;
 
     private:
-        Signal();
+        Signal() = default;
 };
 
 // construct singleton in static variable on first call, after that
 // simply return pointer to existing singleton
-inline Signal *Signal::accessSignal()
+inline Signal &Signal::accessSignal()
 {
     static Signal signalInstance;
-    return &signalInstance;
+    return signalInstance;
 }
 
 // nested class that can be inherited from to handle signals in objects

@@ -1,10 +1,9 @@
 #ifndef SIGNALDEMO_H
 #define SIGNALDEMO_H
 
-#include "signal.ih"
-
 #include <sys/types.h>
-#include <unistd.h>
+
+#include "../signal/signal.h"
 
 class SignalDemo : public Signal::Handler
 {
