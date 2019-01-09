@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-    Strings test;
+    Strings test(argc, argv);
 
     test += string("test");
 

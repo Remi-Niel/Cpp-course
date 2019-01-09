@@ -12,7 +12,7 @@ class Signal
     std::multimap<size_t, Handler &> d_sigmap;
 
     public:
-        static Signal *accessSignal();
+        static Signal &accessSignal();
         void signal(int signum, sighandler_t handler);
         static void sigmapHandler(int signum);
 

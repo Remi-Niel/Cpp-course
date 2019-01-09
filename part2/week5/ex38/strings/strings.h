@@ -10,6 +10,10 @@ class Strings
     std::vector<std::string> d_strings;
 
     public:
+        Strings() = default;
+        Strings(char **environ);
+        Strings(int argc, char **argv);
+
         size_t size() const;
         size_t capacity() const;
 
@@ -22,8 +26,14 @@ class Strings
         std::string const at(size_t idx) const;
         std::string const operator[](size_t idx) const;
     private:
+        static size_t length(char **strings);
         std::string safeAt(size_t idx) const;
 };
+
+inline Strings::Strings(char **environ)
+:
+    Strings(length(environ), environ)
+{ }
 
 inline size_t Strings::size() const
 {
