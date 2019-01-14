@@ -1,13 +1,9 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <set>
+#include <algorithm>
 
-namespace Icmbuild
-{
-    extern char version[];
-    extern char years[];
-    extern char author[];
-};
-
-void usage(std::string const &progname);
+#include "vectorwrapper/vectorwrapper.h"
 
 using namespace std;
