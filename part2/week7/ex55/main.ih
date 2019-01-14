@@ -1,0 +1,8 @@
+#include <chrono>
+#include <iostream>
+#include <thread>
+#include <vector>
+
+typedef std::chrono::time_point<std::chrono::system_clock> moment;
+
+using namespace std;
