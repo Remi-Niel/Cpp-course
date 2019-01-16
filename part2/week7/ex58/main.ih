@@ -1,0 +1,12 @@
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <thread>
+
+using namespace std;
+
+class Handler
+{
+    public:
+        void shift(std::ostream &out, string const &text);
+};
