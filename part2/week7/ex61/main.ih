@@ -1,0 +1,55 @@
+#include <iostream>
+#include <mutex>
+#include <ostream>
+#include <streambuf>
+#include <thread>
+#include <vector>
+
+using namespace std;
+
+/*
+    PassOnStreamBuf
+*/
+class PassOnStreamBuf: public std::streambuf
+{
+    std::ostream &d_os;
+
+    public:
+        PassOnStreamBuf(std::ostream &os);
+        PassOnStreamBuf(PassOnStreamBuf &&tmp) = default;
+
+        int overflow(int ch) override;
+};
+
+inline PassOnStreamBuf::PassOnStreamBuf(std::ostream &os)
+: 
+    d_os(os)
+{}
+
+inline int PassOnStreamBuf::overflow(int ch)
+{
+    d_os.put(ch);
+    return ch;
+}
+
+/*
+    TSosWrap
+*/
+struct TSosWrap: private PassOnStreamBuf, public std::ostream
+{
+    TSosWrap(std::ostream &os);
+    TSosWrap(TSosWrap const &other) = delete;
+    
+    TSosWrap &operator=(TSosWrap const &other) = delete;
+
+    private:
+        lock_guard<std::recursive_mutex> d_guard;
+        static recursive_mutex s_lock;
+};
+
+inline TSosWrap::TSosWrap(std::ostream &os)
+: 
+    PassOnStreamBuf(os),
+    std::ostream(this),
+    d_guard(s_lock)
+{ }

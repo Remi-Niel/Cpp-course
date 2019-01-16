@@ -7,6 +7,7 @@
         "variant": "cpp",
         "iosfwd": "cpp",
         "string": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "mutex": "cpp"
     }
 }
