@@ -2,9 +2,6 @@
 
 bool Storage::finished()
 {
-    finishedMutex.lock();
-    bool done = d_finished;
-    finishedMutex.unlock();
-
-    return done;
+    lock_guard<mutex> lg(finishedMutex);
+    return d_finished;
 }

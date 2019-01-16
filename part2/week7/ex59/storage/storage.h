@@ -10,7 +10,7 @@ class Storage
 {
     std::mutex qMutex;
     std::mutex finishedMutex;
-    std::queue<std::string*> d_data;
+    std::queue<std::string> d_data;
     bool d_finished;
 
     public:

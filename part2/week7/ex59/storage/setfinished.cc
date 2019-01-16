@@ -2,7 +2,6 @@
 
 void Storage::setFinished()
 {
-    finishedMutex.lock();
+    lock_guard<mutex> lg(finishedMutex);
     d_finished = true;
-    finishedMutex.unlock();
 }

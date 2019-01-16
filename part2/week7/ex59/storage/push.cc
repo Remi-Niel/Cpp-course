@@ -3,5 +3,5 @@
 void Storage::push(string &str)
 {
     lock_guard<mutex> lg(qMutex);
-    d_data.push(&str);
+    d_data.push(str);
 }

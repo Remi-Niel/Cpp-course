@@ -13,6 +13,8 @@ void worker(Storage *warehouse, string filename)
             output.flush();
             warehouse->pop();
         }
+        else if(warehouse->finished())
+            break;
         else
             this_thread::sleep_for(chrono::seconds(1));
     }   
