@@ -1,0 +1,11 @@
+#include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+#include <fstream>
+
+#include "storage/storage.h"
+
+using namespace std;
+
+void worker(Storage *warehouse, string filename);
