@@ -15,22 +15,12 @@ class Storage
 
     public:
         Storage();
-        bool empty() const;
-        size_t size() const;
+        bool empty();
+        size_t size();
         std::string front();
         void push(std::string &str);
         bool pop(std::string &str);    
         bool finished();
         void setFinished();
 };
-
-inline bool Storage::empty() const
-{
-    return d_data.empty();
-}
-
-inline size_t Storage::size() const
-{
-    return d_data.size();
-}
 #endif

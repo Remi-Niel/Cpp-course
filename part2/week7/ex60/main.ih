@@ -1,0 +1,13 @@
+#include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+#include <fstream>
+#include <vector>
+
+#include "storage/storage.h"
+#include "client/client.h"
+
+using namespace std;
+
+void worker(Storage *warehouse, string filename);

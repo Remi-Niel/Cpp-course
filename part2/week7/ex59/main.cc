@@ -10,9 +10,9 @@ int main(int argc, char **argv)
 
     while (cin >> in)
     {
-        if (in != "\\")
+        if (in != "\\")         //If more lines follow
             warehouse.push(in);
-        else
+        else                    //Else stop and inform workers done
         {
             warehouse.setFinished(); 
             break;

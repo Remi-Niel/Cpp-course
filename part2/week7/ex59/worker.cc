@@ -9,9 +9,11 @@ void worker(Storage *warehouse, string filename)
         if (!warehouse->empty())
         {   
             string out = warehouse->front();
-            output << out <<'\n';
-            output.flush();
-            warehouse->pop();
+            if(warehouse->pop(out))
+            {
+                output << out <<'\n';
+                output.flush();
+            }
         }
         else if(warehouse->finished())
             break;
