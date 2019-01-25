@@ -3,6 +3,7 @@
 
 #include <thread>
 #include <cctype>
+#include <chrono>
 
 #include "task.h"
 #include "isvowel.h"
@@ -21,11 +22,14 @@ class TaskThreads
     };
     std::thread threads[4];
 
+    size_t runtime;
+
     friend void Task::operator()();
 
     public:
         TaskThreads(int argc, char* argv[]);
         void run();
+        void showTime();
 };
 
 #endif
