@@ -6,7 +6,7 @@
 
 using namespace std;
 
-enum { rowLength = 4 };
+enum { rowLength = 5 };
 
 double innerProduct(double *row, double *col)
 {
