@@ -1,7 +1,6 @@
 #include "storage.ih"
 
-string Storage::front()
+string Storage::front() const
 {
-    lock_guard<mutex> lg(qMutex);
     return d_data.front();
 }

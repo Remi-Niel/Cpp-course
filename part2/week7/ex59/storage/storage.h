@@ -17,9 +17,9 @@ class Storage
         Storage();
         bool empty() const;
         size_t size() const;
-        std::string front();
+        std::string front() const; //Simply calls front of d_data  
         void push(std::string &str);
-        bool pop(std::string &str);    
+        bool pop(std::string &str); //Makes sure that the given string is actually on top
         bool finished();
         void setFinished();
 };

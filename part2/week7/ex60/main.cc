@@ -5,36 +5,32 @@ int main(int argc, char **argv)
     Storage warehouse{};
 
     vector<Client> clients;
-    vector<thread> threads;
 
     for (size_t idx = 1; idx < argc; ++idx)
-    {
         clients.push_back(Client());    //Keep track of client object
-    }
 
-    for (size_t idx = 1; idx < argc; ++idx)
-    {
-        threads.push_back(std::thread(ref(clients[idx-1]),ref(warehouse), argv[idx])); 
-    }
+
+    vector<thread> threads;
+    threads.resize(clients.size());
+
+    //Construct a thread for every client and store it in threads
+    transform(clients.begin(), clients.end(), argv + 1, threads.begin(), 
+        [&](Client &client, char * file)
+        {
+            return thread(ref(client), ref(warehouse), file);
+        }
+    );
     
     string in;
+    while (cin >> in && in != "\\") //Repeat until a single \ is encountered
+        warehouse.push(in);
 
-    while (cin >> in)
-    {
-        if (in != "\\")         //If more lines follow
-            warehouse.push(in);
-        else                    //Else stop and inform workers are done
-        {
-            cout <<"finished\n";
-            warehouse.setFinished(); 
-            break;
-        }
-    }    
+    warehouse.setFinished();
 
-    for(thread &thr: threads)
+    for (thread &thr: threads)
         thr.join();
 
-    for(Client &cl: clients)
+    for (Client &cl: clients)
         cout << cl.size() << '\n';
 
     

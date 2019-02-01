@@ -4,6 +4,7 @@
 #include <chrono>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 #include "storage/storage.h"
 #include "client/client.h"

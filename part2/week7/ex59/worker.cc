@@ -1,23 +1,18 @@
 #include "main.ih"
 
-void worker(Storage *warehouse, string filename)
+void worker(Storage &warehouse, string &filename)
 {
     ofstream output(filename);
-    
-    while(true)
+
+    while (!warehouse.empty() || !warehouse.finished())
     {
-        if (!warehouse->empty())
+        if (!warehouse.empty())
         {   
-            string out = warehouse->front();
-            if(warehouse->pop(out))
-            {
+            string out = warehouse.front();
+            if  (warehouse.pop(out)) 
                 output << out <<'\n';
-                output.flush();
-            }
         }
-        else if(warehouse->finished())
-            break;
         else
             this_thread::sleep_for(chrono::seconds(1));
-    }   
+    }    
 }
