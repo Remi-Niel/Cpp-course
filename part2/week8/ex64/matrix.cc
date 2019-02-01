@@ -8,11 +8,6 @@ using namespace std;
 
 enum { rowLength = 5 };
 
-double innerProduct(double *row, double *col)
-{
-    return inner_product(row, row + rowLength, col, 0);
-}
-
 int main()
 {
     double lhs[4][5] = 
@@ -38,7 +33,12 @@ int main()
     {
         for (size_t inner = 0; inner != 6; ++inner)
         {
-            packaged_task<double(double *, double *)> task(innerProduct);
+            packaged_task<double(double *, double *)> task(
+                [](double *row, double *col)
+                {
+                    return inner_product(row, row + rowLength, col, 0);
+                });
+            
             fut[outer][inner] = task.get_future();
             thread(std::move(task), lhs[outer], rhsT[inner]).detach();          
         }
