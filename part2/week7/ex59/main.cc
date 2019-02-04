@@ -3,8 +3,7 @@
 int main(int argc, char **argv)
 {
     Storage warehouse;
-    string file = "test";
-    thread thr(worker, ref(warehouse), ref(file));
+    thread thr(worker, ref(warehouse), "test");
 
     string in;
     

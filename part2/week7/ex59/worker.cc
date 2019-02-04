@@ -1,6 +1,6 @@
 #include "main.ih"
 
-void worker(Storage &warehouse, string &filename)
+void worker(Storage &warehouse, string const &filename)
 {
     ofstream output(filename);
 
