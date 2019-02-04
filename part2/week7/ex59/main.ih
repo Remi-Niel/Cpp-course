@@ -8,4 +8,4 @@
 
 using namespace std;
 
-void worker(Storage &warehouse, string &filename);
+void worker(Storage &warehouse, string const &filename);
