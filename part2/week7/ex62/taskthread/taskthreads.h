@@ -4,7 +4,7 @@
 #include <thread>
 #include <cctype>
 
-#include "task.h"
+#include "../task/task.h"
 
 class TaskThreads
 {
@@ -21,8 +21,6 @@ class TaskThreads
     std::thread threads[4];
 
     size_t runtime;
-
-    friend void Task::operator()();
 
     public:
         TaskThreads(int argc, char* argv[]);

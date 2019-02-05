@@ -1,3 +1,6 @@
 #include "task.h"
 
+#include <fstream>
+#include "../taskthread/taskthreads.h"
+
 using namespace std;

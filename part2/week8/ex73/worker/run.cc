@@ -5,7 +5,7 @@ void Worker::run()
     size_t n_threads = thread::hardware_concurrency();
 
     if (n_threads < 3)
-        cout << "Warning! more threads than core's.";
+        cout << "Warning! more threads than cores.";
 
     cout << "Running on " << n_threads << " threads.\n";
     // fire up the output handler.

@@ -1,6 +1,4 @@
-#include "taskthreads.h"
-
-char *TaskThreads::d_filename;
+#include "main.ih"
 
 int main(int argc, char* argv[])
 {

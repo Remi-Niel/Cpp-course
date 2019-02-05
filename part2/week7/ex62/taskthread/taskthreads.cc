@@ -2,6 +2,6 @@
 
 TaskThreads::TaskThreads(int argc, char* argv[])
 :
-    args(argc),
-    d_filename(argv[1])
+    d_filename(argv[1]),
+    args(argc)
 { }
