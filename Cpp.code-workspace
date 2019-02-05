@@ -11,7 +11,8 @@
 			"*.cc": "cpp",
 			"variant": "cpp",
 			"iosfwd": "cpp",
-			"iostream": "cpp"
+			"iostream": "cpp",
+			"ostream": "cpp"
 		}
 	}
 }

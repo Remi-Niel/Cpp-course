@@ -1,5 +1,6 @@
 #include <iostream>
 #include <mutex>
+#include <map>
 #include <ostream>
 #include <streambuf>
 #include <thread>
@@ -43,13 +44,19 @@ struct TSosWrap: private PassOnStreamBuf, public std::ostream
     TSosWrap &operator=(TSosWrap const &other) = delete;
 
     private:
-        lock_guard<std::recursive_mutex> d_guard;
-        static recursive_mutex s_lock;
+        unique_lock<std::recursive_mutex> d_lock;
+        static map<ostream*, recursive_mutex> s_mutex;
 };
 
 inline TSosWrap::TSosWrap(std::ostream &os)
 : 
     PassOnStreamBuf(os),
-    std::ostream(this),
-    d_guard(s_lock)
-{ }
+    std::ostream(this)
+{ 
+    //If it is the first time this stream is encountered add a mutex for it
+    if (s_mutex.find(&os) == s_mutex.end())
+        s_mutex[&os];
+    
+    //Lock the stream
+    d_lock = unique_lock<recursive_mutex>(s_mutex[&os]);
+}

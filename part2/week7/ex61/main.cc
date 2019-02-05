@@ -1,6 +1,6 @@
 #include "main.ih"
 
-recursive_mutex TSosWrap::s_lock{};
+map<ostream*, recursive_mutex> TSosWrap::s_mutex{};
 
 void f1()
 {
