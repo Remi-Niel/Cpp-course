@@ -101,7 +101,7 @@
 // =========================================================
 
     // any additional libraries the program may need:
-#define ADD_LIBRARIES       ""
+#define ADD_LIBRARIES       "pthread"
 
     // additional paths (other than the standard paths) to locate additional
     // libraries (specify absolute paths or relative to TMP_DIR):

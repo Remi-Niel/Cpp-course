@@ -2,6 +2,7 @@
 #define TASK_H
 
 #include <cctype>
+#include <string>
  
 typedef int (*task_function)(int);
 
@@ -14,7 +15,7 @@ class Task
 
     public:
         Task(task_function is_function, char const *label);
-        void operator()();
+        void operator()(char const *file);
         std::size_t count();
         char const *taskname();
 };

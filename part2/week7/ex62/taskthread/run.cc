@@ -10,7 +10,7 @@ void TaskThreads::run()
         cout << "\nrunning sequentially...\n\n";
         for (size_t iter = 0; iter != 4; ++iter)
         {
-            tasks[iter]();
+            tasks[iter](d_filename);
         }
     }
     
@@ -20,7 +20,7 @@ void TaskThreads::run()
         cout << "\nrunning in parallel...\n\n";
         for (size_t iter = 0; iter != 4; ++iter)
         {
-            threads[iter] = std::thread(std::ref(tasks[iter]));
+            threads[iter] = std::thread(std::ref(tasks[iter]), d_filename);
         }
         for (size_t iter = 0; iter != 4; ++iter)
         {

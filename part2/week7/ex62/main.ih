@@ -3,5 +3,3 @@
 #include "taskthread/taskthreads.h"
 
 using namespace std;
-
-bool isvowel(char ch);
