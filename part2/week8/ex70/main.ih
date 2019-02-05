@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <queue>
+#include <vector>
+#include <algorithm>
+#include <mutex>
+#include <thread>
+#include "semaphore/semaphore.h"
+
+using namespace std;
+
+struct Pair
+{
+    int *beg;
+    int *end;
+    Pair() = default;
+    Pair(int *b, int *e)
+    :
+        beg(b),
+        end(e)
+    {}
+};
