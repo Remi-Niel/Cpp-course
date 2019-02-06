@@ -1,5 +1,7 @@
 #include "compilation.ih"
 
+#include <iostream>
+
 Result compile(string const &infile)
 {
     //const since its used over multiple threads.
@@ -9,6 +11,11 @@ Result compile(string const &infile)
     // command += "-o out_location";
     string executer = command + infile;
     string output_file = string{tmpnam(nullptr)};
+
+    string outfolder = Option::instance().output_folder();
+    if (outfolder != "")
+        executer += "-o " + output_name(infile, outfolder);
+
     executer += " > " + output_file + " 2>&1";
     
     int exit_code = system(executer.c_str());

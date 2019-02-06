@@ -2,19 +2,10 @@
 
 #include "../arg/arg.h"
 
-namespace
-{
-    Arg::LongOption long_options[] = 
-    {
-        Arg::LongOption{"threads", 't'},
-        Arg::LongOption{"output", 'o'}
-    };
-    auto long_end = long_options + std::size(long_options);
-}
-
 class Option
 {
     size_t d_nthreads;
+    std::string d_input;
     std::string d_output_folder;
 
     public:
@@ -23,6 +14,7 @@ class Option
         void initialize(int argc, char *argv[]);
 
         size_t nthreads() const;
+        std::string const &input() const;
         std::string const &output_folder() const;
 
     private:
@@ -35,6 +27,11 @@ class Option
 inline size_t Option::nthreads() const
 {
     return d_nthreads;
+}
+
+inline std::string const &Option::input() const
+{
+    return d_input;
 }
 
 inline std::string const &Option::output_folder() const
