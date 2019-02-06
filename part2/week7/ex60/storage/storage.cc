@@ -2,5 +2,5 @@
 
 Storage::Storage()
 {
-    d_finished=false;
+    d_finished = false;
 }
