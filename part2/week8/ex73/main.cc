@@ -3,8 +3,9 @@
 int main(int argc, char **argv)
 try
 {
-
-    Worker worker{1000};
+    BigInt max {3000000};
+    
+    Worker worker{max};
     worker.run();
 
 }

@@ -1,0 +1,9 @@
+The program would expect one argument which is either a folder (which contains a set of *.cc files to compile), or a textfile which contains a newline seperated list of files to be compiled.
+
+It would also accept an optional flag '-t' followed by a number which defines the number of threads that is allowed to use. And another additional flag '-o' followed by a directory in which the output files should be placed.
+
+It would then determine the source files that need to be compiled (dependent on the first argument), and put these in a queue. This queue, together with a validity flag are guarded by a mutex.
+
+The program would then spawn a number of worker objects equal to the ammount of threads that are asked for. These worker objects start the compilation process and store the results. When the return value of the process is not 0. it sets the validity flag to false and outputs the output of the compilation.
+
+A worker object will end if one (or more) of three things occur. 1: The queue is empty, 2: the validity flag is set to false, or after outputting compilation errors.
