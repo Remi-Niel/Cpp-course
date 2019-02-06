@@ -14,7 +14,7 @@ namespace
 
 void Option::initialize(int argc, char *argv[])
 {
-    Arg &arg = Arg::initialize(":t:o", long_options, long_end, argc, argv);
+    Arg &arg = Arg::initialize("t:o:", long_options, long_end, argc, argv);
 
     // read arguments.
     string buffer;
