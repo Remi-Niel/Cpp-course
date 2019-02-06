@@ -5,7 +5,7 @@ try
 {
     Option::instance().initialize(argc, argv);
 
-    Producer producer{argv[1]};
+    Producer producer{Option::instance().input()};
     producer.run();
 
 }
