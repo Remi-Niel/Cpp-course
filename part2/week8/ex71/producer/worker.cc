@@ -16,7 +16,7 @@ void Producer::worker()
             if (!set_invalid()) //another thread had errors already.
                 return;
             
-            cout << "failed to compile file.\n";
+            report_errors(result.d_outfile);
             fs::remove(result.d_outfile);
         }
     }

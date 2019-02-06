@@ -6,6 +6,6 @@ bool Producer::set_invalid()
     if (!d_valid)
         return false;
 
-    d_valid = true;
+    d_valid = false;
     return true;
 }

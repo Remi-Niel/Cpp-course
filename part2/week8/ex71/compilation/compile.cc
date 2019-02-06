@@ -11,7 +11,6 @@ Result compile(string const &infile)
     string output_file = string{tmpnam(nullptr)};
     executer += " > " + output_file + " 2>&1";
     
-    cout << "running command: " << executer << "\n";
     int exit_code = system(executer.c_str());
 
     if (exit_code != 0)

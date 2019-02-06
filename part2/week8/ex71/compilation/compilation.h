@@ -11,6 +11,7 @@ struct Result
 };
 
 Result compile(std::string const &infile);
+void report_errors(std::string const &path);
 
 typedef std::future<Result> FutureResult;
 typedef std::packaged_task<Result (std::string const &)> CompileTask;
