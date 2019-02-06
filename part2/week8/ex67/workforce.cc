@@ -42,8 +42,6 @@ void WorkForce::process(std::istream &instream, std::ostream &outstream)
         d_workers.notify();
     }
 
-    std::cout << "failed to get new line\n";
-
     // once done, end threads
     d_workers.notify_all();
     worker1.join();
