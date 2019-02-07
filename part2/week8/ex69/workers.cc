@@ -9,12 +9,12 @@
 
 using namespace std;
 
+typedef packaged_task<double(double *, double *)> ptask;
+
 enum { rowLength = 5 };
 
-// workers pop packaged tasks from queue and execute them until queue is empty
-void executeTasks(queue<packaged_task<double ()>> &multiQueue)
-{
-}
+// // workers pop packaged tasks from queue and execute them until queue is empty
+
 
 int main()
 {
@@ -37,29 +37,37 @@ int main()
 
     future<double> fut[4][6];
     
-    queue<packaged_task<double ()>> multiQueue;
+    typedef struct TaskPackage
+    {
+        ptask task;
+        double *row;
+        double *column;
+    } TaskPackage;
+
+    queue<TaskPackage> taskQueue;
     mutex queueMutex;
 
     for (size_t outer = 0; outer != 4; ++outer)
     {
         for (size_t inner = 0; inner != 6; ++inner)
         {
-            // bind required variables to task and package it
-            packaged_task<double ()> task(bind(
+            ptask task(
                 [](double *row, double *col)
                 {
                     return inner_product(row, row + rowLength, col, 0);
-                }, 
-                lhs[outer], rhsT[inner]));
+                });
             
             fut[outer][inner] = task.get_future();
-
-            // enqueue packaged tasks in multiplication queue
-            multiQueue.push(std::move(task));
+            taskQueue.push(TaskPackage{move(task), lhs[outer], rhsT[inner]});         
         }
     }
 
-    executeTasks(multiQueue);
+    for (size_t idx = 0; idx != 24; ++idx)
+    {
+        TaskPackage package = move(taskQueue.front());
+        taskQueue.pop();
+        package.task(package.row, package.column);
+    }
 
     // print result
     for (size_t outer = 0; outer != 4; ++outer)
