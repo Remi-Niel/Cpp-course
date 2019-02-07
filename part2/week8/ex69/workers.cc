@@ -13,8 +13,30 @@ typedef packaged_task<double(double *, double *)> ptask;
 
 enum { rowLength = 5 };
 
-// // workers pop packaged tasks from queue and execute them until queue is empty
+typedef struct TaskPackage
+{
+    ptask task;
+    double *row;
+    double *column;
+} TaskPackage;
 
+queue<TaskPackage> taskQueue;
+mutex queueMutex;
+
+// threads pop packaged tasks from queue and execute them until queue is empty
+void multiplicationTask()
+{
+    while (true)
+    {
+        lock_guard<mutex> lock(queueMutex);
+        if (not taskQueue.empty())
+        {
+            taskQueue.front().task(taskQueue.front().row, taskQueue.front().column);
+            taskQueue.pop();
+        }
+        else break;
+    }
+}
 
 int main()
 {
@@ -36,16 +58,6 @@ int main()
     };
 
     future<double> fut[4][6];
-    
-    typedef struct TaskPackage
-    {
-        ptask task;
-        double *row;
-        double *column;
-    } TaskPackage;
-
-    queue<TaskPackage> taskQueue;
-    mutex queueMutex;
 
     for (size_t outer = 0; outer != 4; ++outer)
     {
@@ -62,13 +74,9 @@ int main()
         }
     }
 
-    while (!taskQueue.empty())
+    for (size_t idx = 0; idx != 8; ++idx)
     {
-        taskQueue.front().task(taskQueue.front().row, taskQueue.front().column);
-        taskQueue.pop();
-        
-        // TaskPackage package = move(taskQueue.front());
-        // package.task(package.row, package.column);
+        thread(multiplicationTask).detach();
     }
 
     // print result
