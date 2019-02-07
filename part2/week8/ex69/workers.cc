@@ -62,11 +62,13 @@ int main()
         }
     }
 
-    for (size_t idx = 0; idx != 24; ++idx)
+    while (!taskQueue.empty())
     {
-        TaskPackage package = move(taskQueue.front());
+        taskQueue.front().task(taskQueue.front().row, taskQueue.front().column);
         taskQueue.pop();
-        package.task(package.row, package.column);
+        
+        // TaskPackage package = move(taskQueue.front());
+        // package.task(package.row, package.column);
     }
 
     // print result
