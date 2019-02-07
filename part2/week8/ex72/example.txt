@@ -1,0 +1,12 @@
+Running with two files that contain syntax errors, note it only reports the
+first error it encounters.
+
+$ ./tmp/bin/binary ~/test/strings
+d_input: /home/jos/test/strings
+12
+
+/home/jos/test/strings/length.cc: In static member function ‘static size_t Strings::length(char**)’:
+/home/jos/test/strings/length.cc:7:25: error: unable to find numeric literal operator ‘operator""sdf’
+     while (data[idx] != 0sdf)
+                         ^~~~
+/home/jos/test/strings/length.cc:7:25: note: use -fext-numeric-literals to enable more built-in suffixes
