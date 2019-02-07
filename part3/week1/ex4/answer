@@ -1,0 +1,7 @@
+You have to use explicit argument types, this is because it can't deduce the type of fun, since 2 of them exist.
+
+So for the first call:
+forwarder<void (*)(int,int), int>(fun, 1, 3);
+
+And the second call:
+forwarder<void (*)(Demo &&, Demo &&), Demo&&>(fun, Demo{}, Demo{});
