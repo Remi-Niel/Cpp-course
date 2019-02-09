@@ -1,0 +1,69 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+enum class TcpUdp
+{
+    SECONDS = 1,
+    MU_SECONDS,              
+
+    PROTOCOL,       // tcp/udp
+    SRC,
+    DST,
+    SPORT,
+    DPORT,
+    SENTPACKETS,
+    SENTBYTES,
+    RECVDPACKETS,
+    RECVDBYTES,
+    nFields,
+};
+    
+enum class Icmp
+{
+    SECONDS   =   1,
+    MU_SECONDS,              
+
+    SRC,
+    DST,
+    ID,
+    SENTPACKETS,
+    SENTBYTES,
+    RECVDPACKETS,
+    RECVDBYTES,
+    nFields,
+};
+
+class Storage
+{
+    vector<size_t> d_data;
+
+    public:
+        Storage() = default;
+        Storage(initializer_list<size_t> const &list);
+
+        template<typename Type>
+        size_t operator[](Type idx) const;
+
+        template<typename Type>
+        size_t &operator[](Type idx);
+};
+
+Storage::Storage(initializer_list<size_t> const &list)
+:
+    d_data(list)
+{ }
+
+template<typename Type>
+size_t Storage::operator[](Type idx) const
+{
+    return d_data[static_cast<size_t>(idx)];
+}
+
+template<typename Type>
+size_t &Storage::operator[](Type idx)
+{
+    return d_data[static_cast<size_t>(idx)];
+}
+
