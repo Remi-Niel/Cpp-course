@@ -1,6 +1,5 @@
 #include "main.ih"
 
-
 void tsort(queue<Pair, deque<Pair, allocator<Pair>>> &nextRange, mutex &qmutex, Semaphore &available, size_t nThreads)
 {
     while (true)
@@ -16,10 +15,14 @@ void tsort(queue<Pair, deque<Pair, allocator<Pair>>> &nextRange, mutex &qmutex, 
         }
 
         // Get next range from the queue
-        qmutex.lock();
-        Pair range = nextRange.front();
-        nextRange.pop();
-        qmutex.unlock();
+        Pair range;
+        guard(qmutex,
+            [&]()
+            {
+                range = nextRange.front();
+                nextRange.pop();
+            }
+        );
 
         // Partition the range
         int lhs = *range.beg;
@@ -35,17 +38,23 @@ void tsort(queue<Pair, deque<Pair, allocator<Pair>>> &nextRange, mutex &qmutex, 
         // multiple elements
         if (mid - range.beg > 1)
         {
-            qmutex.lock();
-            nextRange.push(Pair{range.beg, mid});
-            qmutex.unlock();
+            guard(qmutex,
+                [&]()
+                {
+                    nextRange.push(Pair{range.beg, mid});
+                }
+            );
             available.notify_all();
         }
 
         if (range.end - mid > 1)
         {
-            qmutex.lock();
-            nextRange.push(Pair{mid, range.end});
-            qmutex.unlock();
+            guard(qmutex,
+                [&]()
+                {
+                    nextRange.push(Pair{mid, range.end});
+                }
+            );
             available.notify_all();
         }
     }
@@ -65,7 +74,7 @@ int main(int argc, char **argv)
     int set[size];
 
     for (size_t idx = 0; idx != size; ++idx)
-        set[idx] = rand() % 1000;
+        set[idx] = rand() % 100000;
 
     queue <Pair> nextRange;
     mutex qmutex; //mutex shared by the threads
