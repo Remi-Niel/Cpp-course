@@ -3,7 +3,7 @@
 using namespace std;
 
 template <typename T1>
-T1 as(auto in)
+inline T1 as(auto in)
 {
     return static_cast<T1>(in);
 }

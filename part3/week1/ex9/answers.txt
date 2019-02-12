@@ -1,0 +1,24 @@
+\textbf{Why is the scope resolution operator required when calling max()?}
+
+Using the scope resolution operator in this way ensures that the compiler searches for the max() function outside of the std namespace. Which is what we want in this case.
+
+\textbf{Why doesn't the compiler generate a max(double, double) function in this case?}
+
+Because the compiler doesnt use parameter promotion when determining wether a template fits.
+
+\textbf{assume we add a function \texttt{double max(double const &left, double const &right)} to the source. Explain why this solves the problem.}
+
+Now the compiler can use promotion on the integer parameter.
+
+\textbf{Assume we would then call ::max('a', 12). Which max() function is then used and why?}
+
+The \texttt{double max(double const &left, double const &right)} function is used, because the compiler can generate no template that fits max(char, int), but it can promote both the char and the int parameter to a double.
+
+\textbf{Remove the additional max function. Without using casts or otherwise changing the argument list of the function call max(3.5, 4), how can we get the compiler to compile the source properly?}
+
+To make sure this works we can explicitly declare the double version for our template:
+
+\texttt{template double max<double>(double const&, double const&); }
+
+\textbf{Specify a general characteristic of the answer to the previous question (i.e., can the approach always be used or are there certain limitations?).}
+This 'trick' can always be used but the parameters still have to be able to work with the function.
