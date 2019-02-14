@@ -1,0 +1,24 @@
+#include <iostream>
+
+#include "base.h"
+
+using namespace std;
+
+
+class IntValue : public Base<IntValue>
+{
+    int d_value;
+
+    public:
+        IntValue(int value);
+        void insert_into(ostream &out) const;
+};
+
+class DoubleValue : public Base<DoubleValue>
+{
+    double d_value;
+
+    public:
+        DoubleValue(double value);
+        void insert_into(ostream &out) const;
+};
