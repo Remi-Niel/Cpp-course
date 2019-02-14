@@ -2,7 +2,6 @@
     "C_Cpp.default.cppStandard": "c++17",
     "files.associations": {
         "*.ih": "cpp",
-        "*.f": "cpp",
         "istream": "cpp",
         "*.f": "cpp",
         "*.cc": "cpp",
