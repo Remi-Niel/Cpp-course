@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+
+#include "values.h"
+
+using namespace std;
+
+class LabelledInt : public IntValue
+{
+    std::string d_label;
+
+    public:
+        LabelledInt(std::string const &label, int value);
+        void insert_into(ostream &out) const;
+};
+
+LabelledInt::LabelledInt(std::string const &label, int value)
+:
+    IntValue(value),
+    d_label(label)
+{ }
+
+void LabelledInt::insert_into(ostream &out) const
+{
+    out << d_label << ": " << value();
+}

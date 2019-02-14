@@ -3,6 +3,7 @@
     "files.associations": {
         "*.ih": "cpp",
         "istream": "cpp",
+        "*.f": "cpp",
         "*.cc": "cpp",
         "variant": "cpp",
         "iosfwd": "cpp",
