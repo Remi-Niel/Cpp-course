@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+
+#include "abc/abc.h"
+#include "process.h"
+
+using namespace std;
+
+
+class Derived1 : public ABC
+{
+    std::ostream &d_out;
+
+    public:
+        Derived1(std::ostream &out);
+
+    private:
+        void run();
+};
+
+inline Derived1::Derived1(std::ostream &out)
+:   
+    d_out(out)
+{ }
+
+void Derived1::run()
+{
+    d_out << "Derived1 doin' some work\n";
+}
+
+class Derived2 : public ABC
+{
+    std::ostream &d_out;
+    std::istream &d_in;
+
+    public:
+        Derived2(std::istream &in, std::ostream &out);
+
+    private:
+        void run();
+};
+
+inline Derived2::Derived2(std::istream &in, std::ostream &out)
+:
+    d_out(out),
+    d_in(in)
+{ }
+
+void Derived2::run()
+{
+    d_out << "Derived 2 requestin' some input:";
+    string buf;
+    getline(d_in, buf);
+    d_out << "you gave " << buf << " as input, nice!\n";
+}
