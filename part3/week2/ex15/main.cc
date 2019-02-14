@@ -3,7 +3,9 @@
 int main(int argc, char **argv)
 {
     Process process{
-                argc == 1 ? Derived1{ cerr } : Derived2{ cin, cout }
+                argc == 1 ? static_cast<ABC&&>((Derived1{ cerr })) : static_cast<ABC&&>(Derived2{ cin, cout })
             };
+            
+    process.execute();
     // etc.
 }
