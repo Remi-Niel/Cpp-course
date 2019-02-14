@@ -4,6 +4,7 @@
         "*.ih": "cpp",
         "*.f": "cpp",
         "istream": "cpp",
+        "*.f": "cpp",
         "*.cc": "cpp",
         "variant": "cpp",
         "iosfwd": "cpp",
