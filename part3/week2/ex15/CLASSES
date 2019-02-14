@@ -15,6 +15,6 @@
 # -d (enter   icmake -d   for short usage info, or see the section on icm_dep 
 # in icmake(1) and icmbuild(1)'s man-pages
 
-abc
+abc.1
 
 
