@@ -22,10 +22,16 @@ int main(int argc, char **argv)
     internal.push_back(new string{"nou"});
     internal.push_back(new string{"van"});
 
-    cout << "unsorted:\n";
+    cout << "__unsorted__:\n";
     for (auto str : storage)
     {
         cout << str << "\n";
-    }    
+    }
 
+    std::sort(storage.begin(), storage.end());
+    cout << "__sorted__:\n";
+    for (auto str : storage)
+    {
+        cout << str << "\n";
+    }
 }
