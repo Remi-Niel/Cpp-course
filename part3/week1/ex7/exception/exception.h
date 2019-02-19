@@ -19,7 +19,7 @@ class Exception: public std::exception
 };
 
 template<typename T>
-Exception &&operator<<(Exception ex, T txt)
+Exception &&operator<<(Exception ex, T const &txt)
 {
     std::stringstream ss;
     ss << txt;
