@@ -4,7 +4,7 @@
 #include <mutex>
 
 template<typename func>
-inline void guard(std::mutex &mut, func function) 
+inline void guard(std::mutex &mut, func &function) 
 {
     std::lock_guard<std::mutex> lg(mut);
     function();

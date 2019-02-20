@@ -1,24 +1,24 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <functional>
 #include "forwarder.h"
 
 using namespace std;
 
 void fun(int first, int second)
 {
-    cout << "fun(" << first << ", " << second << ")\n";
+    cout << "int fun(" << first << ", " << second << ")\n";
 }
 
 void fun(double &&first, double &&second)
 {
-    cout << "fun(" << first << ", " << second << ")\n";
+    cout << "double && fun(" << first << ", " << second << ")\n";
 }
 
 void fun2(int &&first, int &&second)
 {
-    cout << "fun(" << first << ", " << second << ")\n";
+    cout << "int && fun(" << first << ", " << second << ")\n";
 }
                                         // increments each argument:
 void incrementer(int &one, int &two, int &three)
