@@ -1,46 +1,53 @@
 #include "storage.h" //for my linter
 
+// template <typename Data>
+// typename Storage<Data>::iterator &Storage<Data>::iterator::operator=(typename Storage<Data>::iterator const &rhv)
+// {
+//     d_container = rhv.d_container;
+//     d_index = rhv.d_index;
+//     return *this;
+// }
+
 template <typename Data>
-Storage<Data>::iterator::iterator(std::vector<Data *> &container, size_t index)
+Storage<Data>::iterator::iterator(Data **item)
 :
-    d_container(container),
-    d_index(index)
+    d_item(item)
 { }
 
 template <typename Data>
-Storage<Data>::iterator &Storage<Data>::iterator::operator++()
+typename Storage<Data>::iterator &Storage<Data>::iterator::operator++()
 {
-    ++d_index;
+    ++d_item;
     return *this;
 }
 
 template <typename Data>
-Storage<Data>::iterator &Storage<Data>::iterator::operator--()
+typename Storage<Data>::iterator &Storage<Data>::iterator::operator--()
 {
-    --d_index;
+    --d_item;
     return *this;
 }
 
 template <typename Data>
-Storage<Data>::iterator Storage<Data>::iterator::operator++(int)
+typename Storage<Data>::iterator Storage<Data>::iterator::operator++(int)
 {
     auto copy = *this;
-    ++d_index;
+    ++d_item;
     return copy;
 }
 
 template <typename Data>
-Storage<Data>::iterator Storage<Data>::iterator::operator--(int)
+typename Storage<Data>::iterator Storage<Data>::iterator::operator--(int)
 {
     auto copy = *this;
-    --d_index;
+    --d_item;
     return copy;
 }
 
 template <typename Data>
 bool Storage<Data>::iterator::operator==(iterator const &rhv) const
 {
-    return d_index == rhv.d_index;
+    return d_item == rhv.d_item;
 }
 
 template <typename Data>
@@ -52,35 +59,35 @@ bool Storage<Data>::iterator::operator!=(iterator const &rhv) const
 template <typename Data>
 bool Storage<Data>::iterator::operator<(iterator const &rhv) const
 {
-    return d_index < rhv.d_index;
+    return d_item < rhv.d_item;
 }
 
 template <typename Data>
 int Storage<Data>::iterator::operator-(iterator const &rhv) const
 {
-    return static_cast<int>(d_index) - static_cast<int>(rhv.d_index);
+    return d_item - rhv.d_item;
 }
 
 template <typename Data>
-Storage<Data>::iterator Storage<Data>::iterator::operator+(int step) const
+typename Storage<Data>::iterator Storage<Data>::iterator::operator+(int step) const
 {
-    return iterator{d_index + step};
+    return iterator{d_item + step};
 }
 
 template <typename Data>
-Storage<Data>::iterator Storage<Data>::iterator::operator-(int step) const
+typename Storage<Data>::iterator Storage<Data>::iterator::operator-(int step) const
 {
-    return iterator{d_index - step};
+    return iterator{d_item - step};
 }
 
 template <typename Data>
-Data *&Storage<Data>::iterator::operator*()
+Data &Storage<Data>::iterator::operator*()
 {
-    return d_container[d_index];
+    return **d_item;
 }
 
 template <typename Data>
-Data **Storage<Data>::iterator::operator->()
+Data *Storage<Data>::iterator::operator->()
 {
-    return &d_container[d_index];
+    return d_item;
 }

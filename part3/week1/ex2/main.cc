@@ -2,8 +2,8 @@
 
 using namespace std;
 
-template <typename T1>
-inline T1 as(auto in)
+template <typename T1, typename T2>
+inline T1 as(T2 const &in)
 {
     return static_cast<T1>(in);
 }

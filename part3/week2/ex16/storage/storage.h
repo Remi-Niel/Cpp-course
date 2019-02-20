@@ -15,10 +15,14 @@ class Storage
             Data
         >
         {
-            std::vector<Data *> &d_container;
-            size_t d_index;
+            friend Storage<Data>;
+            Data **d_item;
 
             public:
+                iterator(iterator const &other) = default;
+                iterator &operator=(iterator const &rhv) = default;
+
+                
                 iterator &operator++();
                 iterator &operator--();
                 iterator operator++(int);
@@ -30,16 +34,17 @@ class Storage
                 int operator-(iterator const &rhv) const;
                 iterator operator+(int step) const;
                 iterator operator-(int  step) const;
-                Data *&operator*();
-                Data **operator->();
+                Data &operator*();
+                Data *operator->();
 
             private:
-                iterator(std::vector<Data *> &container, size_t d_index);
+                iterator(Data **item);
         };
 
         typename Storage<Data>::iterator;
 
         Storage();
+        ~Storage();
         std::vector<Data *> &data();
 
         iterator begin();
@@ -51,21 +56,28 @@ inline Storage<Data>::Storage()
 { }
 
 template <typename Data>
+inline Storage<Data>::~Storage()
+{
+    for (Data *del : d_data)
+        delete del;
+}
+
+template <typename Data>
 inline std::vector<Data *> &Storage<Data>::data()
 {
     return d_data;
 }
 
 template <typename Data>
-inline Storage<Data>::iterator Storage<Data>::begin()
+inline typename Storage<Data>::iterator Storage<Data>::begin()
 {
-    return iterator{d_data, 0};
+    return iterator{d_data.data()};
 }
 
 template <typename Data>
-inline Storage<Data>::iterator Storage<Data>::end()
+inline typename Storage<Data>::iterator Storage<Data>::end()
 {
-    return iterator{d_data, d_data.size()};
+    return iterator{d_data.data() + d_data.size()};
 }
 
 #include "storageiterator.f"
