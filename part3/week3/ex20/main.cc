@@ -23,7 +23,7 @@ class OneChar
 
 int main()
 {
-    Merge<Chars<'1','2','3'>,Chars<'4','5','6'>>::CP object;
+    Merge<Chars<'1','2','3'>,Merge<Chars<'4','5'>,OneChar<'6'>>::CP object;
 
     cout << object() << '\n';
 
