@@ -19,7 +19,6 @@ class TypeIdx
                 TypeIdx<Needle, x-1, Haystack ...>::located};
 };
 
-
 //If haystack empty, needle is not encountered hence located = 0
 template<typename Needle, typename ...Haystack>
 class TypeIdx<Needle, 0, Haystack...>

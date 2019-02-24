@@ -6,13 +6,16 @@
 	],
 	"settings": {
 		"files.associations": {
-			"*.ih": "cpp",
-			"istream": "cpp",
-			"*.cc": "cpp",
-			"variant": "cpp",
-			"iosfwd": "cpp",
-			"iostream": "cpp",
-			"ostream": "cpp"
-		}
+            "*.ih": "cpp",
+            "istream": "cpp",
+            "*.cc": "cpp",
+            "variant": "cpp",
+            "iosfwd": "cpp",
+            "iostream": "cpp",
+            "ostream": "cpp",
+            "array": "cpp",
+            "tuple": "cpp",
+            "utility": "cpp"
+        }
 	}
 }
