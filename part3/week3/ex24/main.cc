@@ -5,47 +5,27 @@
 
 using namespace std;
 
-template<size_t input>
-struct Width_helper
-{
-    enum {
-        value = Width_helper<input / 10>::value + 1
-    };
+//remove last number, add it to the chars
+template<size_t val,char... chars>
+struct I2C_Helper{
+    static constexpr char const* res= I2C_Helper<val/10, '0' + val % 10, chars...>::res;
 };
 
-template<>
-struct Width_helper<0>
-{
-    enum {
-        value = 0
-    };
-};
-
-//Needed for case input = 0
-// otherwise width would become 0 for input = 0
-template<size_t input>
-struct Width
-{
-    enum {
-        value = Width_helper<input / 10>::value + 1
-    };
+template<char... chars>
+struct I2C_Helper<0,chars...>{
+    static constexpr char const res[sizeof ...(chars)]= {chars...};
 };
 
 //remove last number, add it to the chars
-template<size_t val, size_t width, char... chars>
-struct I2C_Helper{
-    static constexpr char const* res= I2C_Helper<val/10, width - 1, '0' + val % 10, chars...>::res;
-};
-
 template<size_t val, char... chars>
-struct I2C_Helper<val,0,chars...>{
-    static constexpr char const res[sizeof ...(chars)]= {chars...};
+struct I2C_Step{
+    static constexpr char const* res= I2C_Helper<val/10, '0' + val % 10, chars...>::res;
 };
 
 template<size_t val>
 struct I2C{
-    static constexpr char const *s_ch = I2C_Helper<val, Width<val>::value, '\0'>::res;
-    static constexpr char const *s_ntbs = I2C_Helper<val, Width<val>::value,'\0'>::res;
+    static constexpr char const *s_ch = I2C_Step<val,'\0'>::res;
+    static constexpr char const *s_ntbs = I2C_Step<val,'\0'>::res;
 };
 
 int main()
