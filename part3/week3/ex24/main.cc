@@ -23,7 +23,7 @@ struct Width_helper<0>
 
 //Needed for case input = 0
 // otherwise width would become 0 for input = 0
-template<size_t input, bool first>
+template<size_t input>
 struct Width
 {
     enum {
@@ -44,8 +44,8 @@ struct I2C_Helper<val,0,chars...>{
 
 template<size_t val>
 struct I2C{
-    static constexpr char const *s_ch = I2C_Helper<val, Width<val,true>::value, '\0'>::res;
-    static constexpr char const *s_ntbs = I2C_Helper<val, Width<val,true>::value,'\0'>::res;
+    static constexpr char const *s_ch = I2C_Helper<val, Width<val>::value, '\0'>::res;
+    static constexpr char const *s_ntbs = I2C_Helper<val, Width<val>::value,'\0'>::res;
 };
 
 int main()
