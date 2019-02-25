@@ -3,6 +3,33 @@
 
 using namespace std;
 
+
+template<size_t input>
+struct Width_helper
+{
+    enum {
+        value = Width_helper<input / 10>::value + 1
+    };
+};
+
+template<>
+struct Width_helper<0>
+{
+    enum {
+        value = 0
+    };
+};
+
+//Needed for case input = 0
+// otherwise width would become 0 for input = 0
+template<size_t input, bool first>
+struct Width
+{
+    enum {
+        value = Width_helper<input / 10>::value + 1
+    };
+};
+
 template<size_t input>
 struct NrTrait
 {
@@ -10,15 +37,7 @@ struct NrTrait
         value = input,
         even = (input + 1) % 2,
         by3 = (input + 1) % 3,
-        width = NrTrait<value / 10>::width + 1
-    };
-};
-
-template<>
-struct NrTrait<0>
-{
-    enum {
-        width = 0
+        width = Width<input, true>::value
     };
 };
 
