@@ -32,7 +32,7 @@ struct Convert
 
 int main()
 {
-    cout << "    <0, 8>: " << Convert<0, 8>::result << "\n";
+    cout << "     <0, 8>: " << Convert<0, 8>::result << "\n";
     cout << " <57005, 8>: " << Convert<57005, 8>::result << "\n";
     cout << "<57005, 16>: " << Convert<57005, 16>::result << "\n";
     cout << "<57005, 32>: " << Convert<57005, 32>::result << "\n";
