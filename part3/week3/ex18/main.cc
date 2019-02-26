@@ -44,6 +44,7 @@ struct NrTrait
 
 int main()
 {
-    cout << NrTrait<1971962>::value << ' ' << NrTrait<1971962>::even << ' ' << 
-                NrTrait<1971962>::by3 << ' ' << NrTrait<1971962>::width << '\n';
+    cout << NrTrait<1971962>::value << ' ' << NrTrait<1971962>::even
+         << ' ' << NrTrait<1971962>::by3 << ' ' << NrTrait<1971962>::width 
+         << '\n';
 }

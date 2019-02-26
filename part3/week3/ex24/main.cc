@@ -8,7 +8,8 @@ using namespace std;
 //remove last number, add it to the chars
 template<size_t val,char... chars>
 struct I2C_Helper{
-    static constexpr char const* res= I2C_Helper<val/10, '0' + val % 10, chars...>::res;
+    static constexpr char const* res =
+        I2C_Helper<val/10, '0' + val % 10, chars...>::res;
 };
 
 template<char... chars>
@@ -19,7 +20,8 @@ struct I2C_Helper<0,chars...>{
 //remove last number, add it to the chars
 template<size_t val, char... chars>
 struct I2C_Step{
-    static constexpr char const* res= I2C_Helper<val/10, '0' + val % 10, chars...>::res;
+    static constexpr char const* res =
+        I2C_Helper<val/10, '0' + val % 10, chars...>::res;
 };
 
 template<size_t val>
