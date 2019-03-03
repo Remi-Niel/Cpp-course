@@ -5,18 +5,21 @@
 
 using namespace std;
 
-//remove last number, add it to the chars
 template<size_t val,char... chars>
 struct I2C_Helper{
+    // add the last number of val to the front of the parameter pack,
+    // and recursively call I2C_Helper::res with val = val/10
     static constexpr char const* res= I2C_Helper<val/10, '0' + val % 10, chars...>::res;
 };
 
+// when val == 0 nothing left over, so create character array from parameter pack
 template<char... chars>
 struct I2C_Helper<0,chars...>{
     static constexpr char const res[sizeof ...(chars)]= {chars...};
 };
 
-//remove last number, add it to the chars
+//Starting step needed to catch val = 0, otherwise it would
+// return empty array in that case.
 template<size_t val, char... chars>
 struct I2C_Step{
     static constexpr char const* res= I2C_Helper<val/10, '0' + val % 10, chars...>::res;
