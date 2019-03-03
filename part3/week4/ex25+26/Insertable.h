@@ -6,9 +6,6 @@ using namespace std;
 
 HDR_ struct Insertable: public Policy<Data>
 {
-    template<template <typename> class Policy_shadow, typename Data_shadow>
-    friend std::ostream &operator<<(std::ostream &out, Insertable<Policy_shadow, Data_shadow> &data);
-
     Insertable() = default;
     Insertable(Data in);
     Insertable(Policy<Data>);
