@@ -1,0 +1,5 @@
+line 45 returns an value_type by calling cpt() from an Operation struct defined using the operation template argument given to BinExpr.
+Hence if MUL is given to BinExpr, Operation must be have an cpt() member. However the unspecialized template doesn't have this member,
+which means that Operation<LH, RH, MUL>.cpt(d_lhs[ix], d_rhs[ix]); does not exist hence the compiler gives errors.
+
+ADD and SUB don't give these error because their specializations of Operation do contain the cpt member.
