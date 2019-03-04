@@ -1,0 +1,10 @@
+The result of the expression will be a temporary Expr<LHS, RHS, std::plus> object, with the LHS being Expr<LHS, RHS, std::plus> and RHS an std::vector<int>. 
+Note that this structure repeats untill for Expr<LHS,RHS,std::plus> both LHS and RHS are std::vector<int>.
+
+Note that at this point no actual index computations have been performed. The index computations are only actually performed,
+if and when the returned Expr object "operator VType()" member is used.
+
+In which case N * (K + 1) index computations will be performed, where K is the amount of vectors and N the amount of elements in a vector.
+
+K + 1 because K times for every element because the to be summed elements need to be processed, + 1 because a index computation is needed
+for the location where you are going to store the result.
