@@ -1,0 +1,2 @@
+This causes problems because you'd have to use the enum in Eval as template variables. So for example simply Eval::NO_PRIME is not available
+every time you want to compare to NO_PRIME you'd have to instantiate with some prime and candidate. I.e. Eval<1,1>::NO_PRIME

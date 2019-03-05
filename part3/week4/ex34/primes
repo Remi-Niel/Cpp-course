@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $# -eq 0 ] ; then
+    last=25
+else
+    last=$1
+fi
+
+if [ $# -gt 1 ] ; then
+   g++ --std=c++2a -DLAST=${last} primefrank.cc |& less
+else
+    (g++ --std=c++2a -DLAST=${last} primefrank.cc 2>&1) |
+                                   grep 'instantiation of' |
+                                    sed 's/ instantiation of//'
+fi
