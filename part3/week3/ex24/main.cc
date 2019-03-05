@@ -14,21 +14,20 @@ struct I2C_Helper{
 // when val == 0 nothing left over, so create character array from parameter pack
 template<char... chars>
 struct I2C_Helper<0,chars...>{
-    static constexpr char const res[sizeof ...(chars)]= {chars...};
+    static constexpr char const res[] = {chars...};
 };
 
 //Starting step needed to catch val = 0, otherwise it would
 // return empty array in that case.
 template<size_t val, char... chars>
-struct I2C_Step{
-    static constexpr char const* res =
-        I2C_Helper<val/10, '0' + val % 10, chars...>::res;
+constexpr char const *I2C_Step(){
+    return I2C_Helper<val/10, '0' + val % 10, chars...>::res;
 };
 
 template<size_t val>
 struct I2C{
-    static constexpr char const *s_ch = I2C_Step<val,'\0'>::res;
-    static constexpr char const *s_ntbs = I2C_Step<val,'\0'>::res;
+    static constexpr char const *s_ch = I2C_Step<val,'\0'>();
+    static constexpr char const *s_ntbs = I2C_Step<val,'\0'>();
 };
 
 int main()

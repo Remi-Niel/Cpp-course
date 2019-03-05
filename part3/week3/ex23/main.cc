@@ -1,8 +1,19 @@
 #include <cstddef>
 #include <iostream>
-#include <type_traits>
 
 using namespace std;
+
+template<typename T1, typename T2>
+struct same_class
+{
+    static constexpr bool value = false;
+};
+
+template<typename T>
+struct same_class<T,T>
+{
+    static constexpr bool value = true;
+};
 
 template<typename Needle, typename ...Haystack>
 class Type
@@ -13,9 +24,6 @@ class Type
     public:
         //Start search for needle at the first location.
         enum {located = TypeIdx<Haystack...>::located};
-
-    template<typename First, typename ...ReducedStack>
-    friend class TypeIdx;
 };
  
 //Catch the edge case where Haystack is empty
@@ -36,7 +44,7 @@ class Type<Needle, Haystack...>::TypeIdx
         // otherwise add 1 to the result of the next recursion.
         enum
         {
-            located = is_same<Needle, First>::value 
+            located = same_class<Needle, First>::value 
                 ?  1 
                 : Type<Needle, Haystack...>
                     ::TypeIdx<ReducedStack...>::located + 1
@@ -55,7 +63,7 @@ class Type<Needle, Haystack...>::TypeIdx<First>
             // otherwise return the negated index of the last element. 
             // This way the additions by the other levels in the 
             // recursion get cancelled out to 0.
-            located = is_same<Needle, First>::value 
+            located = same_class<Needle, First>::value 
                 ? 1
                 : - (sizeof ...(Haystack) - 1)
         };
