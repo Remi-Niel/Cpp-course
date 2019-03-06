@@ -13,5 +13,4 @@ struct Insertable: public Policy<Data>
     std::ostream &insertInto(std::ostream &out);
 };
 
-#undef HDR_
 #endif
