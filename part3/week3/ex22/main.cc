@@ -8,12 +8,14 @@ using namespace std;
 template <bool empty, size_t val, size_t base, char... chars>
 struct Display
 {
-    static constexpr char intermediate = (val % base) < 9
-        ? '0' + (val % base) 
-        : 'a' + (val % base) - 10;
+    enum
+    {
+        cval = val % base,
+        _char = cval < 9 ? '0' + cval : 'a' + cval - 10
+    };
 
     static constexpr char const *result =
-        Display<false, val / base, base, intermediate, chars...>::result;
+        Display<false, val / base, base, _char, chars...>::result;
 };
 
 template <size_t base, char ...chars>
