@@ -4,8 +4,6 @@
 #include <functional>
 #include <type_traits>
 
-
-
 template <typename Type>
 class Ptr
 {
@@ -26,7 +24,8 @@ template <typename Type>
 template <typename AType>
 inline Ptr<Type>::Ptr(AType *pointer)
 {
-    static_assert(std::is_base_of<Type, AType>::value, "Argument type not same or derived from Ptr type");
+    static_assert(std::is_base_of<Type, AType>::value,
+        "Argument type not same or derived from Ptr type");
     d_pointer = pointer;
     d_deleter = [=]()
     {
@@ -44,7 +43,8 @@ template <typename Type>
 template <typename AType>
 inline void Ptr<Type>::reset(AType *pointer)
 {
-    static_assert(std::is_base_of<Type, AType>::value, "Argument type not same or derived from Ptr type");
+    static_assert(std::is_base_of<Type, AType>::value,
+        "Argument type not same or derived from Ptr type");
     d_deleter();
 
     d_pointer = pointer;
