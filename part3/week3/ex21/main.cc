@@ -1,40 +1,50 @@
 #include <cstddef>
 #include <iostream>
-#include <tuple>
 #include <type_traits>
 
 using namespace std;
 
 
-template<typename Needle, size_t x, typename ...Haystack>
+template<typename Needle, typename Test, typename ...Haystack>
 class TypeIdx
 {
-    tuple<Haystack ...> d_tuple;
     public:
-        //Get type of (length-x)'th value from haystack 
-        typedef typename tuple_element
-        <
-            sizeof ...(Haystack) - x,
-            decltype(d_tuple)
-        >::type T; 
-
-        // If the type is the same as Needle set located to N - x + 1 with
-        // N being length of haystack, otherwise check next location.
         enum 
         {
-            located = is_same<Needle, T>::value 
-                ? sizeof ...(Haystack) - x + 1 
-                : TypeIdx<Needle, x-1, Haystack ...>::located
+            located = TypeIdx<Needle, Haystack ...>::located + 1
         };
 };
 
-//If haystack empty, needle is not encountered hence located = 0
 template<typename Needle, typename ...Haystack>
-class TypeIdx<Needle, 0, Haystack...>
+class TypeIdx<Needle, Needle, Haystack...>
 {
     public:
-        enum {located = 0};
+        enum 
+        {
+            located = 1
+        };
 };
+
+template<typename Needle>
+class TypeIdx<Needle, Needle>
+{
+    public:
+        enum 
+        {
+            located = 1
+        };
+};
+
+template<typename Needle, typename Test>
+class TypeIdx<Needle, Test>
+{
+    public:
+        enum 
+        {
+            located = 0
+        };
+};
+
 
 template<typename Needle, typename ...Haystack>
 class Type
@@ -44,7 +54,18 @@ class Type
         enum 
         {
             located =
-                TypeIdx<Needle, sizeof ...(Haystack), Haystack ...>::located
+                TypeIdx<Needle, Haystack ...>::located
+        };
+};
+
+template<typename Needle>
+class Type<Needle>
+{
+    public:
+        //Start search for needle at the first location.
+        enum 
+        {
+            located = 0
         };
 };
 
