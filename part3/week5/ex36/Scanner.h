@@ -13,7 +13,8 @@ enum TOKENS
     FLOAT,
     OPER,
     STRING,
-    ENDL
+    ENDL,
+    DONE
 };
 
 // $insert classHead

@@ -7,13 +7,15 @@ int main()
 {
     Scanner scanner;
 
-    while (true)
+    bool run = true;
+    while (run)
     {
         size_t token = scanner.lex();
         switch (token)
         {
-            case EOF:
-                return 0; //done
+            case DONE:
+                run = false; //done
+                break;
             case INT:
                 cout << "INT: " << scanner.matched() << '\n';
                 break;
@@ -30,10 +32,11 @@ int main()
                 cout << "STRING: " << scanner.matched() << '\n';
                 break;
             case ENDL:
-                cout << "ENDL: " << scanner.matched() << '\n';
+                cout << "ENDL: " << scanner.matched() << "\\n";
                 break;
             default:
                 cout << token << ": " << scanner.matched() << '\n';
         }
     }
+
 }
