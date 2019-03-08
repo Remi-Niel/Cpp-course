@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <memory>
 #include <algorithm>
 
 using namespace std;
@@ -11,11 +12,10 @@ int main(int argc, char** argv)
     const char alpha[] = "badcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY";
     vector<string> dictionary;
 
-    ifstream inputFromFile(argv[1]);
-    istream *input = &inputFromFile;
-    if (argc == 1)
-        input = &cin;    
-
+    istream *input = &cin;    
+    if (argc > 1)
+        input = new ifstream(argv[1]);
+    
 
     string line;
     size_t right, left;
@@ -42,5 +42,9 @@ int main(int argc, char** argv)
 
     for (auto iter = dictionary.begin(); iter != dictionary.end(); ++iter)
         cout << *iter << '\n';
+
+
+    if (argc > 1)
+        delete dynamic_cast<ifstream*>(input);
 
 }
