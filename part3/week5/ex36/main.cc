@@ -7,15 +7,13 @@ int main()
 {
     Scanner scanner;
 
-    bool run = true;
-    while (run)
+    while (true)
     {
         size_t token = scanner.lex();
         switch (token)
         {
             case DONE:
-                run = false; //done
-                break;
+                return 0;
             case INT:
                 cout << "INT: " << scanner.matched() << '\n';
                 break;

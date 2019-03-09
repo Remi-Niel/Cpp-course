@@ -1,9 +1,5 @@
 // flexc++ definition section
 
-alpha       [a-zA-Z]
-num         [0-9]
-alphanum    [a-zA-Z0-9]
-
 %%
 // flexc++ rules section
 

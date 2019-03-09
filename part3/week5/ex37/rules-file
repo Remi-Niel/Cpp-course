@@ -1,0 +1,61 @@
+// flexc++ definition section
+
+/*  There are 3 cases for block comments:
+    - basic 1 line block comment, so no blank before or after.
+    - blanked block comment, 1 line block comment preceded or followed
+        by 1 or more blanks. This comment should be replace by a blank.
+    - Multi line block comment, can be preceded or followed by blanks.
+        Should be replace by a newline.*/
+%x comment
+%x blankComment
+%x multiComment
+
+%%
+// starting conditions block-comments----------------
+[ \t]+"/*"                   begin(StartCondition__::blankComment); //go to state blankComment
+"/*"                        begin(StartCondition__::comment); //go to state comment
+
+
+//Rules basic comments------------
+
+//End of comment encountered return to state INITIAL
+<comment>"*/"               begin(StartCondition__::INITIAL);
+
+//End of comment encountered followed by blanks, return to state INITIAL
+// and return BLANK
+<comment>"*/"[ \t]+         {begin(StartCondition__::INITIAL);
+                                return BLANK;}
+
+<comment>.                  //ignore
+
+//New line encountered return ENDL and transition to multiComment
+<comment>\n                 {begin(StartCondition__::multiComment);
+                                return ENDL;}
+
+//Blank comments-------------------
+
+<blankComment>.             //ignore
+
+//New line encountered return ENDL and transition to multiComment
+<blankComment>\n            {begin(StartCondition__::multiComment); 
+                                return ENDL;}
+
+//End of comment encountered go back to state initial and return BLANK
+<blankComment>"*/"         {begin(StartCondition__::INITIAL); 
+                                return BLANK;}
+
+//Multi-line Comments------------------
+<multiComment>.|\n          //ignore
+<multiComment>"*/"          begin(StartCondition__::INITIAL); //go back to state initial
+
+
+//General Rules---------------
+"//".*/\n                   //ignore end-of-line comment
+
+^[ \t][ \t]*                                    //ignore initial blanks
+[ \t]*[ \t]                                   //ignore trailing blanks
+
+//starts with none blank and ends with none blank
+[^ \t\n][^"/*""//"\n]*[^ \t\n"//""/*"]              return SUBL;
+\n                                                  return ENDL;
+<<EOF>>                                             return DONE;
