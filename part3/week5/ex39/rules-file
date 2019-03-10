@@ -1,0 +1,22 @@
+// flexc++ definition section
+
+%x word
+
+%%
+[ \t\n]                               //ignore blanks
+
+house                                           std::cout << matched() << '\n';
+
+[a-zA-Z\-]                          {std::cout << matched();
+                                        begin(StartCondition__::word);}
+
+//If house is encountered before a space print leftover char and return to initial
+<word>[a-zA-Z\-]/house             {std::cout << matched() << '\n';
+                                        begin(StartCondition__::INITIAL);}
+
+//If a legal character is encountered just print it
+<word>[a-zA-Z\-]                   {std::cout << matched();}
+
+//If a non-word character is encountered print new line and return to INITIAL.
+<word>[^a-zA-Z\-]                  {std::cout << '\n';
+                                        begin(StartCondition__::INITIAL);}
