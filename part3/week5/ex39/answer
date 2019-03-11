@@ -1,14 +1,10 @@
-Flex(C++) takes takes the longest match or incase of a tie the 1 
-which was defined first in the rules files. 
-Length is determined by the amount of matching characters, 
-not the amount of characters removed from the stream.
-Hence the lookahead operators increase the length/priority of a match.
+Minimal match feature is not needed because it would not enable flexc++ to process more than it does now.
+Minimal matches can be emulated by making use of mini-scanners. In our case we introduce a mini-scanner which
+scans words, but not the word house.
 
+In the initial scanner "house" is accepted and single characters start the miniscanner "word". This miniscanner processes
+the text char by char untill the next char is either not a letter or is followed by "house". In both cases it stops and returns
+to the initial scanner.
 
-So take our example of words. Words are assumed to consist of consecutive letters and might contain dashes '-'.
-So something like [a-zA-z\-]+. House would simply be: house. However to make sure it is
-chosen over houseboats we can make the match length longer by making an extra version
-assuming there is more to the word and simply adding it all: house/[a-zA-z\-]+ 
-1 case then remains, what if the word ends with house. In this case the word match
-would still be longer. This can be catched in word word rule: [a-zA-Z\-]+[^"house"]
-
+Since "house" is always larger than a single character it has precedence in the initial scanner. And the miniscanner stops the
+moment it encounters it. Hence words with house in it are split up into parts.
