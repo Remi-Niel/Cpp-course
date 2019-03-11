@@ -8,3 +8,6 @@ to the initial scanner.
 
 Since "house" is always larger than a single character it has precedence in the initial scanner. And the miniscanner stops the
 moment it encounters it. Hence words with house in it are split up into parts.
+
+A weakpoint of this implementation is that we print the words char by char. However this can be improved by making use of the more()
+member. This member prefixes the currently matched text to the matched text in the next lexical scan.

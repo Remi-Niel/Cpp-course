@@ -5,12 +5,12 @@
 %%
 [ \t\n]                               //ignore blanks
 
-house                                           std::cout << matched() << '\n';
+house                               std::cout << matched() << '\n';
 
 [a-zA-Z\-]                          {std::cout << matched();
                                         begin(StartCondition__::word);}
 
-//If house is encountered before a space print leftover char and return to initial
+//If house is encountered print leftover char and return to initial
 <word>[a-zA-Z\-]/house             {std::cout << matched() << '\n';
                                         begin(StartCondition__::INITIAL);}
 
