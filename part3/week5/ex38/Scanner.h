@@ -16,7 +16,9 @@ enum TOKENS
     DONE
 };
 
-// $insert classHead
+// This program accounts for the fact that unmatched input gets outputted
+// So it only matches what it is required, on such a match it replaces the
+// input when needed and outputs that to the stream the lexer outputs to.
 class Scanner: public ScannerBase
 {
     public:
@@ -25,6 +27,12 @@ class Scanner: public ScannerBase
 
         Scanner(std::string const &infile, std::string const &outfile);
         
+        // when the lexer returns STRING_PART, this function
+        // gathers all parts, (accounting for multiline strings).
+        std::string gather_string();
+
+
+
         // $insert lexFunctionDecl
         int lex();
 

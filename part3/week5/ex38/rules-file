@@ -6,13 +6,24 @@
 %%
 // rules section
 
-#include.*                      //ignore
-"//".*                          return LINE_COMMENT;
+// special cases, these can contain string literals that should
+// not be replaced. We do return them because they need to be copied
+// to the output file.
+#include.*              return INCLUDE;
+"//".*                  return LINE_COMMENT;
 
-\"                              {more(); begin(StartCondition__::string);}
-<string>\"                      {begin(StartCondition__::multiline); return STRING_PART;}
-<string>.                       more();
-<multiline>\"                   {more(); begin(StartCondition__::string);}
-<multiline>[^ \n\t]             {begin(StartCondition__::INITIAL); return STRING_DONE;}
+// If a string starts, go to miniscanner
+\"                      {more(); begin(StartCondition__::string);}
 
-<<EOF>>                         return DONE;
+// If string ends, go to multiline scanner, which checks wether the
+// string continues on the next line
+<string>\"              {begin(StartCondition__::multiline); return STRING_PART;}
+<string>.               more();
+
+// if a new string start is found after only whitespace, parse that one too.
+<multiline>\"           {more(); begin(StartCondition__::string);}
+// no new string means we finalize the current one and go back to normal
+parsing
+<multiline>[^ \n\t]     {begin(StartCondition__::INITIAL); return STRING_DONE;}
+
+<<EOF>>                 return DONE;
