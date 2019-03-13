@@ -3,6 +3,11 @@
 %x string
 %x multiline
 
+%x rawstring_delim
+%x rawstring_inner
+%x rawstring_closer
+
+
 %%
 // rules section
 
@@ -25,5 +30,30 @@
 // no new string means we finalize the current one and go back to normal
 parsing
 <multiline>[^ \n\t]     {begin(StartCondition__::INITIAL); return STRING_DONE;}
+
+R\"                             {d_buffer = ""; d_delimiter = ""; begin(StartCondition__::rawstring_delim);}
+<rawstring_delim>\(             begin(StartCondition__::rawstring_inner);
+<rawstring_delim>.              {d_delimiter += matched()[0];}
+
+<rawstring_inner>\)             {begin(StartCondition__::rawstring_closer);}
+<rawstring_inner>.|\n           d_buffer += matched()[0];
+
+<rawstring_closer>\"            {
+                                    if (matched() == (d_delimiter + '"'))
+                                    {
+                                        setMatched(d_buffer);
+                                        begin(StartCondition__::INITIAL);
+                                        return RAWSTRING;
+                                    }
+                                    else
+                                    {
+                                        d_buffer += ')';
+                                        redo(matched().size());
+                                        begin(StartCondition__::rawstring_inner);
+                                    }
+                                }
+<rawstring_closer>.             more();
+
+
 
 <<EOF>>                 return DONE;

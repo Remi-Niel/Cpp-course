@@ -13,6 +13,7 @@ enum TOKENS
     STRING_DONE,
     INCLUDE,
     LINE_COMMENT,
+    RAWSTRING,
     DONE
 };
 
@@ -37,6 +38,9 @@ class Scanner: public ScannerBase
         int lex();
 
     private:
+        std::string d_buffer;
+        std::string d_delimiter;
+
         int lex__();
         int executeAction__(size_t ruleNr);
 

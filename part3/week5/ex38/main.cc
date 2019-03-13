@@ -4,6 +4,8 @@
 
 using namespace std;
 
+char const *raw = R"foo(te(hlala""st123)foo";
+
 int main()
 {
 
@@ -13,6 +15,7 @@ int main()
 
     int lexxed;
     stringstream store;
+    string raw;
     while((lexxed = scanner.lex()) != DONE)
     {
         if (lexxed == STRING_PART)
@@ -26,6 +29,11 @@ int main()
             cout << store.str() << "\n";
             cout << "---\n";
             store.str("");
+        }
+
+        if (lexxed == RAWSTRING)
+        {
+            cout << "rawstring: "<< scanner.matched() << "\n";
         }
         
     }
