@@ -31,13 +31,23 @@
 parsing
 <multiline>[^ \n\t]     {begin(StartCondition__::INITIAL); return STRING_DONE;}
 
+//Parse start of a raw string, we need to find the delimiter first
 R\"                             {d_buffer = ""; d_delimiter = ""; begin(StartCondition__::rawstring_delim);}
+//delimiter can be empty, so bracket open means we start parsing the inner string
 <rawstring_delim>\(             begin(StartCondition__::rawstring_inner);
+
+// collect the delimiter
 <rawstring_delim>.              {d_delimiter += matched()[0];}
 
+// Closing bracket might well be end of the string, but we need to check
+// the delimiter, <rawstring_closer> does that.
 <rawstring_inner>\)             {begin(StartCondition__::rawstring_closer);}
+// collect string contents
 <rawstring_inner>.|\n           d_buffer += matched()[0];
 
+// if we encounter a '"' we check wether the delimiter we parsed matches with
+// the opening delimiter. If so we collected the string.
+// else we got bamboozled and we go back and parse the stuff as normal
 <rawstring_closer>\"            {
                                     if (matched() == (d_delimiter + '"'))
                                     {
@@ -52,6 +62,7 @@ R\"                             {d_buffer = ""; d_delimiter = ""; begin(StartCon
                                         begin(StartCondition__::rawstring_inner);
                                     }
                                 }
+// collecting the close delimiter
 <rawstring_closer>.             more();
 
 
