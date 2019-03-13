@@ -7,12 +7,12 @@
 // rules section
 
 #include.*                      //ignore
-\/\/.*                          //ignore
+"//".*                          return LINE_COMMENT;
 
-\"                              more(); begin(StartCondition__::string);
-<string>\"                      begin(StartCondition__::multiline); return STRING_PART;
+\"                              {more(); begin(StartCondition__::string);}
+<string>\"                      {begin(StartCondition__::multiline); return STRING_PART;}
 <string>.                       more();
-<multiline>\"                   more(); begin(StartCondition__::string);
-<multiline>[^ \n\t]             begin(StartCondition__::INITIAL); return STRING_DONE;
+<multiline>\"                   {more(); begin(StartCondition__::string);}
+<multiline>[^ \n\t]             {begin(StartCondition__::INITIAL); return STRING_DONE;}
 
 <<EOF>>                         return DONE;
