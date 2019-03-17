@@ -9,21 +9,23 @@
 
 #include[ \t]*\"            begin(StartCondition__::openStream);
 
-//Char by char scan input untill " is encountered, more() prefixes the matched text
-// to the text matched in the next lexical scan. Everything upto the " is then used a filename
-<openStream>\"              {
-                                pushStream(matched().substr(0, matched().size() - 1));
-                                begin(StartCondition__::nested);
-                            };        
-<openStream>.               more();                        
+//Char by char scan input untill " is encountered, more() prefixes the matched 
+//text to the text matched in the next lexical scan. Everything upto the " is 
+//then used as the filename
+<openStream>\"      {
+                        pushStream(matched().substr(0, 
+                                        matched().size() - 1));
+                        begin(StartCondition__::nested);
+                    };        
+<openStream>.       more();                        
 
-<nested>#include            {
-                                std::cerr << "\nRECURSIVE INCLUDES NOT SUPPORTED" << '\n';
-                                throw("Recursive includes not supported!");
-                            }
-                                    
-<nested>.|\n                std::cout << matched();
-<nested><<EOF>>             {
-                                popStream();
-                                begin(StartCondition__::INITIAL);
-                            }
+<nested>#include    {
+                        std::cerr << "\nRECURSIVE INCLUDES NOT SUPPORTED" << '\n';
+                        throw("Recursive includes not supported!");
+                    }
+                            
+<nested>.|\n        std::cout << matched();
+<nested><<EOF>>     {
+                        popStream();
+                        begin(StartCondition__::INITIAL);
+                    }

@@ -25,7 +25,7 @@
                                 return BLANK;}
 
 <multiComment>.|\n          //ignore
-<multiComment>"*/"          begin(StartCondition__::INITIAL); //go back to state initial
+<multiComment>"*/"          begin(StartCondition__::INITIAL); 
          
 
 

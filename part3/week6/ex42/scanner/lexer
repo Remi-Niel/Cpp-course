@@ -1,0 +1,12 @@
+%filenames scanner
+
+%%
+
+[ \t]+                          // Often used: skip white space
+\n                              // same
+
+write[ \t]*                                 return ParserBase::Tokens__::WRITE;
+
+[a-zA-Z][a-zA-Z0-9_]*                       return ParserBase::Tokens__::IDENT;
+[0-9]+((\.[0-9]+)((e|E)[0-9]+)?)?           return ParserBase::Tokens__::NUMBER;
+\(|,|\)                                     return matched()[0];

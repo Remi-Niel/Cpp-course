@@ -1,0 +1,99 @@
+[grammar (info)] Line 37: 
+Production Rules:
+   (precedences (shown between parentheses) were set by %prec;
+    are equal to the precedence of the rules' 1st terminal tokens;
+    or (if not shown) are equal to the default (max) precedence)
+1: functioncalls ->  functioncalls functioncall
+2: functioncalls ->  <empty>
+3: functioncall (WRITE) ->  WRITE '(' arguments ')'
+4: arguments (',') ->  arguments ',' argument
+5: arguments ->  argument
+6: argument (IDENT) ->  IDENT
+7: argument (NUMBER) ->  NUMBER
+8: functioncalls_$ ->  functioncalls
+
+
+Symbolic Terminal tokens:
+       error
+       EOF
+   257: WRITE
+   258: IDENT
+   259: NUMBER
+    40: '('
+    41: ')'
+    44: ','
+
+
+Grammar States: 
+
+State 0:
+8: functioncalls_$ ->  . functioncalls 
+  0:   On functioncalls to state 1
+  Reduce by 2: functioncalls ->  . 
+
+
+State 1:
+8: functioncalls_$ -> functioncalls  . 
+1: functioncalls -> functioncalls  . functioncall 
+  0:   On functioncall to state 2
+  1:   On WRITE to state 3
+
+
+State 2:
+1: functioncalls -> functioncalls functioncall  . 
+  Reduce by 1: functioncalls -> functioncalls functioncall  . 
+
+
+State 3:
+3: functioncall -> WRITE  . '(' arguments ')' 
+  0:   On '(' to state 4
+
+
+State 4:
+3: functioncall -> WRITE '('  . arguments ')' 
+  0:   On arguments to state 5
+  1:   On argument to state 6
+  2:   On IDENT to state 7
+  3:   On NUMBER to state 8
+
+
+State 5:
+3: functioncall -> WRITE '(' arguments  . ')' 
+4: arguments -> arguments  . ',' argument 
+  0:   On ')' to state 9
+  1:   On ',' to state 10
+
+
+State 6:
+5: arguments -> argument  . 
+  Reduce by 5: arguments -> argument  . 
+
+
+State 7:
+6: argument -> IDENT  . 
+  Reduce by 6: argument -> IDENT  . 
+
+
+State 8:
+7: argument -> NUMBER  . 
+  Reduce by 7: argument -> NUMBER  . 
+
+
+State 9:
+3: functioncall -> WRITE '(' arguments ')'  . 
+  Reduce by 3: functioncall -> WRITE '(' arguments ')'  . 
+
+
+State 10:
+4: arguments -> arguments ','  . argument 
+  0:   On argument to state 11
+  1:   On IDENT to state 7
+  2:   On NUMBER to state 8
+
+
+State 11:
+4: arguments -> arguments ',' argument  . 
+  Reduce by 4: arguments -> arguments ',' argument  . 
+
+
+
