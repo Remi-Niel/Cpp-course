@@ -1,0 +1,24 @@
+%token NR
+%left NEQ  //Let the scanner handle "!=" to NEQ
+%left '+'
+%left '*'
+%left '^'
+%right '-'
+
+%%
+
+expr:
+    NR
+|
+    '-' expr
+|
+    expr NEQ expr
+|
+    expr '+' expr
+|
+    expr '*' expr
+|
+    expr '^' expr
+;
+
+    
