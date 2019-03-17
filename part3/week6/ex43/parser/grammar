@@ -1,0 +1,60 @@
+//%default-actions quiet
+%filenames parser
+%scanner ../scanner/scanner.h
+
+%token NUMBER //all other things are single character
+%left '+' '-'
+%left '*' '/'
+%left '$'
+
+
+%%
+//  Define the start-rule below (the name `startrule' may be altered)
+
+expressions:
+    expressions expression
+|
+    //empty
+;
+
+expression:
+    '(' expression ')'
+|
+    addition
+|   
+    subtraction
+|
+    multiplication
+|
+    division
+|
+    squared
+|
+    negation
+|
+    NUMBER
+;
+
+addition:
+    expression '+' expression
+;
+
+subtraction:
+    expression '-' expression
+;
+
+multiplication:
+    expression '*' expression
+;
+
+division:
+    expression '/' expression
+;
+
+squared:
+    '$' expression
+;
+
+negation:
+    '-' expression
+;
