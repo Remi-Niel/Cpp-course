@@ -1,0 +1,6 @@
+When a NUMBER is encountered in can either be reduced to the non-terminal number and then to the 
+non-terminal expression or it can be directly reduced to the non-terminal expression. This
+is a source of ambiguity.
+
+Another problem is that the operators '+' and '-' can either shift or reduce. Right now it is
+basically missing information about order of operations. 
