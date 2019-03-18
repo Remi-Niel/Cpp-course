@@ -1,0 +1,27 @@
+
+%token WORD
+
+%%
+
+list:
+        WORD
+    |
+        plain WORD
+    |
+        separated ',' WORD
+    ;
+
+plain:
+        plain
+        WORD
+    |
+        WORD
+    ;
+
+separated:
+        separated
+        ','
+        WORD
+    |
+        WORD
+    ;
