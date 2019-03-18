@@ -1,0 +1,112 @@
+[grammar (info)] Line 35: 
+Production Rules:
+   (precedences (shown between parentheses) were set by %prec;
+    are equal to the precedence of the rules' 1st terminal tokens;
+    or (if not shown) are equal to the default (max) precedence)
+1: startrule (NEWLINE) ->  NEWLINE
+2: startrule (MEAN_TOKEN) ->  MEAN_TOKEN DOUBLE startrule
+3: startrule (STDEV_TOKEN) ->  STDEV_TOKEN DOUBLE startrule
+4: startrule (DOUBLE) ->  DOUBLE startrule
+5: startrule (DOUBLE) ->  DOUBLE INTEGER startrule
+6: startrule_$ ->  startrule
+
+
+Symbolic Terminal tokens:
+       error
+       EOF
+   257: INTEGER
+   258: DOUBLE
+   259: NEWLINE
+   260: MEAN_TOKEN
+   261: STDEV_TOKEN
+
+
+Grammar States: 
+
+State 0:
+6: startrule_$ ->  . startrule 
+  0:   On startrule to state 1
+  1:   On NEWLINE to state 2
+  2:   On MEAN_TOKEN to state 3
+  3:   On STDEV_TOKEN to state 4
+  4:   On DOUBLE to state 5
+
+
+State 1:
+6: startrule_$ -> startrule  . 
+
+
+State 2:
+1: startrule -> NEWLINE  . 
+  Reduce by 1: startrule -> NEWLINE  . 
+
+
+State 3:
+2: startrule -> MEAN_TOKEN  . DOUBLE startrule 
+  0:   On DOUBLE to state 6
+
+
+State 4:
+3: startrule -> STDEV_TOKEN  . DOUBLE startrule 
+  0:   On DOUBLE to state 7
+
+
+State 5:
+4: startrule -> DOUBLE  . startrule 
+5: startrule -> DOUBLE  . INTEGER startrule 
+  0:   On startrule to state 8
+  1:   On INTEGER to state 9
+  2:   On NEWLINE to state 2
+  3:   On MEAN_TOKEN to state 3
+  4:   On STDEV_TOKEN to state 4
+  5:   On DOUBLE to state 5
+
+
+State 6:
+2: startrule -> MEAN_TOKEN DOUBLE  . startrule 
+  0:   On startrule to state 10
+  1:   On NEWLINE to state 2
+  2:   On MEAN_TOKEN to state 3
+  3:   On STDEV_TOKEN to state 4
+  4:   On DOUBLE to state 5
+
+
+State 7:
+3: startrule -> STDEV_TOKEN DOUBLE  . startrule 
+  0:   On startrule to state 11
+  1:   On NEWLINE to state 2
+  2:   On MEAN_TOKEN to state 3
+  3:   On STDEV_TOKEN to state 4
+  4:   On DOUBLE to state 5
+
+
+State 8:
+4: startrule -> DOUBLE startrule  . 
+  Reduce by 4: startrule -> DOUBLE startrule  . 
+
+
+State 9:
+5: startrule -> DOUBLE INTEGER  . startrule 
+  0:   On startrule to state 12
+  1:   On NEWLINE to state 2
+  2:   On MEAN_TOKEN to state 3
+  3:   On STDEV_TOKEN to state 4
+  4:   On DOUBLE to state 5
+
+
+State 10:
+2: startrule -> MEAN_TOKEN DOUBLE startrule  . 
+  Reduce by 2: startrule -> MEAN_TOKEN DOUBLE startrule  . 
+
+
+State 11:
+3: startrule -> STDEV_TOKEN DOUBLE startrule  . 
+  Reduce by 3: startrule -> STDEV_TOKEN DOUBLE startrule  . 
+
+
+State 12:
+5: startrule -> DOUBLE INTEGER startrule  . 
+  Reduce by 5: startrule -> DOUBLE INTEGER startrule  . 
+
+
+

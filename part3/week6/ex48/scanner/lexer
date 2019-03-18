@@ -1,0 +1,13 @@
+%filenames scanner
+
+//%interactive
+//%debug
+
+%%
+
+[ \t]+                          // Often used: skip white space
+\n                              return Parser::NEWLINE;
+-*[[:digit:]]+                  return Parser::INTEGER;
+-*[[:digit:]]*\.[[:digit:]]+     return Parser::DOUBLE;
+"m"                             return Parser::MEAN_TOKEN;
+"s"                             return Parser::STDEV_TOKEN;
