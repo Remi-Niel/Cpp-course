@@ -4,26 +4,24 @@
 
 %token INTEGER
 %token DOUBLE
-%token NEWLINE
-%token MEAN_TOKEN
-%token STDEV_TOKEN
-
 
 %%
 
-startrule:
-    NEWLINE
+repl:
+    '\n'
     {
         ACCEPT();
     }
     |
-        MEAN_TOKEN DOUBLE startrule 
+        'm' DOUBLE '\n'
     |
-        STDEV_TOKEN DOUBLE startrule 
+        's' DOUBLE '\n'
     |
-        DOUBLE startrule 
+        DOUBLE '\n'
     |
-        DOUBLE INTEGER startrule 
+        DOUBLE INTEGER '\n'
+    |
+        repl repl
 ;
 
 

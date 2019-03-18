@@ -1,14 +1,15 @@
-[grammar (info)] Line 35: 
+[grammar (info)] Line 33: 
 Production Rules:
    (precedences (shown between parentheses) were set by %prec;
     are equal to the precedence of the rules' 1st terminal tokens;
     or (if not shown) are equal to the default (max) precedence)
-1: startrule (NEWLINE) ->  NEWLINE
-2: startrule (MEAN_TOKEN) ->  MEAN_TOKEN DOUBLE startrule
-3: startrule (STDEV_TOKEN) ->  STDEV_TOKEN DOUBLE startrule
-4: startrule (DOUBLE) ->  DOUBLE startrule
-5: startrule (DOUBLE) ->  DOUBLE INTEGER startrule
-6: startrule_$ ->  startrule
+1: repl ('\x0a') ->  '\x0a'
+2: repl ('m') ->  'm' DOUBLE '\x0a'
+3: repl ('s') ->  's' DOUBLE '\x0a'
+4: repl (DOUBLE) ->  DOUBLE '\x0a'
+5: repl (DOUBLE) ->  DOUBLE INTEGER '\x0a'
+6: repl ->  repl repl
+7: repl_$ ->  repl
 
 
 Symbolic Terminal tokens:
@@ -16,97 +17,108 @@ Symbolic Terminal tokens:
        EOF
    257: INTEGER
    258: DOUBLE
-   259: NEWLINE
-   260: MEAN_TOKEN
-   261: STDEV_TOKEN
+    10: '\x0a'
+   109: 'm'
+   115: 's'
 
 
 Grammar States: 
 
 State 0:
-6: startrule_$ ->  . startrule 
-  0:   On startrule to state 1
-  1:   On NEWLINE to state 2
-  2:   On MEAN_TOKEN to state 3
-  3:   On STDEV_TOKEN to state 4
+7: repl_$ ->  . repl 
+  0:   On repl to state 1
+  1:   On '\x0a' to state 2
+  2:   On 'm' to state 3
+  3:   On 's' to state 4
   4:   On DOUBLE to state 5
 
 
 State 1:
-6: startrule_$ -> startrule  . 
+7: repl_$ -> repl  . 
+6: repl -> repl  . repl 
+  0:   On repl to state 6
+  1:   On '\x0a' to state 2
+  2:   On 'm' to state 3
+  3:   On 's' to state 4
+  4:   On DOUBLE to state 5
 
 
 State 2:
-1: startrule -> NEWLINE  . 
-  Reduce by 1: startrule -> NEWLINE  . 
+1: repl -> '\x0a'  . 
+  Reduce by 1: repl -> '\x0a'  . 
 
 
 State 3:
-2: startrule -> MEAN_TOKEN  . DOUBLE startrule 
-  0:   On DOUBLE to state 6
-
-
-State 4:
-3: startrule -> STDEV_TOKEN  . DOUBLE startrule 
+2: repl -> 'm'  . DOUBLE '\x0a' 
   0:   On DOUBLE to state 7
 
 
+State 4:
+3: repl -> 's'  . DOUBLE '\x0a' 
+  0:   On DOUBLE to state 8
+
+
 State 5:
-4: startrule -> DOUBLE  . startrule 
-5: startrule -> DOUBLE  . INTEGER startrule 
-  0:   On startrule to state 8
-  1:   On INTEGER to state 9
-  2:   On NEWLINE to state 2
-  3:   On MEAN_TOKEN to state 3
-  4:   On STDEV_TOKEN to state 4
-  5:   On DOUBLE to state 5
+4: repl -> DOUBLE  . '\x0a' 
+5: repl -> DOUBLE  . INTEGER '\x0a' 
+  0:   On '\x0a' to state 9
+  1:   On INTEGER to state 10
 
 
 State 6:
-2: startrule -> MEAN_TOKEN DOUBLE  . startrule 
-  0:   On startrule to state 10
-  1:   On NEWLINE to state 2
-  2:   On MEAN_TOKEN to state 3
-  3:   On STDEV_TOKEN to state 4
+6: repl -> repl repl  . 
+6: repl -> repl  . repl 
+  0:   On repl to state 6
+  1:   On '\x0a' to state 2
+  2:   On 'm' to state 3
+  3:   On 's' to state 4
   4:   On DOUBLE to state 5
+  Reduce by 6: repl -> repl repl  . 
+Solved SR CONFLICT on '\x0a':
+	shift to state 2, removed '\x0a' from LA-set of rule 6)
+Solved SR CONFLICT on 'm':
+	shift to state 3, removed 'm' from LA-set of rule 6)
+Solved SR CONFLICT on 's':
+	shift to state 4, removed 's' from LA-set of rule 6)
+Solved SR CONFLICT on DOUBLE:
+	shift to state 5, removed DOUBLE from LA-set of rule 6)
+Solved SR CONFLICT on DOUBLE:
+	shift to state 5, removed DOUBLE from LA-set of rule 6)
 
 
 State 7:
-3: startrule -> STDEV_TOKEN DOUBLE  . startrule 
-  0:   On startrule to state 11
-  1:   On NEWLINE to state 2
-  2:   On MEAN_TOKEN to state 3
-  3:   On STDEV_TOKEN to state 4
-  4:   On DOUBLE to state 5
+2: repl -> 'm' DOUBLE  . '\x0a' 
+  0:   On '\x0a' to state 11
 
 
 State 8:
-4: startrule -> DOUBLE startrule  . 
-  Reduce by 4: startrule -> DOUBLE startrule  . 
+3: repl -> 's' DOUBLE  . '\x0a' 
+  0:   On '\x0a' to state 12
 
 
 State 9:
-5: startrule -> DOUBLE INTEGER  . startrule 
-  0:   On startrule to state 12
-  1:   On NEWLINE to state 2
-  2:   On MEAN_TOKEN to state 3
-  3:   On STDEV_TOKEN to state 4
-  4:   On DOUBLE to state 5
+4: repl -> DOUBLE '\x0a'  . 
+  Reduce by 4: repl -> DOUBLE '\x0a'  . 
 
 
 State 10:
-2: startrule -> MEAN_TOKEN DOUBLE startrule  . 
-  Reduce by 2: startrule -> MEAN_TOKEN DOUBLE startrule  . 
+5: repl -> DOUBLE INTEGER  . '\x0a' 
+  0:   On '\x0a' to state 13
 
 
 State 11:
-3: startrule -> STDEV_TOKEN DOUBLE startrule  . 
-  Reduce by 3: startrule -> STDEV_TOKEN DOUBLE startrule  . 
+2: repl -> 'm' DOUBLE '\x0a'  . 
+  Reduce by 2: repl -> 'm' DOUBLE '\x0a'  . 
 
 
 State 12:
-5: startrule -> DOUBLE INTEGER startrule  . 
-  Reduce by 5: startrule -> DOUBLE INTEGER startrule  . 
+3: repl -> 's' DOUBLE '\x0a'  . 
+  Reduce by 3: repl -> 's' DOUBLE '\x0a'  . 
+
+
+State 13:
+5: repl -> DOUBLE INTEGER '\x0a'  . 
+  Reduce by 5: repl -> DOUBLE INTEGER '\x0a'  . 
 
 
 
