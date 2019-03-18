@@ -1,0 +1,24 @@
+%token VAR
+%token NR
+%left '+'
+%left '*'
+%right '-'
+
+%%
+
+expr:
+    NR
+|
+    VAR
+|
+    expr '[' expr ']'
+|
+    '-' expr
+|
+    expr '+' expr
+|
+    expr '*' expr
+;
+
+// by adding " expr '[' expr ']' " as a rule we allow simple operations such as list[idx], and list[5].
+// We also allow for list[intlist[3]][3].
