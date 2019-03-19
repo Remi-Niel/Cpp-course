@@ -8,6 +8,16 @@
 %%
 
 repl:
+    prompt input
+;
+
+prompt:
+    {
+        std::cout << "?: ";
+    }
+;
+
+input:
     '\n'
     {
         ACCEPT();
@@ -21,10 +31,8 @@ repl:
     |
         DOUBLE INTEGER '\n'
     |
-        repl repl
+        input input
 ;
-
-
 
 
 
