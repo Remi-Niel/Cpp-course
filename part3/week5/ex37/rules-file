@@ -23,7 +23,7 @@
 
 
 
-//Normal non commented line
+//Non commented parts of the lines
 <subline>.                  more();   
 <subline>./([ \t]+)\n       |
 <subline>./\n               |
