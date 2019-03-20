@@ -4,7 +4,8 @@
 
 %%
 
-//Copy to output
+//Pop stream from deque, and pop stream. Unless
+// no more stream to pop then return 0;
 <<EOF>>                     {
                                 if(d_stack.size() != 0)
                                 {
@@ -14,13 +15,17 @@
                                 else
                                     return 0; //done
                             }
+
+//Print normal characters
 .|\n                        std::cout << matched();
 
 #include[ \t]*\"            begin(StartCondition__::openStream);
 
 //Char by char scan input untill " is encountered, more() prefixes the matched 
 //text to the text matched in the next lexical scan. Everything upto the " is 
-//then used as the filename
+//then used as the filename.
+//We use a deque to keep track which files have been openened to prevent
+// nested include loops.
 <openStream>\"      {
                         std::string fn = matched().substr(0, matched().size() - 1);
                         if (std::find(d_stack.begin(), d_stack.end(), fn)
