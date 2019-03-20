@@ -5,18 +5,20 @@
 %%
 [ \t\n]                               //ignore blanks
 
-house                               std::cout << matched() << '\n';
+//If house is part of household or houseboat
+// print house.
+house/boat[^a-zA-Z\-]               |
+house/hold[^a-zA-Z\-]               std::cout << matched() << '\n';
 
-[a-zA-Z\-]                          {std::cout << matched();
-                                        begin(StartCondition__::word);}
+[a-zA-Z\-]                          {
+                                        more();
+                                        begin(StartCondition__::word);
+                                    }
 
-//If house is encountered print leftover char and return to initial
-<word>[a-zA-Z\-]/house             {std::cout << matched() << '\n';
-                                        begin(StartCondition__::INITIAL);}
-
-//If a legal character is encountered just print it
-<word>[a-zA-Z\-]                   {std::cout << matched();}
-
-//If a non-word character is encountered print new line and return to INITIAL.
-<word>[^a-zA-Z\-]                  {std::cout << '\n';
-                                        begin(StartCondition__::INITIAL);}
+//Accept the rest of the word and output it, null is accepted here
+//because  when starting the <word>  miniscanner involves calling more(),
+// hence matched() is cannot be empty and the action exits the miniscanner.
+<word>[a-zA-Z\-]*                   {
+                                        std::cout << matched() << '\n';
+                                        begin(StartCondition__::INITIAL);
+                                    }
