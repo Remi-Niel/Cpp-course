@@ -5,6 +5,7 @@
 %%
 
 //Copy to output
+<<EOF>>                     return END;
 .|\n                        std::cout << matched();
 
 #include[ \t]*\"            begin(StartCondition__::openStream);
@@ -13,19 +14,8 @@
 //text to the text matched in the next lexical scan. Everything upto the " is 
 //then used as the filename
 <openStream>\"      {
-                        pushStream(matched().substr(0, 
-                                        matched().size() - 1));
-                        begin(StartCondition__::nested);
-                    };        
-<openStream>.       more();                        
-
-<nested>#include    {
-                        std::cerr << "\nRECURSIVE INCLUDES NOT SUPPORTED" << '\n';
-                        throw("Recursive includes not supported!");
-                    }
-                            
-<nested>.|\n        std::cout << matched();
-<nested><<EOF>>     {
-                        popStream();
                         begin(StartCondition__::INITIAL);
-                    }
+                        return INCLUDE;
+                    };        
+<openStream>.       more();     
+                   

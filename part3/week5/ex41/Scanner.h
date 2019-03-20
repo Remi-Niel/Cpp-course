@@ -4,13 +4,24 @@
 #define Scanner_H_INCLUDED_
 
 // $insert baseclass_h
+#include <deque>
+#include <algorithm>
 #include "Scannerbase.h"
 
+enum TOKENS
+{
+    INCLUDE = 256,
+    END
+};
 
 // $insert classHead
 class Scanner: public ScannerBase
 {
+    std::deque<std::string> d_stack;
+
     public:
+        void pubPushStream(std::string file);
+        void pubPopStream();
         explicit Scanner(std::istream &in = std::cin,
                                 std::ostream &out = std::cout);
 
@@ -31,6 +42,15 @@ class Scanner: public ScannerBase
                             // re-implement this function for code that must 
                             // be exec'ed after the rules's actions.
 };
+
+inline void Scanner::pubPushStream(std::string file)
+{
+    pushStream(file);
+}
+inline void Scanner::pubPopStream()
+{
+    popStream();
+}
 
 // $insert scannerConstructors
 inline Scanner::Scanner(std::istream &in, std::ostream &out)
