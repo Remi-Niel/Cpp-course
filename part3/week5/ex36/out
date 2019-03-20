@@ -1,0 +1,10 @@
+WORD: test
+STRING: "test"
+INT: 123
+FLOAT: 1.5
+OPER: +
+OPER: ++
+OPER: %=
+OPER: &&
+ENDL
+

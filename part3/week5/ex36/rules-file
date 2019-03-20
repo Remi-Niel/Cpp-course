@@ -4,14 +4,37 @@
 // flexc++ rules section
 
 [ \t]                                               //ignored
-[0-9]+                                            return INT;
+[0-9]+                                              return INT;
 [a-zA-Z_][a-zA-Z0-9_]*                              return WORD;
-[0-9]+(\.[0-9]+)((e|E)[0-9]+)?                     return FLOAT;
-(=)|(\+)|(-)|(\/)|(\*)|(%)|(\+\+)|(--)|(==)|(!-)    return OPER;
-(\>)|(\<)|(\>=)|(\<=)|(!)|(&&)|(\|\|)|(~)|(&)       return OPER;
-(\|)|(\^)|(\<\<)|(\>\>)|(\+=)|(-=)|(\*=)|(\/=)      return OPER;
-(%=)|(&=)|(\|=)|(\^=)|(\<\<=)|(\>\>=)               return OPER;
-(\"(.|\n)\"([ \t]))\n?                              return STRING;
-'[.]'                                               return matched()[1];
+[0-9]+(\.[0-9]+)((e|E)[0-9]+)?                      return FLOAT;
+[-+/*%] |
+"++"    |
+--      |
+==      |
+!=      |
+">"     |
+"<"     |
+">="    |
+"<="    |
+!       |
+&&      |
+"||"    |
+[~&|^]  |
+"<<"    |
+">>"    |
+"+="    |
+"-="    |
+"*="    |
+"/="    |
+%=      |
+&=      |
+"|="    |
+"^="    |
+"<<="   |
+">>="                                               return OPER;
+//Strings concats (string seperated by only blank space) return
+// return 1 STRING token
+(\".+\")([ \t]*(\".+\"))*                           return STRING;
+.                                                   return matched()[1];
 \n                                                  return ENDL;
 <<EOF>>                                             return DONE;

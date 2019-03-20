@@ -3,7 +3,6 @@
 %%
 // flexc++ rules section
 
-[ \t\n]                                             //ignored
-[[:alpha:]]+                                        return WORD;
-.                                                   //ignored
-<<EOF>>                                             return DONE;
+[[:alpha:]]+        return WORD;
+.|\n                //If it is not a letter it is ignored
+<<EOF>>             return DONE;

@@ -15,26 +15,27 @@ int main()
             case DONE:
                 return 0;
             case INT:
-                cout << "INT: " << scanner.matched() << '\n';
+                cout << "INT: "; 
                 break;
             case FLOAT:
-                cout << "FLOAT: " << scanner.matched() << '\n';
+                cout << "FLOAT: ";
                 break;
             case OPER:
-                cout << "OPER: " << scanner.matched() << '\n';
+                cout << "OPER: ";
                 break;
             case WORD:
-                cout << "WORD: " << scanner.matched() << '\n';
+                cout << "WORD: ";
                 break;
             case STRING:
-                cout << "STRING: " << scanner.matched() << '\n';
+                cout << "STRING: ";
                 break;
             case ENDL:
-                cout << "ENDL: " << scanner.matched() << "\\n";
+                cout << "ENDL";
                 break;
             default:
-                cout << token << ": " << scanner.matched() << '\n';
+                cout << token << ": ";
         }
+        cout << scanner.matched() << '\n';
     }
 
 }
