@@ -6,52 +6,30 @@
         by 1 or more blanks. This comment should be replace by a blank.
     - Multi line block comment, can be preceded or followed by blanks.
         Should be replace by a newline.*/
-%x subline comment blankComment multiComment
+%x subline comment multicomment
 
 %%
-<comment>"*/"               begin(StartCondition__::INITIAL);
-<comment>"*/"[ \t]+         {begin(StartCondition__::INITIAL);
-                                return BLANK;}
-<comment>.                  //ignore
-<comment>\n                 {begin(StartCondition__::multiComment);
-                                return ENDL;}
-
-//Blank comments-------------------
-
-<blankComment>.             //ignore
-<blankComment>\n            {begin(StartCondition__::multiComment); 
-                                return ENDL;}
-<blankComment>"*/"         {begin(StartCondition__::INITIAL); 
-                                return BLANK;}
-
-<multiComment>.|\n          //ignore
-<multiComment>"*/"          begin(StartCondition__::INITIAL); 
-         
+<comment>.                      //ignore
+<comment>\n                     {
+                                    begin(StartCondition__::multicomment);
+                                    return ENDL;
+                                }
+<comment>"*/"                   {
+                                    begin(StartCondition__::INITIAL);
+                                    return BLANK;
+                                }
+<multicomment>.|\n              //ignore
+<multicomment>"*/"              begin(StartCondition__::INITIAL);
 
 
-<subline>./([ \t]+)\n       {
-                                begin(StartCondition__::INITIAL);
-                                return SUBL;
-                            }
-<subline>./\n               {
-                                begin(StartCondition__::INITIAL);
-                                return SUBL;
-                            }
 
-<subline>./"//"             {
-                            begin(StartCondition__::INITIAL);
-                            return SUBL;
-                            }
-<subline>./"/*"             {
-                            begin(StartCondition__::INITIAL);
-                            return SUBL;
-                            }
-//keep possible blank before /*
-<subline>./" /*"             {
-                            begin(StartCondition__::INITIAL);
-                            return SUBL;
-                            }
-<subline>.          more();         
+//Normal non commented line
+<subline>.                  more();   
+<subline>./([ \t]+)\n       |
+<subline>./\n               |
+<subline>./"//"             |
+<subline>./"/*"             |
+<subline>./" /*"            |      
 <subline><<EOF>>            {
                                 begin(StartCondition__::INITIAL);
                                 return SUBL;
@@ -59,10 +37,10 @@
 
 //General Rules---------------
 "//".*/\n                   //ignore end-of-line comment
-"/*"                        begin(StartCondition__::comment); //go to state comment                        
+"/*"                        begin(StartCondition__::comment);                 
 
-^[ \t]+                                    //ignore initial blanks
-[ \t]*[ \t]                                   //ignore trailing blanks
+^[ \t]+                     //ignore initial blanks
+[ \t]*[ \t]                 //ignore trailing blanks
 
 //starts with none blank and ends with none blank
 [^ \t\n]                {more(); 
