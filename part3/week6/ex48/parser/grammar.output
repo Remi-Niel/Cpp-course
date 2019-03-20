@@ -1,14 +1,17 @@
-[grammar (info)] Line 35: 
+[grammar (info)] Line 41: 
 Production Rules:
    (precedences (shown between parentheses) were set by %prec;
     are equal to the precedence of the rules' 1st terminal tokens;
     or (if not shown) are equal to the default (max) precedence)
-1: startrule (NEWLINE) ->  NEWLINE
-2: startrule (MEAN_TOKEN) ->  MEAN_TOKEN DOUBLE startrule
-3: startrule (STDEV_TOKEN) ->  STDEV_TOKEN DOUBLE startrule
-4: startrule (DOUBLE) ->  DOUBLE startrule
-5: startrule (DOUBLE) ->  DOUBLE INTEGER startrule
-6: startrule_$ ->  startrule
+1: repl ->  prompt input
+2: prompt ->  <empty>
+3: input ('\x0a') ->  '\x0a'
+4: input ('m') ->  'm' DOUBLE '\x0a'
+5: input ('s') ->  's' DOUBLE '\x0a'
+6: input (DOUBLE) ->  DOUBLE '\x0a'
+7: input (DOUBLE) ->  DOUBLE INTEGER '\x0a'
+8: input ->  input input
+9: repl_$ ->  repl
 
 
 Symbolic Terminal tokens:
@@ -16,97 +19,120 @@ Symbolic Terminal tokens:
        EOF
    257: INTEGER
    258: DOUBLE
-   259: NEWLINE
-   260: MEAN_TOKEN
-   261: STDEV_TOKEN
+    10: '\x0a'
+   109: 'm'
+   115: 's'
 
 
 Grammar States: 
 
 State 0:
-6: startrule_$ ->  . startrule 
-  0:   On startrule to state 1
-  1:   On NEWLINE to state 2
-  2:   On MEAN_TOKEN to state 3
-  3:   On STDEV_TOKEN to state 4
-  4:   On DOUBLE to state 5
+9: repl_$ ->  . repl 
+  0:   On repl to state 1
+  1:   On prompt to state 2
+  Reduce by 2: prompt ->  . 
 
 
 State 1:
-6: startrule_$ -> startrule  . 
+9: repl_$ -> repl  . 
 
 
 State 2:
-1: startrule -> NEWLINE  . 
-  Reduce by 1: startrule -> NEWLINE  . 
+1: repl -> prompt  . input 
+  0:   On input to state 3
+  1:   On '\x0a' to state 4
+  2:   On 'm' to state 5
+  3:   On 's' to state 6
+  4:   On DOUBLE to state 7
 
 
 State 3:
-2: startrule -> MEAN_TOKEN  . DOUBLE startrule 
-  0:   On DOUBLE to state 6
+1: repl -> prompt input  . 
+8: input -> input  . input 
+  0:   On input to state 8
+  1:   On '\x0a' to state 4
+  2:   On 'm' to state 5
+  3:   On 's' to state 6
+  4:   On DOUBLE to state 7
+  Reduce by 1: repl -> prompt input  . 
 
 
 State 4:
-3: startrule -> STDEV_TOKEN  . DOUBLE startrule 
-  0:   On DOUBLE to state 7
+3: input -> '\x0a'  . 
+  Reduce by 3: input -> '\x0a'  . 
 
 
 State 5:
-4: startrule -> DOUBLE  . startrule 
-5: startrule -> DOUBLE  . INTEGER startrule 
-  0:   On startrule to state 8
-  1:   On INTEGER to state 9
-  2:   On NEWLINE to state 2
-  3:   On MEAN_TOKEN to state 3
-  4:   On STDEV_TOKEN to state 4
-  5:   On DOUBLE to state 5
+4: input -> 'm'  . DOUBLE '\x0a' 
+  0:   On DOUBLE to state 9
 
 
 State 6:
-2: startrule -> MEAN_TOKEN DOUBLE  . startrule 
-  0:   On startrule to state 10
-  1:   On NEWLINE to state 2
-  2:   On MEAN_TOKEN to state 3
-  3:   On STDEV_TOKEN to state 4
-  4:   On DOUBLE to state 5
+5: input -> 's'  . DOUBLE '\x0a' 
+  0:   On DOUBLE to state 10
 
 
 State 7:
-3: startrule -> STDEV_TOKEN DOUBLE  . startrule 
-  0:   On startrule to state 11
-  1:   On NEWLINE to state 2
-  2:   On MEAN_TOKEN to state 3
-  3:   On STDEV_TOKEN to state 4
-  4:   On DOUBLE to state 5
+6: input -> DOUBLE  . '\x0a' 
+7: input -> DOUBLE  . INTEGER '\x0a' 
+  0:   On '\x0a' to state 11
+  1:   On INTEGER to state 12
 
 
 State 8:
-4: startrule -> DOUBLE startrule  . 
-  Reduce by 4: startrule -> DOUBLE startrule  . 
+8: input -> input input  . 
+8: input -> input  . input 
+  0:   On input to state 8
+  1:   On '\x0a' to state 4
+  2:   On 'm' to state 5
+  3:   On 's' to state 6
+  4:   On DOUBLE to state 7
+  Reduce by 8: input -> input input  . 
+Solved SR CONFLICT on '\x0a':
+	shift to state 4, removed '\x0a' from LA-set of rule 8)
+Solved SR CONFLICT on 'm':
+	shift to state 5, removed 'm' from LA-set of rule 8)
+Solved SR CONFLICT on 's':
+	shift to state 6, removed 's' from LA-set of rule 8)
+Solved SR CONFLICT on DOUBLE:
+	shift to state 7, removed DOUBLE from LA-set of rule 8)
+Solved SR CONFLICT on DOUBLE:
+	shift to state 7, removed DOUBLE from LA-set of rule 8)
 
 
 State 9:
-5: startrule -> DOUBLE INTEGER  . startrule 
-  0:   On startrule to state 12
-  1:   On NEWLINE to state 2
-  2:   On MEAN_TOKEN to state 3
-  3:   On STDEV_TOKEN to state 4
-  4:   On DOUBLE to state 5
+4: input -> 'm' DOUBLE  . '\x0a' 
+  0:   On '\x0a' to state 13
 
 
 State 10:
-2: startrule -> MEAN_TOKEN DOUBLE startrule  . 
-  Reduce by 2: startrule -> MEAN_TOKEN DOUBLE startrule  . 
+5: input -> 's' DOUBLE  . '\x0a' 
+  0:   On '\x0a' to state 14
 
 
 State 11:
-3: startrule -> STDEV_TOKEN DOUBLE startrule  . 
-  Reduce by 3: startrule -> STDEV_TOKEN DOUBLE startrule  . 
+6: input -> DOUBLE '\x0a'  . 
+  Reduce by 6: input -> DOUBLE '\x0a'  . 
 
 
 State 12:
-5: startrule -> DOUBLE INTEGER startrule  . 
-  Reduce by 5: startrule -> DOUBLE INTEGER startrule  . 
+7: input -> DOUBLE INTEGER  . '\x0a' 
+  0:   On '\x0a' to state 15
+
+
+State 13:
+4: input -> 'm' DOUBLE '\x0a'  . 
+  Reduce by 4: input -> 'm' DOUBLE '\x0a'  . 
+
+
+State 14:
+5: input -> 's' DOUBLE '\x0a'  . 
+  Reduce by 5: input -> 's' DOUBLE '\x0a'  . 
+
+
+State 15:
+7: input -> DOUBLE INTEGER '\x0a'  . 
+  Reduce by 7: input -> DOUBLE INTEGER '\x0a'  . 
 
 
 

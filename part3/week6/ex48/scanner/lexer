@@ -6,8 +6,7 @@
 %%
 
 [ \t]+                          // Often used: skip white space
-\n                              return Parser::NEWLINE;
 -*[[:digit:]]+                  return Parser::INTEGER;
--*[[:digit:]]*\.[[:digit:]]+     return Parser::DOUBLE;
-"m"                             return Parser::MEAN_TOKEN;
-"s"                             return Parser::STDEV_TOKEN;
+-*[[:digit:]]*\.[[:digit:]]+    return Parser::DOUBLE;
+.                               return matched()[0];
+\n                              return matched()[0];

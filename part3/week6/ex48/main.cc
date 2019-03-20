@@ -8,17 +8,11 @@ try
     Parser parser;
     Scanner scan;
 
-    int token;
-    while ((token = scan.lex()) != Parser::NEWLINE)
-    {
-        cout << token << "\n";
-    }
+    if (parser.parse() != 1)
+        cout << "parsed ok!\n";
+    else
+        cout << "parser error!\n";
 
-    // cout << "? ";
-    // if ( parser.parse() == 1)
-    //     cout << "parser error\n";
-    // else
-    //     cout << "parser ok\n";
 }
 catch (...)
 {
