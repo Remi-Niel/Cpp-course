@@ -1,55 +1,24 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <memory>
-#include <algorithm>
-
-using namespace std;
+#include "main.ih"
 
 int main(int argc, char** argv)
 {
-    const char alpha[] = "badcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY";
-    vector<string> dictionary;
+    vector<string> words;
 
-    istream *input = &cin;    
+    Scanner scanner;
 
-    string line;
-    size_t right, left;
-
-    //If argc is 1 loop should execute once for cin
-    //Else loop should start at 1
-    size_t idx = argc == 1 ? 0 : 1; 
-
-    for (; idx != argc; ++idx)
+    if (argc == 1)
+        readInput(scanner, words);
+    else
     {
-        if (argc > 1)
-            input = new ifstream(argv[idx]);
-        
-        while (getline(*input, line))
+        for (size_t idx = 1; idx != argc; ++idx)
         {
-            left = 0;
-            while (true)
-            {
-                left = line.find_first_of(alpha, left);
-                if (left != string::npos)
-                {
-                    right = line.find_first_not_of(alpha, left);
-                    dictionary.push_back(line.substr(left, right - left));
-                    left = right;
-                }
-                else
-                    break;
-                
-                left = right;
-            }
+            scanner.switchIstream(argv[idx]);
+            readInput(scanner,words);
         }
-        if (argc > 1)
-            delete dynamic_cast<ifstream*>(input);
     }
-    
-    sort(dictionary.begin(), dictionary.end());
 
-    for (auto iter = dictionary.begin(); iter != dictionary.end(); ++iter)
-        cout << *iter << '\n';
+    sort(words.begin(), words.end());
+
+    for (size_t idx = 0; idx != words.size(); ++idx)
+        cout << words[idx] << '\n';
 }

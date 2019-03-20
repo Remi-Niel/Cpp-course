@@ -1,0 +1,12 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include "Scanner.h"
+
+using namespace std;
+
+void readInput(Scanner &scanner, vector<string> &words);
+
+

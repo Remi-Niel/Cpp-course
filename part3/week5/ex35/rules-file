@@ -1,0 +1,9 @@
+// flexc++ definition section
+
+%%
+// flexc++ rules section
+
+[ \t\n]                                             //ignored
+[[:alpha:]]+                                        return WORD;
+.                                                   //ignored
+<<EOF>>                                             return DONE;
