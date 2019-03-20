@@ -5,7 +5,15 @@
 %%
 
 //Copy to output
-<<EOF>>                     return END;
+<<EOF>>                     {
+                                if(d_stack.size() != 0)
+                                {
+                                    d_stack.pop_back();
+                                    popStream();
+                                }
+                                else
+                                    return 0; //done
+                            }
 .|\n                        std::cout << matched();
 
 #include[ \t]*\"            begin(StartCondition__::openStream);
@@ -14,8 +22,19 @@
 //text to the text matched in the next lexical scan. Everything upto the " is 
 //then used as the filename
 <openStream>\"      {
+                        std::string fn = matched().substr(0, matched().size() - 1);
+                        if (std::find(d_stack.begin(), d_stack.end(), fn)
+                                == d_stack.end())
+                        {
+                            d_stack.push_back(fn);
+                            pushStream(fn);
+                        }
+                        else
+                        {
+                            std::cout << "\n\nnested includes of the same file not allowed\n";
+                            throw("nested includes of the same file not allowed");
+                        }
                         begin(StartCondition__::INITIAL);
-                        return INCLUDE;
                     };        
 <openStream>.       more();     
                    
