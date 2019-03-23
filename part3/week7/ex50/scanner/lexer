@@ -1,0 +1,34 @@
+%filenames scanner
+%interactive
+
+digits      [0-9]+
+optdigits   [0-9]*
+exp         [eE][-+]?{digits}
+
+%%
+
+[ \t]+
+
+quit                                    |
+exit                                    return Parser::END;
+
+{digits}                                |
+{digits}"."{optdigits}{exp}?            |
+{optdigits}"."{digits}{exp}?            return Parser::NUMBER;
+
+[[:alpha:]_][[:alnum:]_]*               return Parser::IDENT;
+
+"<<"                                    return Parser::LSHIFT;
+">>"                                    return Parser::RSHIFT;
+"*="                                    return Parser::MULa;
+"/="                                    return Parser::DIVa;
+"%="                                    return Parser::MODa;
+"+="                                    return Parser::ADDa;
+"-="                                    return Parser::SUBa;
+"<<="                                   return Parser::LSHIFTa;
+">>="                                   return Parser::RSHIFTa;
+"&="                                    return Parser::ANDa;
+"|="                                    return Parser::ORa;
+"^="                                    return Parser::XORa;
+
+\n|.                                    return matched()[0];

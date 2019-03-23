@@ -1,0 +1,1577 @@
+[grammar (info)] Line 209: 
+Production Rules:
+   (precedences (shown between parentheses) were set by %prec;
+    are equal to the precedence of the rules' 1st terminal tokens;
+    or (if not shown) are equal to the default (max) precedence)
+1: lines ->  lines line
+2: lines ->  line
+3: line ('\x0a') ->  expr '\x0a'
+4: line (errTok__) ->  errTok__ '\x0a'
+5: line ('\x0a') ->  '\x0a'
+6: line (END) ->  END '\x0a'
+7: expr (NUMBER) ->  NUMBER
+8: expr (IDENT) ->  IDENT
+9: expr (uMinus) ->  '-' expr
+10: expr ('~') ->  '~' expr
+11: expr ('*') ->  expr '*' expr
+12: expr ('/') ->  expr '/' expr
+13: expr ('%') ->  expr '%' expr
+14: expr ('+') ->  expr '+' expr
+15: expr ('-') ->  expr '-' expr
+16: expr (LSHIFT) ->  expr LSHIFT expr
+17: expr (RSHIFT) ->  expr RSHIFT expr
+18: expr ('&') ->  expr '&' expr
+19: expr ('^') ->  expr '^' expr
+20: expr ('|') ->  expr '|' expr
+21: expr ('(') ->  '(' expr ')'
+22: expr ('=') ->  expr '=' expr
+23: expr (MULa) ->  expr MULa expr
+24: expr (DIVa) ->  expr DIVa expr
+25: expr (MODa) ->  expr MODa expr
+26: expr (ADDa) ->  expr ADDa expr
+27: expr (SUBa) ->  expr SUBa expr
+28: expr (LSHIFTa) ->  expr LSHIFTa expr
+29: expr (RSHIFTa) ->  expr RSHIFTa expr
+30: expr (ANDa) ->  expr ANDa expr
+31: expr (ORa) ->  expr ORa expr
+32: expr (XORa) ->  expr XORa expr
+33: lines_$ ->  lines
+
+
+Symbolic Terminal tokens:
+       error
+       EOF
+   257: NUMBER
+   258: IDENT
+   259: END
+    61: '='
+   260: MULa
+   261: DIVa
+   262: MODa
+   263: ADDa
+   264: SUBa
+   265: LSHIFTa
+   266: RSHIFTa
+   267: ANDa
+   268: ORa
+   269: XORa
+   126: '~'
+   124: '|'
+    94: '^'
+    38: '&'
+   270: LSHIFT
+   271: RSHIFT
+    43: '+'
+    45: '-'
+    42: '*'
+    47: '/'
+    37: '%'
+   272: uMinus
+    10: '\x0a'
+    40: '('
+    41: ')'
+
+
+Grammar States: 
+
+State 0:
+33: lines_$ ->  . lines 
+  0:   On lines to state 1
+  1:   On line to state 2
+  2:   On expr to state 3
+  3:   On errTok__ to state 4
+  4:   On '\x0a' to state 5
+  5:   On END to state 6
+  6:   On NUMBER to state 7
+  7:   On IDENT to state 8
+  8:   On '-' to state 9
+  9:   On '~' to state 10
+  10:   On '(' to state 11
+
+
+State 1:
+33: lines_$ -> lines  . 
+1: lines -> lines  . line 
+  0:   On line to state 12
+  1:   On expr to state 3
+  2:   On errTok__ to state 4
+  3:   On '\x0a' to state 5
+  4:   On END to state 6
+  5:   On NUMBER to state 7
+  6:   On IDENT to state 8
+  7:   On '-' to state 9
+  8:   On '~' to state 10
+  9:   On '(' to state 11
+
+
+State 2:
+2: lines -> line  . 
+  Reduce by 2: lines -> line  . 
+
+
+State 3:
+3: line -> expr  . '\x0a' 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '\x0a' to state 13
+  1:   On '*' to state 14
+  2:   On '/' to state 15
+  3:   On '%' to state 16
+  4:   On '+' to state 17
+  5:   On '-' to state 18
+  6:   On LSHIFT to state 19
+  7:   On RSHIFT to state 20
+  8:   On '&' to state 21
+  9:   On '^' to state 22
+  10:   On '|' to state 23
+  11:   On '=' to state 24
+  12:   On MULa to state 25
+  13:   On DIVa to state 26
+  14:   On MODa to state 27
+  15:   On ADDa to state 28
+  16:   On SUBa to state 29
+  17:   On LSHIFTa to state 30
+  18:   On RSHIFTa to state 31
+  19:   On ANDa to state 32
+  20:   On ORa to state 33
+  21:   On XORa to state 34
+
+
+State 4:
+4: line -> errTok__  . '\x0a' 
+  0:   On '\x0a' to state 35
+
+
+State 5:
+5: line -> '\x0a'  . 
+  Reduce by 5: line -> '\x0a'  . 
+
+
+State 6:
+6: line -> END  . '\x0a' 
+  0:   On '\x0a' to state 36
+
+
+State 7:
+7: expr -> NUMBER  . 
+  Reduce by 7: expr -> NUMBER  . 
+
+
+State 8:
+8: expr -> IDENT  . 
+  Reduce by 8: expr -> IDENT  . 
+
+
+State 9:
+9: expr -> '-'  . expr 
+  0:   On expr to state 37
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 10:
+10: expr -> '~'  . expr 
+  0:   On expr to state 38
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 11:
+21: expr -> '('  . expr ')' 
+  0:   On expr to state 39
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 12:
+1: lines -> lines line  . 
+  Reduce by 1: lines -> lines line  . 
+
+
+State 13:
+3: line -> expr '\x0a'  . 
+  Reduce by 3: line -> expr '\x0a'  . 
+
+
+State 14:
+11: expr -> expr '*'  . expr 
+  0:   On expr to state 40
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 15:
+12: expr -> expr '/'  . expr 
+  0:   On expr to state 41
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 16:
+13: expr -> expr '%'  . expr 
+  0:   On expr to state 42
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 17:
+14: expr -> expr '+'  . expr 
+  0:   On expr to state 43
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 18:
+15: expr -> expr '-'  . expr 
+  0:   On expr to state 44
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 19:
+16: expr -> expr LSHIFT  . expr 
+  0:   On expr to state 45
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 20:
+17: expr -> expr RSHIFT  . expr 
+  0:   On expr to state 46
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 21:
+18: expr -> expr '&'  . expr 
+  0:   On expr to state 47
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 22:
+19: expr -> expr '^'  . expr 
+  0:   On expr to state 48
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 23:
+20: expr -> expr '|'  . expr 
+  0:   On expr to state 49
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 24:
+22: expr -> expr '='  . expr 
+  0:   On expr to state 50
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 25:
+23: expr -> expr MULa  . expr 
+  0:   On expr to state 51
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 26:
+24: expr -> expr DIVa  . expr 
+  0:   On expr to state 52
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 27:
+25: expr -> expr MODa  . expr 
+  0:   On expr to state 53
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 28:
+26: expr -> expr ADDa  . expr 
+  0:   On expr to state 54
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 29:
+27: expr -> expr SUBa  . expr 
+  0:   On expr to state 55
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 30:
+28: expr -> expr LSHIFTa  . expr 
+  0:   On expr to state 56
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 31:
+29: expr -> expr RSHIFTa  . expr 
+  0:   On expr to state 57
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 32:
+30: expr -> expr ANDa  . expr 
+  0:   On expr to state 58
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 33:
+31: expr -> expr ORa  . expr 
+  0:   On expr to state 59
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 34:
+32: expr -> expr XORa  . expr 
+  0:   On expr to state 60
+  1:   On NUMBER to state 7
+  2:   On IDENT to state 8
+  3:   On '-' to state 9
+  4:   On '~' to state 10
+  5:   On '(' to state 11
+
+
+State 35:
+4: line -> errTok__ '\x0a'  . 
+  Reduce by 4: line -> errTok__ '\x0a'  . 
+
+
+State 36:
+6: line -> END '\x0a'  . 
+  Reduce by 6: line -> END '\x0a'  . 
+
+
+State 37:
+9: expr -> '-' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0 (removed by precedence):   On '*' to state 14
+  1 (removed by precedence):   On '/' to state 15
+  2 (removed by precedence):   On '%' to state 16
+  3 (removed by precedence):   On '+' to state 17
+  4 (removed by precedence):   On '-' to state 18
+  5 (removed by precedence):   On LSHIFT to state 19
+  6 (removed by precedence):   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 9: expr -> '-' expr  . 
+
+
+State 38:
+10: expr -> '~' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 10: expr -> '~' expr  . 
+
+
+State 39:
+21: expr -> '(' expr  . ')' 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On ')' to state 61
+  1:   On '*' to state 14
+  2:   On '/' to state 15
+  3:   On '%' to state 16
+  4:   On '+' to state 17
+  5:   On '-' to state 18
+  6:   On LSHIFT to state 19
+  7:   On RSHIFT to state 20
+  8:   On '&' to state 21
+  9:   On '^' to state 22
+  10:   On '|' to state 23
+  11:   On '=' to state 24
+  12:   On MULa to state 25
+  13:   On DIVa to state 26
+  14:   On MODa to state 27
+  15:   On ADDa to state 28
+  16:   On SUBa to state 29
+  17:   On LSHIFTa to state 30
+  18:   On RSHIFTa to state 31
+  19:   On ANDa to state 32
+  20:   On ORa to state 33
+  21:   On XORa to state 34
+
+
+State 40:
+11: expr -> expr '*' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0 (removed by precedence):   On '*' to state 14
+  1 (removed by precedence):   On '/' to state 15
+  2 (removed by precedence):   On '%' to state 16
+  3 (removed by precedence):   On '+' to state 17
+  4 (removed by precedence):   On '-' to state 18
+  5 (removed by precedence):   On LSHIFT to state 19
+  6 (removed by precedence):   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 11: expr -> expr '*' expr  . 
+
+
+State 41:
+12: expr -> expr '/' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0 (removed by precedence):   On '*' to state 14
+  1 (removed by precedence):   On '/' to state 15
+  2 (removed by precedence):   On '%' to state 16
+  3 (removed by precedence):   On '+' to state 17
+  4 (removed by precedence):   On '-' to state 18
+  5 (removed by precedence):   On LSHIFT to state 19
+  6 (removed by precedence):   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 12: expr -> expr '/' expr  . 
+
+
+State 42:
+13: expr -> expr '%' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0 (removed by precedence):   On '*' to state 14
+  1 (removed by precedence):   On '/' to state 15
+  2 (removed by precedence):   On '%' to state 16
+  3 (removed by precedence):   On '+' to state 17
+  4 (removed by precedence):   On '-' to state 18
+  5 (removed by precedence):   On LSHIFT to state 19
+  6 (removed by precedence):   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 13: expr -> expr '%' expr  . 
+
+
+State 43:
+14: expr -> expr '+' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3 (removed by precedence):   On '+' to state 17
+  4 (removed by precedence):   On '-' to state 18
+  5 (removed by precedence):   On LSHIFT to state 19
+  6 (removed by precedence):   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 14: expr -> expr '+' expr  . 
+
+
+State 44:
+15: expr -> expr '-' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3 (removed by precedence):   On '+' to state 17
+  4 (removed by precedence):   On '-' to state 18
+  5 (removed by precedence):   On LSHIFT to state 19
+  6 (removed by precedence):   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 15: expr -> expr '-' expr  . 
+
+
+State 45:
+16: expr -> expr LSHIFT expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5 (removed by precedence):   On LSHIFT to state 19
+  6 (removed by precedence):   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 16: expr -> expr LSHIFT expr  . 
+
+
+State 46:
+17: expr -> expr RSHIFT expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5 (removed by precedence):   On LSHIFT to state 19
+  6 (removed by precedence):   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 17: expr -> expr RSHIFT expr  . 
+
+
+State 47:
+18: expr -> expr '&' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7 (removed by precedence):   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 18: expr -> expr '&' expr  . 
+
+
+State 48:
+19: expr -> expr '^' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8 (removed by precedence):   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 19: expr -> expr '^' expr  . 
+
+
+State 49:
+20: expr -> expr '|' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9 (removed by precedence):   On '|' to state 23
+  10 (removed by precedence):   On '=' to state 24
+  11 (removed by precedence):   On MULa to state 25
+  12 (removed by precedence):   On DIVa to state 26
+  13 (removed by precedence):   On MODa to state 27
+  14 (removed by precedence):   On ADDa to state 28
+  15 (removed by precedence):   On SUBa to state 29
+  16 (removed by precedence):   On LSHIFTa to state 30
+  17 (removed by precedence):   On RSHIFTa to state 31
+  18 (removed by precedence):   On ANDa to state 32
+  19 (removed by precedence):   On ORa to state 33
+  20 (removed by precedence):   On XORa to state 34
+  Reduce by 20: expr -> expr '|' expr  . 
+
+
+State 50:
+22: expr -> expr '=' expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 22: expr -> expr '=' expr  . 
+
+
+State 51:
+23: expr -> expr MULa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 23: expr -> expr MULa expr  . 
+
+
+State 52:
+24: expr -> expr DIVa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 24: expr -> expr DIVa expr  . 
+
+
+State 53:
+25: expr -> expr MODa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 25: expr -> expr MODa expr  . 
+
+
+State 54:
+26: expr -> expr ADDa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 26: expr -> expr ADDa expr  . 
+
+
+State 55:
+27: expr -> expr SUBa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 27: expr -> expr SUBa expr  . 
+
+
+State 56:
+28: expr -> expr LSHIFTa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 28: expr -> expr LSHIFTa expr  . 
+
+
+State 57:
+29: expr -> expr RSHIFTa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 29: expr -> expr RSHIFTa expr  . 
+
+
+State 58:
+30: expr -> expr ANDa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 30: expr -> expr ANDa expr  . 
+
+
+State 59:
+31: expr -> expr ORa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 31: expr -> expr ORa expr  . 
+
+
+State 60:
+32: expr -> expr XORa expr  . 
+11: expr -> expr  . '*' expr 
+12: expr -> expr  . '/' expr 
+13: expr -> expr  . '%' expr 
+14: expr -> expr  . '+' expr 
+15: expr -> expr  . '-' expr 
+16: expr -> expr  . LSHIFT expr 
+17: expr -> expr  . RSHIFT expr 
+18: expr -> expr  . '&' expr 
+19: expr -> expr  . '^' expr 
+20: expr -> expr  . '|' expr 
+22: expr -> expr  . '=' expr 
+23: expr -> expr  . MULa expr 
+24: expr -> expr  . DIVa expr 
+25: expr -> expr  . MODa expr 
+26: expr -> expr  . ADDa expr 
+27: expr -> expr  . SUBa expr 
+28: expr -> expr  . LSHIFTa expr 
+29: expr -> expr  . RSHIFTa expr 
+30: expr -> expr  . ANDa expr 
+31: expr -> expr  . ORa expr 
+32: expr -> expr  . XORa expr 
+  0:   On '*' to state 14
+  1:   On '/' to state 15
+  2:   On '%' to state 16
+  3:   On '+' to state 17
+  4:   On '-' to state 18
+  5:   On LSHIFT to state 19
+  6:   On RSHIFT to state 20
+  7:   On '&' to state 21
+  8:   On '^' to state 22
+  9:   On '|' to state 23
+  10:   On '=' to state 24
+  11:   On MULa to state 25
+  12:   On DIVa to state 26
+  13:   On MODa to state 27
+  14:   On ADDa to state 28
+  15:   On SUBa to state 29
+  16:   On LSHIFTa to state 30
+  17:   On RSHIFTa to state 31
+  18:   On ANDa to state 32
+  19:   On ORa to state 33
+  20:   On XORa to state 34
+  Reduce by 32: expr -> expr XORa expr  . 
+
+
+State 61:
+21: expr -> '(' expr ')'  . 
+  Reduce by 21: expr -> '(' expr ')'  . 
+
+
+
