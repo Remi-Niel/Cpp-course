@@ -3,5 +3,5 @@
 void Parser::prompt()
 {
     d_display = true;
-    std::cout << "? " << std::flush;
+    std::cout << "> " << std::flush;
 }
