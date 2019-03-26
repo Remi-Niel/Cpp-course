@@ -1,0 +1,12 @@
+%filenames scanner
+
+%%
+
+[ \t]+                          // Often used: skip white space
+
+[A-Z]+                          return Parser::NAME;
+true                            return Parser::TRUE;
+false                            return Parser::FALSE;
+[0-9]+                          return Parser::NUMBER;
+
+.                               return matched()[0];

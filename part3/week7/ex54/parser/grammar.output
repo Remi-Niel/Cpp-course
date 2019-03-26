@@ -1,0 +1,115 @@
+[grammar (info)] Line 37: 
+Production Rules:
+   (precedences (shown between parentheses) were set by %prec;
+    are equal to the precedence of the rules' 1st terminal tokens;
+    or (if not shown) are equal to the default (max) precedence)
+1: specifications ->  specifications specification
+2: specifications ->  specification
+3: specification (NAME) ->  NAME ':' FALSE
+4: specification (NAME) ->  NAME ':' TRUE
+5: specification (NAME) ->  NAME ':' TRUE NUMBER
+6: specification (NAME) ->  NAME ':' NUMBER NUMBER
+7: specification (NAME) ->  NAME ':' NUMBER NUMBER NUMBER
+8: specification (errTok__) ->  errTok__
+9: specifications_$ ->  specifications
+
+
+Symbolic Terminal tokens:
+       error
+       EOF
+   257: NAME
+   258: TRUE
+   259: FALSE
+   260: NUMBER
+    58: ':'
+
+
+Grammar States: 
+
+State 0:
+9: specifications_$ ->  . specifications 
+  0:   On specifications to state 1
+  1:   On specification to state 2
+  2:   On NAME to state 3
+  3:   On errTok__ to state 4
+
+
+State 1:
+9: specifications_$ -> specifications  . 
+1: specifications -> specifications  . specification 
+  0:   On specification to state 5
+  1:   On NAME to state 3
+  2:   On errTok__ to state 4
+
+
+State 2:
+2: specifications -> specification  . 
+  Reduce by 2: specifications -> specification  . 
+
+
+State 3:
+3: specification -> NAME  . ':' FALSE 
+4: specification -> NAME  . ':' TRUE 
+5: specification -> NAME  . ':' TRUE NUMBER 
+6: specification -> NAME  . ':' NUMBER NUMBER 
+7: specification -> NAME  . ':' NUMBER NUMBER NUMBER 
+  0:   On ':' to state 6
+
+
+State 4:
+8: specification -> errTok__  . 
+  Reduce by 8: specification -> errTok__  . 
+
+
+State 5:
+1: specifications -> specifications specification  . 
+  Reduce by 1: specifications -> specifications specification  . 
+
+
+State 6:
+3: specification -> NAME ':'  . FALSE 
+4: specification -> NAME ':'  . TRUE 
+5: specification -> NAME ':'  . TRUE NUMBER 
+6: specification -> NAME ':'  . NUMBER NUMBER 
+7: specification -> NAME ':'  . NUMBER NUMBER NUMBER 
+  0:   On FALSE to state 7
+  1:   On TRUE to state 8
+  2:   On NUMBER to state 9
+
+
+State 7:
+3: specification -> NAME ':' FALSE  . 
+  Reduce by 3: specification -> NAME ':' FALSE  . 
+
+
+State 8:
+4: specification -> NAME ':' TRUE  . 
+5: specification -> NAME ':' TRUE  . NUMBER 
+  0:   On NUMBER to state 10
+  Reduce by 4: specification -> NAME ':' TRUE  . 
+
+
+State 9:
+6: specification -> NAME ':' NUMBER  . NUMBER 
+7: specification -> NAME ':' NUMBER  . NUMBER NUMBER 
+  0:   On NUMBER to state 11
+
+
+State 10:
+5: specification -> NAME ':' TRUE NUMBER  . 
+  Reduce by 5: specification -> NAME ':' TRUE NUMBER  . 
+
+
+State 11:
+6: specification -> NAME ':' NUMBER NUMBER  . 
+7: specification -> NAME ':' NUMBER NUMBER  . NUMBER 
+  0:   On NUMBER to state 12
+  Reduce by 6: specification -> NAME ':' NUMBER NUMBER  . 
+
+
+State 12:
+7: specification -> NAME ':' NUMBER NUMBER NUMBER  . 
+  Reduce by 7: specification -> NAME ':' NUMBER NUMBER NUMBER  . 
+
+
+

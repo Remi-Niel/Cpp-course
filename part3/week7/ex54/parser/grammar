@@ -1,0 +1,36 @@
+//%default-actions quiet
+%filenames parser
+%scanner ../scanner/scanner.h
+
+%token NAME TRUE FALSE NUMBER
+
+%%
+
+specifications:
+    specifications specification
+|
+    specification
+;
+
+specification:
+    NAME ':' FALSE
+|
+    NAME ':' TRUE
+|
+    NAME ':' TRUE NUMBER
+|
+    NAME ':' NUMBER NUMBER
+|
+    NAME ':' NUMBER NUMBER NUMBER
+|
+    error 
+    {
+        std::cout << "? " << std::flush;
+    }
+;
+
+
+
+
+
+
