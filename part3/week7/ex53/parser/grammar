@@ -1,0 +1,35 @@
+
+%baseclass-preinclude <string>
+%token INT STRING DOUBLE QUIT
+
+%polymorphic INT: int; TEXT: std::string; DOUBLE: double;
+
+%%
+
+lines:
+    lines '\n' line
+|
+    line
+;
+
+line:
+    INT
+    {
+        showInt($1);
+    }
+|
+    STRING
+    {
+        showString($1);
+    }
+|
+    DOUBLE 
+    {
+        showDouble($1);
+    }
+|
+    QUIT
+    {
+        quit();
+    }
+;

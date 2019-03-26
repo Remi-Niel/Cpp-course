@@ -3,7 +3,7 @@
 
 %%
 
-list:
+list: // force the parser to look one way.
         WORD
     |
         plain WORD

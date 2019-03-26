@@ -1,0 +1,13 @@
+%filenames scanner
+
+//%interactive
+//%debug
+
+%%
+
+[ \t]+                          // Often used: skip white space
+\n                              return matched()[0];
+[0-9]+                          return Parser::INT;
+[0-9]+\.[0-9]+                  return Parser::DOUBLE;
+"quit"                          return Parser::QUIT;
+[a-zA-Z]+                       return Parser::STRING;
