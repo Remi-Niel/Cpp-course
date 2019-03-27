@@ -1,17 +1,20 @@
-[grammar (info)] Line 37: 
+[grammar (info)] Line 48: 
 Production Rules:
    (precedences (shown between parentheses) were set by %prec;
     are equal to the precedence of the rules' 1st terminal tokens;
     or (if not shown) are equal to the default (max) precedence)
 1: specifications ->  specifications specification
 2: specifications ->  specification
-3: specification (NAME) ->  NAME ':' FALSE
-4: specification (NAME) ->  NAME ':' TRUE
-5: specification (NAME) ->  NAME ':' TRUE NUMBER
-6: specification (NAME) ->  NAME ':' NUMBER NUMBER
-7: specification (NAME) ->  NAME ':' NUMBER NUMBER NUMBER
-8: specification (errTok__) ->  errTok__
-9: specifications_$ ->  specifications
+3: specification (NAME) ->  NAME ':' arguments
+4: specification (errTok__) ->  errTok__
+5: arguments (FALSE) ->  FALSE
+6: arguments (TRUE) ->  TRUE
+7: arguments (TRUE) ->  TRUE opt_sep NUMBER
+8: arguments (NUMBER) ->  NUMBER opt_sep NUMBER
+9: arguments (NUMBER) ->  NUMBER opt_sep NUMBER opt_sep NUMBER
+10: opt_sep (DELIM) ->  DELIM
+11: opt_sep ->  <empty>
+12: specifications_$ ->  specifications
 
 
 Symbolic Terminal tokens:
@@ -21,13 +24,14 @@ Symbolic Terminal tokens:
    258: TRUE
    259: FALSE
    260: NUMBER
+   261: DELIM
     58: ':'
 
 
 Grammar States: 
 
 State 0:
-9: specifications_$ ->  . specifications 
+12: specifications_$ ->  . specifications 
   0:   On specifications to state 1
   1:   On specification to state 2
   2:   On NAME to state 3
@@ -35,7 +39,7 @@ State 0:
 
 
 State 1:
-9: specifications_$ -> specifications  . 
+12: specifications_$ -> specifications  . 
 1: specifications -> specifications  . specification 
   0:   On specification to state 5
   1:   On NAME to state 3
@@ -48,17 +52,13 @@ State 2:
 
 
 State 3:
-3: specification -> NAME  . ':' FALSE 
-4: specification -> NAME  . ':' TRUE 
-5: specification -> NAME  . ':' TRUE NUMBER 
-6: specification -> NAME  . ':' NUMBER NUMBER 
-7: specification -> NAME  . ':' NUMBER NUMBER NUMBER 
+3: specification -> NAME  . ':' arguments 
   0:   On ':' to state 6
 
 
 State 4:
-8: specification -> errTok__  . 
-  Reduce by 8: specification -> errTok__  . 
+4: specification -> errTok__  . 
+  Reduce by 4: specification -> errTok__  . 
 
 
 State 5:
@@ -67,49 +67,78 @@ State 5:
 
 
 State 6:
-3: specification -> NAME ':'  . FALSE 
-4: specification -> NAME ':'  . TRUE 
-5: specification -> NAME ':'  . TRUE NUMBER 
-6: specification -> NAME ':'  . NUMBER NUMBER 
-7: specification -> NAME ':'  . NUMBER NUMBER NUMBER 
-  0:   On FALSE to state 7
-  1:   On TRUE to state 8
-  2:   On NUMBER to state 9
+3: specification -> NAME ':'  . arguments 
+  0:   On arguments to state 7
+  1:   On FALSE to state 8
+  2:   On TRUE to state 9
+  3:   On NUMBER to state 10
 
 
 State 7:
-3: specification -> NAME ':' FALSE  . 
-  Reduce by 3: specification -> NAME ':' FALSE  . 
+3: specification -> NAME ':' arguments  . 
+  Reduce by 3: specification -> NAME ':' arguments  . 
 
 
 State 8:
-4: specification -> NAME ':' TRUE  . 
-5: specification -> NAME ':' TRUE  . NUMBER 
-  0:   On NUMBER to state 10
-  Reduce by 4: specification -> NAME ':' TRUE  . 
+5: arguments -> FALSE  . 
+  Reduce by 5: arguments -> FALSE  . 
 
 
 State 9:
-6: specification -> NAME ':' NUMBER  . NUMBER 
-7: specification -> NAME ':' NUMBER  . NUMBER NUMBER 
-  0:   On NUMBER to state 11
+6: arguments -> TRUE  . 
+7: arguments -> TRUE  . opt_sep NUMBER 
+  0:   On opt_sep to state 11
+  1:   On DELIM to state 12
+  Reduce by 6: arguments -> TRUE  . 
+  Reduce by 11: opt_sep ->  . 
 
 
 State 10:
-5: specification -> NAME ':' TRUE NUMBER  . 
-  Reduce by 5: specification -> NAME ':' TRUE NUMBER  . 
+8: arguments -> NUMBER  . opt_sep NUMBER 
+9: arguments -> NUMBER  . opt_sep NUMBER opt_sep NUMBER 
+  0:   On opt_sep to state 13
+  1:   On DELIM to state 12
+  Reduce by 11: opt_sep ->  . 
 
 
 State 11:
-6: specification -> NAME ':' NUMBER NUMBER  . 
-7: specification -> NAME ':' NUMBER NUMBER  . NUMBER 
-  0:   On NUMBER to state 12
-  Reduce by 6: specification -> NAME ':' NUMBER NUMBER  . 
+7: arguments -> TRUE opt_sep  . NUMBER 
+  0:   On NUMBER to state 14
 
 
 State 12:
-7: specification -> NAME ':' NUMBER NUMBER NUMBER  . 
-  Reduce by 7: specification -> NAME ':' NUMBER NUMBER NUMBER  . 
+10: opt_sep -> DELIM  . 
+  Reduce by 10: opt_sep -> DELIM  . 
+
+
+State 13:
+8: arguments -> NUMBER opt_sep  . NUMBER 
+9: arguments -> NUMBER opt_sep  . NUMBER opt_sep NUMBER 
+  0:   On NUMBER to state 15
+
+
+State 14:
+7: arguments -> TRUE opt_sep NUMBER  . 
+  Reduce by 7: arguments -> TRUE opt_sep NUMBER  . 
+
+
+State 15:
+8: arguments -> NUMBER opt_sep NUMBER  . 
+9: arguments -> NUMBER opt_sep NUMBER  . opt_sep NUMBER 
+  0:   On opt_sep to state 16
+  1:   On DELIM to state 12
+  Reduce by 8: arguments -> NUMBER opt_sep NUMBER  . 
+  Reduce by 11: opt_sep ->  . 
+
+
+State 16:
+9: arguments -> NUMBER opt_sep NUMBER opt_sep  . NUMBER 
+  0:   On NUMBER to state 17
+
+
+State 17:
+9: arguments -> NUMBER opt_sep NUMBER opt_sep NUMBER  . 
+  Reduce by 9: arguments -> NUMBER opt_sep NUMBER opt_sep NUMBER  . 
 
 
 

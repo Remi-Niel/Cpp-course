@@ -2,10 +2,16 @@
 
 int main(int argc, char **argv)
 {
-    Parser parser;
-    int temp = parser.parse();
+    Parser *parser;
+
+    if (argc != 1)
+        parser = new Parser(argv[1][0]);
+    else
+        parser = new Parser();
     
-    cout << temp << '\n';
+    int result = parser->parse();
     
-    return temp == 0 ? 0 : 1;
+    delete parser;
+
+    return result == 0 ? 0 : 1;
 }

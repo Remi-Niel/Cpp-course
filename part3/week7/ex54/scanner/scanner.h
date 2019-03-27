@@ -11,8 +11,14 @@
 // $insert classHead
 class Scanner: public ScannerBase
 {
+
+    char d_delim;
+
     public:
         explicit Scanner(std::istream &in = std::cin,
+                                std::ostream &out = std::cout);
+
+        explicit Scanner(char c, std::istream &in = std::cin,
                                 std::ostream &out = std::cout);
 
         Scanner(std::string const &infile, std::string const &outfile);
@@ -36,12 +42,20 @@ class Scanner: public ScannerBase
 // $insert scannerConstructors
 inline Scanner::Scanner(std::istream &in, std::ostream &out)
 :
-    ScannerBase(in, out)
+    ScannerBase(in, out),
+    d_delim(0)
+{}
+
+inline Scanner::Scanner(char c, std::istream &in, std::ostream &out)
+:
+    ScannerBase(in, out),
+    d_delim(c)
 {}
 
 inline Scanner::Scanner(std::string const &infile, std::string const &outfile)
 :
-    ScannerBase(infile, outfile)
+    ScannerBase(infile, outfile),
+    d_delim(0)
 {}
 
 // $insert inlineLexFunction

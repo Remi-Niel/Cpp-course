@@ -21,9 +21,11 @@ class Parser: public ParserBase
 {
     // $insert scannerobject
     Scanner d_scanner;
+    char d_delim;
         
     public:
-        Parser() = default;
+        Parser();
+        Parser(char c);
         int parse();
 
     private:

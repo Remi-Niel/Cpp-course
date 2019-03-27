@@ -2,11 +2,16 @@
 
 %%
 
-[ \t]+                          // Often used: skip white space
+[ \t\n]                           //skip whitespace and empty lines
 
 [A-Z]+                          return Parser::NAME;
 true                            return Parser::TRUE;
-false                            return Parser::FALSE;
+false                           return Parser::FALSE;
 [0-9]+                          return Parser::NUMBER;
 
-.                               return matched()[0];
+.                               {
+                                    if (matched()[0] == d_delim)
+                                        return Parser::DELIM;
+                                    else
+                                        return matched()[0];
+                                }

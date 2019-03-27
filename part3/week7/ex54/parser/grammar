@@ -2,7 +2,7 @@
 %filenames parser
 %scanner ../scanner/scanner.h
 
-%token NAME TRUE FALSE NUMBER
+%token NAME TRUE FALSE NUMBER DELIM
 
 %%
 
@@ -13,19 +13,30 @@ specifications:
 ;
 
 specification:
-    NAME ':' FALSE
-|
-    NAME ':' TRUE
-|
-    NAME ':' TRUE NUMBER
-|
-    NAME ':' NUMBER NUMBER
-|
-    NAME ':' NUMBER NUMBER NUMBER
+    NAME ':' arguments
 |
     error 
+;
+
+arguments:
+    FALSE
+|
+    TRUE
+|
+    TRUE opt_sep NUMBER
+|
+    NUMBER opt_sep NUMBER
+|
+    NUMBER opt_sep NUMBER opt_sep NUMBER
+;
+
+opt_sep:
+    DELIM
+|
+    // empty
     {
-        std::cout << "? " << std::flush;
+        if (d_delim != 0)
+            error();
     }
 ;
 
