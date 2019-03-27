@@ -1,38 +1,64 @@
 
-%baseclass-preinclude <string>
-%token IDENT
-%token CHARACTER
+// includes <string> and <vector>
+%baseclass-preinclude "includes.h"
 
-%polymorphic IDENT: std::string; CHARACTER: char;
+%token IDENT
+%polymorphic IDENT: std::string;
+
+%type <IDENT> literal 
+%type <IDENT> line
+%type <IDENT> rulebody
 
 %%
 
 ruleset:
     rule
+    {
+        print("\n");
+    }
 |
     ruleset rule
+    {
+        print("\n");
+    }
 ;
 
 rule:
-    IDENT ':' rulebody ';'
+    literal ':' rulebody ';'
+    {
+        print_rule($1, $3);
+    }
 ;
 
 rulebody:
     line
+    {
+        $$ = $1;
+    }
 |
     rulebody '|' line
+    {
+        $$ = append($1, append(" @ ", $3));
+    }
 ;
 
 line:
     literal
+    {
+        $$ = $1;
+    }
 |
     line literal
+    {
+        $$ = append($1, $2);
+    }
 ;
 
 literal:
     IDENT
-|
-    CHARACTER
+    {
+        $$ = d_scanner.matched();
+    }
 ;
 
 

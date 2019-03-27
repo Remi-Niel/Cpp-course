@@ -1,25 +1,23 @@
-[grammar (info)] Line 39: 
+[grammar (info)] Line 65: 
 Production Rules:
    (precedences (shown between parentheses) were set by %prec;
     are equal to the precedence of the rules' 1st terminal tokens;
     or (if not shown) are equal to the default (max) precedence)
 1: ruleset ->  rule
 2: ruleset ->  ruleset rule
-3: rule (IDENT) ->  IDENT ':' rulebody ';'
+3: rule (':') ->  literal ':' rulebody ';'
 4: rulebody ->  line
 5: rulebody ('|') ->  rulebody '|' line
 6: line ->  literal
 7: line ->  line literal
 8: literal (IDENT) ->  IDENT
-9: literal (CHARACTER) ->  CHARACTER
-10: ruleset_$ ->  ruleset
+9: ruleset_$ ->  ruleset
 
 
 Symbolic Terminal tokens:
        error
        EOF
    257: IDENT
-   258: CHARACTER
     58: ':'
     59: ';'
    124: '|'
@@ -28,17 +26,19 @@ Symbolic Terminal tokens:
 Grammar States: 
 
 State 0:
-10: ruleset_$ ->  . ruleset 
+9: ruleset_$ ->  . ruleset 
   0:   On ruleset to state 1
   1:   On rule to state 2
-  2:   On IDENT to state 3
+  2:   On literal to state 3
+  3:   On IDENT to state 4
 
 
 State 1:
-10: ruleset_$ -> ruleset  . 
+9: ruleset_$ -> ruleset  . 
 2: ruleset -> ruleset  . rule 
-  0:   On rule to state 4
-  1:   On IDENT to state 3
+  0:   On rule to state 5
+  1:   On literal to state 3
+  2:   On IDENT to state 4
 
 
 State 2:
@@ -47,79 +47,70 @@ State 2:
 
 
 State 3:
-3: rule -> IDENT  . ':' rulebody ';' 
-  0:   On ':' to state 5
+3: rule -> literal  . ':' rulebody ';' 
+  0:   On ':' to state 6
 
 
 State 4:
-2: ruleset -> ruleset rule  . 
-  Reduce by 2: ruleset -> ruleset rule  . 
-
-
-State 5:
-3: rule -> IDENT ':'  . rulebody ';' 
-  0:   On rulebody to state 6
-  1:   On line to state 7
-  2:   On literal to state 8
-  3:   On IDENT to state 9
-  4:   On CHARACTER to state 10
-
-
-State 6:
-3: rule -> IDENT ':' rulebody  . ';' 
-5: rulebody -> rulebody  . '|' line 
-  0:   On ';' to state 11
-  1:   On '|' to state 12
-
-
-State 7:
-4: rulebody -> line  . 
-7: line -> line  . literal 
-  0:   On literal to state 13
-  1:   On IDENT to state 9
-  2:   On CHARACTER to state 10
-  Reduce by 4: rulebody -> line  . 
-
-
-State 8:
-6: line -> literal  . 
-  Reduce by 6: line -> literal  . 
-
-
-State 9:
 8: literal -> IDENT  . 
   Reduce by 8: literal -> IDENT  . 
 
 
+State 5:
+2: ruleset -> ruleset rule  . 
+  Reduce by 2: ruleset -> ruleset rule  . 
+
+
+State 6:
+3: rule -> literal ':'  . rulebody ';' 
+  0:   On rulebody to state 7
+  1:   On line to state 8
+  2:   On literal to state 9
+  3:   On IDENT to state 4
+
+
+State 7:
+3: rule -> literal ':' rulebody  . ';' 
+5: rulebody -> rulebody  . '|' line 
+  0:   On ';' to state 10
+  1:   On '|' to state 11
+
+
+State 8:
+4: rulebody -> line  . 
+7: line -> line  . literal 
+  0:   On literal to state 12
+  1:   On IDENT to state 4
+  Reduce by 4: rulebody -> line  . 
+
+
+State 9:
+6: line -> literal  . 
+  Reduce by 6: line -> literal  . 
+
+
 State 10:
-9: literal -> CHARACTER  . 
-  Reduce by 9: literal -> CHARACTER  . 
+3: rule -> literal ':' rulebody ';'  . 
+  Reduce by 3: rule -> literal ':' rulebody ';'  . 
 
 
 State 11:
-3: rule -> IDENT ':' rulebody ';'  . 
-  Reduce by 3: rule -> IDENT ':' rulebody ';'  . 
+5: rulebody -> rulebody '|'  . line 
+  0:   On line to state 13
+  1:   On literal to state 9
+  2:   On IDENT to state 4
 
 
 State 12:
-5: rulebody -> rulebody '|'  . line 
-  0:   On line to state 14
-  1:   On literal to state 8
-  2:   On IDENT to state 9
-  3:   On CHARACTER to state 10
-
-
-State 13:
 7: line -> line literal  . 
   Reduce by 7: line -> line literal  . 
 
 
-State 14:
+State 13:
 5: rulebody -> rulebody '|' line  . 
 7: line -> line  . literal 
-  0:   On literal to state 13
-  1:   On IDENT to state 9
-  2:   On CHARACTER to state 10
+  0:   On literal to state 12
+  1:   On IDENT to state 4
   Reduce by 5: rulebody -> rulebody '|' line  . 
 
 

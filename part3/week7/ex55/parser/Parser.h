@@ -19,10 +19,16 @@
 class Parser: public ParserBase
 {
     Scanner d_scanner;
-        
+    
     public:
         Parser() = default;
         int parse();
+
+        void print(STYPE__ const &str) const;
+        void print(std::string const &str) const;
+        std::string append(std::string const &line, std::string const &str) const;
+        
+        void print_rule(std::string const &name, std::string const &body);
 
     private:
         void error();                   // called on (syntax) errors

@@ -5,6 +5,46 @@
 // $insert class.h
 #include "Parser.h"
 
+#include <sstream>
+#include <iostream>
+using namespace std;
+
+/*
+    Print functions
+*/
+
+inline void Parser::print(STYPE__ const &chr) const
+{
+    cout << chr.get<Tag__::IDENT>() << flush;
+}
+
+inline void Parser::print(std::string const &str) const
+{
+    cout << str << flush;
+}
+
+inline string Parser::append(std::string const &line, std::string const &str) const
+{
+    return line + " " + str;
+}
+
+inline void Parser::print_rule(string const &name, string const &body)
+{
+    cout << name << " = ";
+    
+    for (char c : body)
+    {
+        if (c == '@')
+            cout << "\n" << name << " =";
+        else
+            cout << c;
+    }
+}
+
+/*
+    Rest
+*/
+
 inline void Parser::error()
 {
     std::cerr << "Syntax error\n";

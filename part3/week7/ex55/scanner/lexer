@@ -15,7 +15,7 @@
 <actual>[ \t]+                          // Often used: skip white space
 <actual>\n                              // same
 <actual>[:\|;]                          return matched()[0];
-<actual>'.{1,2}'                        return Parser::CHARACTER;
+<actual>'.{1,2}'                        return Parser::IDENT;
 <actual>[[:alpha:]]+                    return Parser::IDENT;
 <actual>\%[[:alpha:]]+                  // skip
 //<actual><<EOF>>                       return Parser::DONE;
