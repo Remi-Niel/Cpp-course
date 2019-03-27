@@ -18,4 +18,3 @@
 <actual>'.{1,2}'                        return Parser::IDENT;
 <actual>[[:alpha:]]+                    return Parser::IDENT;
 <actual>\%[[:alpha:]]+                  // skip
-//<actual><<EOF>>                       return Parser::DONE;

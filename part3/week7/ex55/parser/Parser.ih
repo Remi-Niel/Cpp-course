@@ -23,22 +23,35 @@ inline void Parser::print(std::string const &str) const
     cout << str << flush;
 }
 
+inline void Parser::print_completed() const
+{
+    for (string const &line : d_rules.back().rhs)
+    {
+        cout << d_rules.back().lhs << " = " << line << "\n";
+    }
+}
+
 inline string Parser::append(std::string const &line, std::string const &str) const
 {
     return line + " " + str;
 }
 
-inline void Parser::print_rule(string const &name, string const &body)
+inline void Parser::newrule()
 {
-    cout << name << " = ";
-    
-    for (char c : body)
-    {
-        if (c == '@')
-            cout << "\n" << name << " =";
-        else
-            cout << c;
-    }
+    d_rules.push_back({});
+}
+
+inline void Parser::set_lhs(std::string const &lhs)
+{
+    d_rules.back().lhs = lhs;
+}
+
+inline void Parser::append_rule(std::string const &line)
+{
+    if (d_rules.empty())
+        d_rules.push_back({});
+
+    d_rules.back().rhs.push_back(line);
 }
 
 /*
