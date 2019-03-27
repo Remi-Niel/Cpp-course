@@ -1,0 +1,38 @@
+
+%baseclass-preinclude <string>
+%token IDENT
+%token CHARACTER
+
+%polymorphic IDENT: std::string; CHARACTER: char;
+
+%%
+
+ruleset:
+    rule
+|
+    ruleset rule
+;
+
+rule:
+    IDENT ':' rulebody ';'
+;
+
+rulebody:
+    line
+|
+    rulebody '|' line
+;
+
+line:
+    literal
+|
+    line literal
+;
+
+literal:
+    IDENT
+|
+    CHARACTER
+;
+
+

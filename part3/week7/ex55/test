@@ -1,0 +1,17 @@
+%%
+
+line:
+        expr '\n'
+|
+    '\n'
+;
+
+expr:
+        INT
+|
+        expr '+' expr
+|
+        '-' expr %prec uminus
+|
+        '(' expr ')'
+;
