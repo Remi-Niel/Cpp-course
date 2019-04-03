@@ -55,11 +55,6 @@ expr:
         $$ = value();
     }
 |
-    ident
-    {
-        $$ = $1;
-    }
-|
     '-' expr            %prec uMinus
     {
         $$ = negate($2);
@@ -83,6 +78,10 @@ expr:
 |
     expr '=' expr
     {
+        if ($1.d_type != RuleValue::VARIABLE)
+        {
+            error("Cannot assign value to non-variable");
+        }
         $$ = assign($1, $3);
     }
 |
@@ -95,9 +94,16 @@ expr:
             $$ = $1;
         } 
         else
-        {
-            $$ = RuleValue((*$1.d_function)($3.d_argList));
+        {       //process function call, function is responsible 
+                // for checking whether amount of arguments is correct
+            RuleValue val = $1.d_function($3.d_argList);
+            $$ = val;
         }
+    }
+|
+    ident
+    {
+        $$ = $1;
     }
 ;
 
@@ -110,6 +116,7 @@ exprList:
             std::cout << "Argument must resolve to a value";
             d_display = false;
         }
+        else
         $1.d_argList.push_back($3);
         $$ = $1;
     }
@@ -126,15 +133,16 @@ exprList:
 ident:
     IDENT
     {
-        if (d_constants.find(d_scanner.matched()) != d_constants.end())
+        if (d_constants.find(d_scanner.matched()) != d_constants.end()) //ident is a function
             $$ = RuleValue(d_constants[d_scanner.matched()]);
-        else if (d_functions.find(d_scanner.matched()) != d_functions.end())
+        else if (d_functions.find(d_scanner.matched()) != d_functions.end()) //ident is a constant
             $$ = RuleValue(d_functions[d_scanner.matched()]);
         else if (d_angle_settings.find(d_scanner.matched()) != d_angle_settings.end())
-        {
+        {                                                                   //ident is a setting
             d_type = d_angle_settings[d_scanner.matched()];
+            d_display = false;
             $$ = RuleValue();
-        }
+        }                                                                   //ident is a variable
         else
             $$ = variable();
     }

@@ -2,7 +2,7 @@
 #define _INCLUDED_RULEVALUE_H_
 
 #include <vector>
-
+#include <functional>
 struct RuleValue
 {
     enum Type
@@ -18,13 +18,13 @@ struct RuleValue
     double                  d_number;
     unsigned                d_idx;
     std::vector<RuleValue>  d_argList;
-    RuleValue &(*d_function)(std::vector<RuleValue>);
+    std::function<double (std::vector<RuleValue>)> d_function;
 
     public:
         RuleValue();
         RuleValue(double value);
         RuleValue(unsigned idx);
-        RuleValue(double (*func)(std::vector<RuleValue>));
+        RuleValue(std::function<double (std::vector<RuleValue>)> fun);
 };
 
 #endif

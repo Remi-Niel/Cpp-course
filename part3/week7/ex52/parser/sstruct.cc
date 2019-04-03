@@ -3,7 +3,8 @@
 
 RuleValue::RuleValue()
 :
-    d_type(ANGLESET)
+    d_type(ANGLESET),
+    d_number(0)
 {}
 
 RuleValue::RuleValue(double value)
@@ -18,7 +19,7 @@ RuleValue::RuleValue(unsigned idx)
     d_idx(idx)
 {}
 
-RuleValue::RuleValue(double (*func)(std::vector<RuleValue>))
+RuleValue::RuleValue(std::function<double (std::vector<RuleValue>)> func)
 :
     d_type(FUNCTION),
     d_function(func)

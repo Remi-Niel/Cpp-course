@@ -1,12 +1,12 @@
 #include "parser.ih"
 
-RuleValue &Parser::exp(std::vector<RuleValue> args)
+double Parser::exp(std::vector<RuleValue> args)
 {
     if (args.size() != 1)
     {
-        std::cout << "tan function expects 1 input variable";
+        std::cout << "exp function expects 1 input variable\n";
         d_display = false;
-        return args[0];
+        return 0;
     }
-    return args[0] = std::exp(valueOf(args[0]));
+    return std::exp(valueOf(args[0]));
 }
