@@ -19,23 +19,25 @@
 class Parser: public ParserBase
 {
     Scanner d_scanner;
-    Rules d_rules;
+    std::vector<Rules> d_rules;
 
     public:
-        Parser() = default;
+        Parser();
         int parse();
 
-        void print(STYPE__ const &str) const;
+    private:
+        // functions used to print rules
         void print(std::string const &str) const;
         void print_completed() const;
 
+        // combine two parts of a rule into 1
         std::string append(std::string const &line, std::string const &str) const;
 
-        void newrule();
+        // sets the name of the rule currently being parsed
         void set_lhs(std::string const &line);
+        // appends rule to the Rules currently being parsed.
         void append_rule(std::string const &line);
 
-    private:
         void error();                   // called on (syntax) errors
         int lex();                      // returns the next token from the
                                         // lexical scanner. 
@@ -50,5 +52,10 @@ class Parser: public ParserBase
         void print__();
 };
 
+inline Parser::Parser()
+{
+    //  we start out with an empty rule.
+    d_rules.push_back(Rules{});
+}
 
 #endif

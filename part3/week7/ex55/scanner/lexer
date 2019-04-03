@@ -10,11 +10,20 @@
 [ \t]+                                  // skip
 \n                                      // skip
 .                                       // skip
+// after we parsed %% we start the actual parsing
+// we use a miniparser for this.
 \%\%                                    begin(StartCondition__::actual);
 
 <actual>[ \t]+                          // Often used: skip white space
 <actual>\n                              // same
+
+// return ':' '|' ';' as they are, these characters have meaning
 <actual>[:\|;]                          return matched()[0];
+
+// two types of small identifiers. for example: 'x', or '\n'.
 <actual>'.{1,2}'                        return Parser::IDENT;
+// Large identifiers are just words
 <actual>[[:alpha:]]+                    return Parser::IDENT;
+
+//When an identifier is preceded by a '%' we ignore it.
 <actual>\%[[:alpha:]]+                  // skip

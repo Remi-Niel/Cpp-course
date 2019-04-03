@@ -1,8 +1,9 @@
 
-%baseclass-preinclude "includes.h"
+%baseclass-preinclude "../rules/rules.h"
 
 %token IDENT
-%token BODY
+
+// polymorphic so all the helper functions have nice signatures.
 %polymorphic IDENT: std::string;
 
 %type <IDENT> literal 
@@ -27,7 +28,6 @@ rule:
     {
         set_lhs($1);
         print_completed();
-        newrule();
     }
 ;
 

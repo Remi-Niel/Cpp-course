@@ -18,7 +18,6 @@ Symbolic Terminal tokens:
        error
        EOF
    257: IDENT
-   258: BODY
     58: ':'
     59: ';'
    124: '|'
