@@ -17,21 +17,6 @@ exp         [eE][-+]?{digits}
 // be processed as keyword anyway. 
 quit                                    |
 exit                                    return Parser::END;
-abs                                     return Parser::ABS;
-sqrt                                    return Parser::SQRT;
-ln                                      return Parser::LN;
-exp                                     return Parser::EXP;
-sin                                     return Parser::SIN;
-asin                                    return Parser::ASIN;
-cos                                     return Parser::COS;
-acos                                    return Parser::ACOS;
-tan                                     return Parser::TAN;
-atan                                    return Parser::ATAN;
-rad                                     return Parser::RAD;
-grad                                    return Parser::GRAD;
-deg                                     return Parser::DEG;
-pi                                      return Parser::PI;
-e                                       return Parser::E;
 
 {digits}                                |
 {digits}"."{optdigits}{exp}?            |

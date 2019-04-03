@@ -2,9 +2,21 @@
 
 Parser::Parser(bool run)
 :
+    d_constants({
+        {"e", M_E},
+        {"pi", M_PI}
+    }),
+    d_functions(),
+    d_angle_settings({
+        {"rad", RAD},
+        {"grad", GRAD},
+        {"deg", DEG}
+    }),
     d_type(RAD),
     d_display(true)
 {
+    d_functions.emplace("abs", std::bind(abs,this, std::placeholders::_1, std::placeholders::_2));
+
     setDebug(false);
 
     if (run)

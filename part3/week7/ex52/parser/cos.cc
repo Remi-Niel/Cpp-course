@@ -1,8 +1,14 @@
 #include "parser.ih"
 
-RuleValue &Parser::cos(RuleValue &e)
+RuleValue &Parser::cos(std::vector<RuleValue> args)
 {
-    double val = valueOf(e);
+    if (args.size() != 1)
+    {
+        std::cout << "cos function expects 1 input variable";
+        d_display = false;
+        return args[0];
+    }
+    double val = valueOf(args[0]);
     switch (d_type)
     {
         case GRAD:
@@ -18,5 +24,5 @@ RuleValue &Parser::cos(RuleValue &e)
         case RAD:
             val = std::cos(val);
     }
-    return e = val;
+    return args[0] = val;
 }

@@ -11,6 +11,7 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <functional>
 
 
 #undef Parser
@@ -30,6 +31,9 @@ class Parser: public ParserBase
         DEG,
         GRAD
     };
+    std::unordered_map<std::string, double> d_constants;
+    std::unordered_map<std::string, std::function<RuleValue & (std::vector<RuleValue>)>> d_functions;
+    std::unordered_map<std::string, Angle_Type> d_angle_settings;
 
     // $insert scannerobject
     Scanner d_scanner;
@@ -69,16 +73,16 @@ class Parser: public ParserBase
         void setAngleType(Angle_Type type);
         RuleValue &add(RuleValue &lvalue, RuleValue &rvalue);
         RuleValue &assign(RuleValue &lvalue, RuleValue &rvalue);
-        RuleValue &exp(RuleValue &e);
-        RuleValue &ln(RuleValue &e);
-        RuleValue &sin(RuleValue &e);
-        RuleValue &asin(RuleValue &e);
-        RuleValue &cos(RuleValue &e);
-        RuleValue &acos(RuleValue &e);
-        RuleValue &tan(RuleValue &e);
-        RuleValue &atan(RuleValue &e);
-        RuleValue &sqrt(RuleValue &e);
-        RuleValue &abs(RuleValue &e);
+        RuleValue &exp(std::vector<RuleValue> args);
+        RuleValue &ln(std::vector<RuleValue> args);
+        RuleValue &sin(std::vector<RuleValue> args);
+        RuleValue &asin(std::vector<RuleValue> args);
+        RuleValue &cos(std::vector<RuleValue> args);
+        RuleValue &acos(std::vector<RuleValue> args);
+        RuleValue &tan(std::vector<RuleValue> args);
+        RuleValue &atan(std::vector<RuleValue> args);
+        RuleValue &sqrt(std::vector<RuleValue> args);
+        RuleValue &abs(std::vector<RuleValue> args);
         RuleValue &negate(RuleValue &e);
         RuleValue &sub(RuleValue &lvalue, RuleValue &rvalue);
         RuleValue value();

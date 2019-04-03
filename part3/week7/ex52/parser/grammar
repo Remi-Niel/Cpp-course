@@ -11,15 +11,10 @@
 %token  NUMBER
         IDENT
         END
-        RAD
-        GRAD
-        DEG
-        PI
-        E
 
 %right  '='
 %left   '+' '-'
-%right  uMinus EXP LN SIN ASIN COS ACOS TAN ATAN SQRT ABS
+%right  uMinus 
 
 // %debug
 
@@ -52,24 +47,6 @@ line:
     {
         done();
     }
-|
-    RAD '\n'
-    {
-        setAngleType(RAD);
-        prompt();
-    }
-|
-    GRAD '\n'
-    {
-        setAngleType(GRAD);
-        prompt();
-    }
-|
-    DEG '\n'
-    {
-        setAngleType(DEG);
-        prompt();
-    }
 ;
 
 expr:
@@ -78,19 +55,9 @@ expr:
         $$ = value();
     }
 |
-    PI
+    ident
     {
-        $$ = RuleValue(M_PI);
-    }
-|
-    E
-    {
-        $$ = RuleValue(M_E);
-    }
-|
-    IDENT
-    {
-        $$ = variable();
+        $$ = $1;
     }
 |
     '-' expr            %prec uMinus
@@ -119,54 +86,56 @@ expr:
         $$ = assign($1, $3);
     }
 |
-    EXP expr
+    ident '(' exprList ')'
     {
-        $$ = exp($2);
-    }
-|
-    LN expr
-    {
-        $$ = ln($2);
-    }
-|
-    ABS expr
-    {
-        $$ = abs($2);
-    }
-|
-    SQRT expr
-    {
-        $$ = sqrt($2);
-    }
-|
-    SIN expr
-    {
-        $$ = sin($2);
-    }
-|
-    ASIN expr
-    {
-        $$ = asin($2);
-    }
-|
-    COS expr
-    {
-        $$ = cos($2);
-    }
-|
-    ACOS expr
-    {
-        $$ = acos($2);
-    }
-|
-    TAN expr
-    {
-        $$ = tan($2);
-    }
-|
-    ATAN expr
-    {
-        $$ = atan($2);
+        if ($1.d_type != RuleValue::FUNCTION)
+        {
+            std::cout << "Function name not valid";
+            d_display = false;
+            $$ = $1;
+        } 
+        else
+        {
+            $$ = RuleValue((*$1.d_function)($3.d_argList));
+        }
     }
 ;
 
+exprList:
+    exprList ',' expr
+    {
+        if ($3.d_type != RuleValue::VALUE &&
+            $3.d_type != RuleValue::VARIABLE)
+        {    
+            std::cout << "Argument must resolve to a value";
+            d_display = false;
+        }
+        $1.d_argList.push_back($3);
+        $$ = $1;
+    }
+|
+    expr
+    {
+        RuleValue list{};
+        list.d_type = RuleValue::LIST;
+        list.d_argList.push_back($1);
+        $$ = list;
+    }
+;
+
+ident:
+    IDENT
+    {
+        if (d_constants.find(d_scanner.matched()) != d_constants.end())
+            $$ = RuleValue(d_constants[d_scanner.matched()]);
+        else if (d_functions.find(d_scanner.matched()) != d_functions.end())
+            $$ = RuleValue(d_functions[d_scanner.matched()]);
+        else if (d_angle_settings.find(d_scanner.matched()) != d_angle_settings.end())
+        {
+            d_type = d_angle_settings[d_scanner.matched()];
+            $$ = RuleValue();
+        }
+        else
+            $$ = variable();
+    }
+;

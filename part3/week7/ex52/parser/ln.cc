@@ -1,13 +1,13 @@
 #include "parser.ih"
 
-RuleValue &Parser::ln(RuleValue &e)
+RuleValue &Parser::ln(std::vector<RuleValue> args)
 {
-    if (valueOf(e) == 0)
+    if (valueOf(args[0]) == 0)
     {
         std::cout << "No power of e can result in 0 \n";
         d_display = false;
-        return e = e;
+        return args[0];
     }
 
-    return e = std::log(valueOf(e));
+    return args[0] = std::log(valueOf(args[0]));
 }
