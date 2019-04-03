@@ -1,12 +1,9 @@
 
-%baseclass-preinclude "includes.h"
+%baseclass-preinclude "../rules/rules.h"
 
 %token IDENT
-%token BODY
-%polymorphic IDENT: std::string;
 
-%type <IDENT> literal 
-%type <IDENT> line
+%stype std::string
 
 %%
 
@@ -27,7 +24,6 @@ rule:
     {
         set_lhs($1);
         print_completed();
-        newrule();
     }
 ;
 

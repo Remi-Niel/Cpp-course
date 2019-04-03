@@ -13,11 +13,6 @@ using namespace std;
     Print functions
 */
 
-inline void Parser::print(STYPE__ const &chr) const
-{
-    cout << chr.get<Tag__::IDENT>() << flush;
-}
-
 inline void Parser::print(std::string const &str) const
 {
     cout << str << flush;
@@ -25,10 +20,7 @@ inline void Parser::print(std::string const &str) const
 
 inline void Parser::print_completed() const
 {
-    for (string const &line : d_rules.back().rhs)
-    {
-        cout << d_rules.back().lhs << " = " << line << "\n";
-    }
+    d_rules.back().print();
 }
 
 inline string Parser::append(std::string const &line, std::string const &str) const
@@ -36,22 +28,14 @@ inline string Parser::append(std::string const &line, std::string const &str) co
     return line + " " + str;
 }
 
-inline void Parser::newrule()
-{
-    d_rules.push_back({});
-}
-
 inline void Parser::set_lhs(std::string const &lhs)
 {
-    d_rules.back().lhs = lhs;
+    d_rules.back().set_name(lhs);
 }
 
 inline void Parser::append_rule(std::string const &line)
 {
-    if (d_rules.empty())
-        d_rules.push_back({});
-
-    d_rules.back().rhs.push_back(line);
+   d_rules.back().append_rule(line);
 }
 
 /*
