@@ -3,11 +3,7 @@
 
 %token IDENT
 
-// polymorphic so all the helper functions have nice signatures.
-%polymorphic IDENT: std::string;
-
-%type <IDENT> literal 
-%type <IDENT> line
+%stype std::string
 
 %%
 
